@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCExpressADriver.h,v 1.2 2002/07/01 16:02:16 mattik Exp $
+ $Id: MyQCExpressADriver.h,v 1.3 2002/09/03 23:03:39 mattik Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -63,6 +63,7 @@ typedef struct STV600GrabContext {
     NSLock* chunkListLock;		//Mutex for chunkBuffer manipulation
     BOOL* shouldBeGrabbing;		//Ref to the global indicator if the grab should go on
     CameraError err;			//Return value for common errors during grab
+    long framesSinceLastChunk;		//Number of frames since the last chunk was completed
 } STV600GrabContext;
 
 @interface MyQCExpressADriver : MyCameraDriver {

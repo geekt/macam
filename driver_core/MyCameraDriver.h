@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.h,v 1.2 2002/09/12 22:09:52 mattik Exp $
+ $Id: MyCameraDriver.h,v 1.3 2002/10/24 18:16:59 mattik Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -118,6 +118,7 @@ Image buffers. There are two sets: lastIamgeBuffer and nextImageBuffer. The clie
 - (void) setDelegate:(id)d;
 - (void) enableNotifyOnMainThread;	//Has to be enabled before [startupWithUsbDeviceRef]! Cannot be unset - anymore!
 - (void) setCentral:(id)c;		//Don't use unless you know what you're doing!
+- (id) central;				//Don't use unless you know what you're doing!
 
 //Camera introspection
 - (BOOL) realCamera;	//Returns if the camera is a real image grabber or a dummy
@@ -213,7 +214,13 @@ Image buffers. There are two sets: lastIamgeBuffer and nextImageBuffer. The clie
 //DSC (Digital Still Camera) management - for cameras that can store media / also operate USB-unplugged
 - (BOOL) canStoreMedia;					//If the device supports DSC or similar functions
 - (long) numberOfStoredMediaObjects;			//How many images are currently on the camera?
-- (id) getStoredMediaObject:(long)idx;			//downloads and returns an NSImage (NSSound or NSMovie later?)
+- (NSDictionary*) getStoredMediaObject:(long)idx;	//downloads a media object
+//required keys: "type" and "data". Currently handled combinations:
+//type		data
+//"bitmap"	NSBitmapImageRep object
+//"jpeg"	NSData with JPEG (JFIF) file contents
+
+
 - (void) eraseStoredMedia;				//Clears the camera media memory
 
 //Camera Custom features

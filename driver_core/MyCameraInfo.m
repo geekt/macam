@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraInfo.m,v 1.1 2002/05/22 04:57:17 dirkx Exp $
+ $Id: MyCameraInfo.m,v 1.2 2002/10/24 18:16:42 mattik Exp $
  */
 
 #import "MyCameraInfo.h"
@@ -33,7 +33,7 @@ static unsigned long cidCount=1;
     driverClass=NULL;
     cid=cidCount++;
     central=NULL;
-    name=[[@"(invalid)" autorelease] copy];
+    name=NULL;
     pid=0;
     vid=0;
     return self;

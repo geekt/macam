@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.13 2003/01/09 15:25:14 mattik Exp $
+ $Id: MyCameraCentral.m,v 1.14 2003/01/10 10:13:30 mattik Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -48,6 +48,7 @@
 #import "MySonix2028Driver.h"
 #import "MySE401Driver.h"
 #import "MyQCProBeigeDriver.h"
+#import "MySPCA500Driver.h"
 #include "unistd.h"
 
 static NSString* driverBundleName=@"de.matthias-krauss.webcam";
@@ -177,6 +178,7 @@ static NSMutableDictionary* prefsDict=NULL;
     [self registerCameraDriver:[MySonix2028Driver class]];
     [self registerCameraDriver:[MySE401Driver class]];
     [self registerCameraDriver:[MyQCProBeigeDriver class]];
+    [self registerCameraDriver:[MySPCA500Driver class]];
 //    [self registerCameraDriver:[MyIntelPCCameraPro class]];
 //    [self registerCameraDriver:[MyIntelPCCamera class]];
 //    [self registerCameraDriver:[MyGrandtecVcap class]];

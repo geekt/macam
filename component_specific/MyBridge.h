@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyBridge.h,v 1.2 2003/07/27 04:55:56 tmolteno Exp $
+ $Id: MyBridge.h,v 1.3 2005/03/16 17:23:20 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -140,7 +140,7 @@ typedef enum BridgeClientState {
 
 - (BOOL) canBlackWhiteMode;		//If camera can adjust color/greyscale at all
 - (BOOL) blackWhiteMode;		//The current color mode
-- (void) setBlackWhiteModeMode:(BOOL)m;	//Set the current color mode
+- (void) setBlackWhiteMode:(BOOL)m;	//Set the current color mode
 
 - (BOOL) canSetLed;			//Can the camera toggle its LED
 - (BOOL) isLedOn;			//The current LED status

@@ -15,9 +15,9 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: BayerConverter.h,v 1.3 2002/12/30 17:51:31 mattik Exp $
+ $Id: BayerConverter.h,v 1.4 2002/12/31 10:55:58 mattik Exp $
 
- $Id: BayerConverter.h,v 1.3 2002/12/30 17:51:31 mattik Exp $
+ $Id: BayerConverter.h,v 1.4 2002/12/31 10:55:58 mattik Exp $
  */
 #import <Cocoa/Cocoa.h>
 #include "GlobalDefs.h"
@@ -95,9 +95,6 @@ sourceFormat specifies serialization type. Examples show first two lines of a 6-
 //Do the whole decoding
 - (BOOL) convertFromSrc:(unsigned char*)src toDest:(unsigned char*)dst
             srcRowBytes:(long)srcRB dstRowBytes:(long)dstRB dstBPP:(short)dstBPP flip:(BOOL)flip;
-
-- (BOOL) convertFromSrc:(unsigned char*)src toDest:(unsigned char*)dst
-            srcRowBytes:(long)srcRB dstRowBytes:(long)dstRB dstBPP:(short)dstBPP;
 
 
 

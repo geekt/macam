@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyOV511Driver.h,v 1.4 2002/11/27 22:59:45 himori Exp $
+ $Id: MyOV511Driver.h,v 1.5 2003/01/16 00:08:57 himori Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -66,6 +66,8 @@ Doing these amounts of defines is often called bad style. We should find a bette
 #define CLAMP_UNIT(a) (CLAMP((a),0.0f,1.0f))
 
 #define OV7610_BRIGHTNESS(a) ((UInt8)(a*63.0f))
+#define OV7610_CONTRAST(a) ((UInt8)(a*255.0f))
+#define OV7610_SATURATION(a) ((UInt8)(a*255.0f))
 
 #define OV511_REG_DLYM		0x10
 #define OV511_REG_PEM		0x11

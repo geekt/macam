@@ -15,11 +15,12 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraInspector.m,v 1.2 2002/05/22 05:40:58 dirkx Exp $
+ $Id: MyCameraInspector.m,v 1.3 2002/10/24 18:20:30 mattik Exp $
  */
 
 #import "MyCameraInspector.h"
 #import "MyCameraDriver.h"
+#import "MyCameraCentral.h"
 
 
 @implementation MyCameraInspector
@@ -29,7 +30,7 @@
     if (!self) return NULL;
     camera=c;
     if (![NSBundle loadNibNamed:@"DefaultCameraInspector" owner:self]) return NULL;
-    [camName setStringValue:[[camera class] cameraName]];
+    [camName setStringValue:[[camera central] nameForDriver:c]];
     return self;
 }
 

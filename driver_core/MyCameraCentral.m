@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.14 2003/01/10 10:13:30 mattik Exp $
+ $Id: MyCameraCentral.m,v 1.15 2003/01/20 16:12:46 mattik Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -27,17 +27,13 @@
 #import "MyCameraInfo.h"
 #import "MyCameraCentral.h"
 #import "MyCameraDriver.h"
-#import "MyToUCamProDriver.h"
-#import "MyToUCamFunDriver.h"
-#import "MyVestaProDriver.h"
-#import "MyVestaDriver.h"
+#import "MyKiaraFamilyDriver.h"
+#import "MyKiaraFlippedDriver.h"
+#import "MyTimonFamilyDriver.h"
 #import "MyCPIACameraDriver.h"
 #import "MyQX3Driver.h"
 #import "MySTV680Driver.h"
 #import "MyIntelPCCameraPro.h"
-#import "MyLogi3000Driver.h"
-#import "MyToUCamPro3DDriver.h"
-#import "MyVestaScanDriver.h"
 #import "MyDummyCameraDriver.h"
 #import "MyQCExpressADriver.h"
 #import "MyQCExpressBDriver.h"
@@ -158,13 +154,9 @@ static NSMutableDictionary* prefsDict=NULL;
 //Add Driver classes (this is where we have to add new model classes!)
 
 
-    [self registerCameraDriver:[MyToUCamFunDriver class]];
-    [self registerCameraDriver:[MyToUCamProDriver class]];
-    [self registerCameraDriver:[MyToUCamPro3DDriver class]];
-    [self registerCameraDriver:[MyVestaDriver class]];
-    [self registerCameraDriver:[MyVestaProDriver class]];
-    [self registerCameraDriver:[MyVestaScanDriver class]];
-    [self registerCameraDriver:[MyLogi3000Driver class]];
+    [self registerCameraDriver:[MyKiaraFamilyDriver class]];
+    [self registerCameraDriver:[MyKiaraFlippedDriver class]];
+    [self registerCameraDriver:[MyTimonFamilyDriver class]];
     [self registerCameraDriver:[MyCPIACameraDriver class]];
     [self registerCameraDriver:[MyQX3Driver class]];
     [self registerCameraDriver:[MySTV680Driver class]];

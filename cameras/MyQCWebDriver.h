@@ -16,14 +16,14 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCWebDriver.h,v 1.3 2002/07/02 14:17:18 mattik Exp $
+ $Id: MyQCWebDriver.h,v 1.4 2002/07/26 12:06:50 mattik Exp $
 */
 
 #import <Cocoa/Cocoa.h>
 #import "GlobalDefs.h"
 #import "MyQCExpressADriver.h"
 
-//The QuickCam Web's STV0610 chip is like an extended STV0600. */
+/* The QuickCam Web's STV0610 chip is like an extended STV0600. */
 
 @interface MyQCWebDriver : MyQCExpressADriver {
     BOOL buttonThreadShouldBeRunning;

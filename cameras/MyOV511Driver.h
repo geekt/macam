@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyOV511Driver.h,v 1.2 2002/11/06 16:37:06 himori Exp $
+ $Id: MyOV511Driver.h,v 1.3 2002/11/11 23:09:03 himori Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -178,6 +178,7 @@ Doing these amounts of defines is often called bad style. We should find a bette
 
 #define SENS_OV7610		1
 #define SENS_SAA7111A		2		
+#define SENS_OV7620		3
 
 typedef struct OV511CompleteChunk {	//The description of a ready-to-decode chunk
     long start;			//start offset in grabBuffer
@@ -270,6 +271,7 @@ typedef struct OV511GrabContext {	//Everything the grabbing thread internals nee
 //I2C
 - (int) i2cWrite:(UInt8) reg val:(UInt8) val;
 - (int) i2cRead:(UInt8) reg;
+- (int) i2cRead2;
 
 @end
 

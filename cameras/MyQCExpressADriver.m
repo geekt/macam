@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCExpressADriver.m,v 1.3 2002/09/03 23:03:39 mattik Exp $
+ $Id: MyQCExpressADriver.m,v 1.4 2002/12/30 17:48:39 mattik Exp $
 */
 
 #include <IOKit/IOKitLib.h>
@@ -150,7 +150,11 @@
     [bayerConverter setMakeImageStats:ag];
     if (!autoGain) [sensor adjustExposure];	//Make sure they are correct
 }
-        
+
+- (BOOL) canSetHFlip {
+    return YES;
+}
+
 - (BOOL) canSetWhiteBalanceMode { return YES; }
 
 - (BOOL) canSetWhiteBalanceModeTo:(WhiteBalanceMode)newMode {
@@ -578,7 +582,8 @@ static bool StartNextIsochRead(STV600GrabContext* grabContext, int transferIdx) 
                                 toDest:nextImageBuffer
                            srcRowBytes:[self width]+extraBytesInLine
                            dstRowBytes:nextImageBufferRowBytes
-                                dstBPP:nextImageBufferBPP];
+                                dstBPP:nextImageBufferBPP
+                                  flip:hFlip];
     }
     lastImageBuffer=nextImageBuffer;			//Copy nextBuffer info into lastBuffer
     lastImageBufferBPP=nextImageBufferBPP;

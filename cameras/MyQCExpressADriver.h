@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCExpressADriver.h,v 1.3 2002/09/03 23:03:39 mattik Exp $
+ $Id: MyQCExpressADriver.h,v 1.4 2002/12/30 17:48:39 mattik Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -108,6 +108,7 @@ typedef struct STV600GrabContext {
 - (BOOL) canSetShutter;
 - (void) setShutter:(float)v;
 - (BOOL) canSetAutoGain;
+- (BOOL) canSetHFlip;
 
 //White Balance
 - (BOOL) canSetWhiteBalanceMode;

@@ -18,7 +18,7 @@
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  
- $Id: MyVicamDriver.m,v 1.1 2002/07/08 22:32:01 mattik Exp $
+ $Id: MyVicamDriver.m,v 1.2 2002/12/30 17:48:25 mattik Exp $
 
  */
 
@@ -427,9 +427,12 @@ VicamInfo	gVicamInfo[] =
 		case ResolutionQSIF:
 		case ResolutionSQSIF:
 		case ResolutionVGA:
-			result = YES;
+                    result = YES;
 		break;
-	}
+                default:
+                    result = NO;
+                    break;
+        }
 	
 	return (result);
 }
@@ -635,6 +638,9 @@ Why CFRunLoops? Somehow, I didn't manage to get the NSRunLoop stopped after inva
             requestIndex = 0;
             break;
 
+        default:
+            requestIndex = 0;
+            break;
     }
 	
     videoBulkReadsPending=0;

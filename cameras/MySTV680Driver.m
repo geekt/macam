@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySTV680Driver.m,v 1.3 2002/10/24 18:18:55 mattik Exp $
+ $Id: MySTV680Driver.m,v 1.4 2002/12/30 17:49:27 mattik Exp $
  */
 
 #import "MySTV680Driver.h"
@@ -100,6 +100,10 @@
 - (void) setSharpness:(float)v {
     [super setSharpness:v];
     [bayerConverter setSharpness:[self sharpness]];
+}
+
+- (BOOL) canSetHFlip {
+    return YES;
 }
 
 - (BOOL) supportsResolution:(CameraResolution)res fps:(short)rate {
@@ -472,7 +476,8 @@ static void handleFullChunk(void *refcon, IOReturn result, void *arg0) {
                                         toDest:lastImageBuffer
                                    srcRowBytes:grabWidth
                                    dstRowBytes:lastImageBufferRowBytes
-                                        dstBPP:lastImageBufferBPP];
+                                        dstBPP:lastImageBufferBPP
+                                          flip:hFlip];
                 [imageBufferLock unlock];
                 [self mergeImageReady];
             } else {
@@ -575,7 +580,8 @@ static void handleFullChunk(void *refcon, IOReturn result, void *arg0) {
                                    toDest:[imageRep bitmapData]
                               srcRowBytes:rawWidth
                               dstRowBytes:[imageRep bytesPerRow]
-                                   dstBPP:[imageRep bitsPerPixel]/8];
+                                   dstBPP:[imageRep bitsPerPixel]/8
+                                     flip:NO];
     }
 //Cleanup
     if (rawBuffer) [rawBuffer release]; rawBuffer=NULL;

@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySTV680Driver.h,v 1.2 2002/10/24 18:18:55 mattik Exp $
+ $Id: MySTV680Driver.h,v 1.3 2002/12/30 17:49:27 mattik Exp $
  */
 
 #import <Cocoa/Cocoa.h>
@@ -72,6 +72,9 @@
 - (void) setGamma:(float)v;
 - (BOOL) canSetSaturation;
 - (void) setSaturation:(float)v;
+- (BOOL) canSetSharpness;
+- (void) setSharpness:(float)v;
+- (BOOL) canSetHFlip;
 
 //White Balance
 - (BOOL) canSetWhiteBalanceMode;

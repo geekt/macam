@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyKiaraFamilyDriver.h,v 1.1 2002/05/22 04:57:11 dirkx Exp $
+ $Id: MyKiaraFamilyDriver.h,v 1.2 2003/01/20 16:21:40 mattik Exp $
  */
 
 #import <Cocoa/Cocoa.h>
@@ -24,6 +24,8 @@
 @interface MyKiaraFamilyDriver : MyPhilipsCameraDriver {
 
 }
+
++ (NSArray*) cameraUsbDescriptions;
 
 - (CameraError) startupWithUsbDeviceRef:(io_service_t)usbDeviceRef;
 

@@ -17,7 +17,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQX3Driver.m,v 1.1 2002/05/22 04:57:13 dirkx Exp $
+ $Id: MyQX3Driver.m,v 1.2 2002/05/27 05:43:31 dirkx Exp $
  */
 
 #import "MyQX3Driver.h"
@@ -133,6 +133,7 @@ o Intel Play QX3 Microscope@2100000  <class IOUSBDevice>
     }
 
     // port 2 bit 6 - cradle
+    //
     if ((v & 0x400000) == 0) {
         if (lastCradle != 0) {	
             NSLog(@"Placed in the cradle (top light off; bottom light on).");
@@ -140,7 +141,6 @@ o Intel Play QX3 Microscope@2100000  <class IOUSBDevice>
             [self setTopLight:FALSE ];
             [self setBottomLight:TRUE ];
             [self setWhiteBalanceMode:[self whiteBalanceMode]];
-            [self changedSomething ];
             }               
         lastCradle = 0;
     } else {

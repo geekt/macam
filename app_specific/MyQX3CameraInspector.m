@@ -16,7 +16,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQX3CameraInspector.m,v 1.1 2002/05/22 04:56:42 dirkx Exp $
+ $Id: MyQX3CameraInspector.m,v 1.2 2002/05/27 05:43:28 dirkx Exp $
 */
 
 #import "MyQX3CameraInspector.h"
@@ -34,7 +34,7 @@
 // Nothing clever - we simply look around for now and
 // update what needs updating. So we do not shortcut
 // any UI action - we simply wait for the driver to
-// notify us of any change - then figure out wha tthe
+// notify us of any change - then figure out what the
 // driver has done - and update accordingly,
 //
 - (void) notifyChange:(NSNotification *)note
@@ -84,8 +84,9 @@
         else 
             [QX3state setImage: [NSImage imageNamed: I_NO_CRADLE ]];
     }
-    } else 
-            [QX3state setImage: [NSImage imageNamed: I_OFF ]];
+    } else
+        // Neither
+        [QX3state setImage: [NSImage imageNamed: I_OFF ]];
 
 }
 

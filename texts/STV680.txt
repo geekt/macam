@@ -266,3 +266,6 @@ Return buffer (known):
 0x0c: Original gain
 0x0d: CLKDIV (???)
 0x0c: Average Pixel value
+
+$Id: STV680.txt,v 1.2 2002/05/27 05:43:38 dirkx Exp $
+

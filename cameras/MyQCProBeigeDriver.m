@@ -18,7 +18,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCProBeigeDriver.m,v 1.1 2003/01/09 15:18:53 mattik Exp $
+ $Id: MyQCProBeigeDriver.m,v 1.2 2003/01/16 15:38:57 mattik Exp $
  */
 
 #import "MyQCProBeigeDriver.h"
@@ -496,9 +496,9 @@ static void handleFullChunk(void *refcon, IOReturn result, void *arg0) {
                     else if (error<-corridor) error+=corridor;
                     else error=0.0f;
                     if (error!=0.0f) {
-                        float correction;
-                        if (error>0) correction=-(error*error);
-                        if (error<0) correction=(error*error);
+                        float correction=0.0f;
+                        if (error>0.0f) correction=-(error*error);
+                        else correction=(error*error);
                         correction*=0.2f;
                         if (correction<-0.1f) correction=-0.1f;
                         if (correction> 0.1f) correction= 0.1f;

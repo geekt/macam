@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.3 2002/07/12 14:51:47 mattik Exp $
+ $Id: MyCameraCentral.m,v 1.4 2002/08/10 01:01:34 dirkx Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -35,6 +35,7 @@
 #import "MyQX3Driver.h"
 #import "MySTV680Driver.h"
 #import "MySPCA504Driver.h"
+#import "MyIntelPCCameraPro.h"
 #import "MyLogi3000Driver.h"
 #import "MyToUCamPro3DDriver.h"
 #import "MyVestaScanDriver.h"
@@ -164,8 +165,14 @@ static NSMutableDictionary* prefsDict=NULL;
     [self registerCameraDriver:[MyQCExpressADriver class]];
     [self registerCameraDriver:[MyQCExpressBDriver class]];
     [self registerCameraDriver:[MyQCWebDriver class]];
-    [self registerCameraDriver:[MyVicamDriver class]];
+    // [self registerCameraDriver:[MyVicamDriver class]];
     [self registerCameraDriver:[MySPCA504Driver class]];
+    [self registerCameraDriver:[MyIntelPCCameraPro class]];
+    [self registerCameraDriver:[MyIntelPCCamera class]];
+    [self registerCameraDriver:[MyGrandtecVcap class]];
+    [self registerCameraDriver:[MyViewQuestM318B class]];
+    [self registerCameraDriver:[MyViewQuestVQ110 class]];
+    [self registerCameraDriver:[MyDVC325 class]];
 
     doNotificationsOnMainThread=nomt;	//Remember this!
     if (doNotificationsOnMainThread) {	//The client wants merged threads: Build a connection to the new thread

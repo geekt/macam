@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySonix2028Driver.m,v 1.6 2002/12/17 14:08:59 mattik Exp $
+ $Id: MySonix2028Driver.m,v 1.7 2002/12/30 17:49:15 mattik Exp $
 */
 
 /* Here's what I know (or guess) about the chipset so far:
@@ -202,6 +202,10 @@ After the line header, the actual pixels follow. Th line lengths don't match exa
 }
 
 - (BOOL) canSetAutoGain {
+    return YES;
+}
+
+- (BOOL) canSetHFlip {
     return YES;
 }
 
@@ -619,7 +623,8 @@ static bool StartNextIsochRead(SONIXGrabContext* grabContext, int transferIdx) {
                             toDest:pixmap
                        srcRowBytes:width+2
                        dstRowBytes:rb
-                            dstBPP:bpp];
+                            dstBPP:bpp
+                              flip:hFlip];
 }
 
 - (CameraError) decodingThread {

@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.m,v 1.2 2002/07/01 16:34:06 mattik Exp $
+ $Id: MyController.m,v 1.3 2002/08/29 09:45:54 mattik Exp $
 */
 
 #import "MyController.h"
@@ -199,6 +199,11 @@ static NSString*	NextCamToolbarItemIdentifier 	= @"Next Camera Item Identifier";
     [driver setWhiteBalanceMode:wb];
 }
 
+- (IBAction)horizontalFlipChanged:(id)sender {
+    BOOL flip=[horizontalFlipCheckbox intValue];
+    [driver setHFlip:flip];
+}
+
 - (IBAction)doGrab:(id)sender {
     cameraGrabbing=[driver startGrabbing];
     if (cameraGrabbing) {
@@ -377,7 +382,7 @@ static NSString*	NextCamToolbarItemIdentifier 	= @"Next Camera Item Identifier";
         err=[central useCameraWithID:cid to:&driver acceptDummy:NO];
         if (err) driver=NULL;
         if (driver!=NULL) {
-            [statusText setStringValue:[LStr(@"Status: Conntected to ") stringByAppendingString:[[driver class] cameraName]]];
+            [statusText setStringValue:[LStr(@"Status: Connected to ") stringByAppendingString:[[driver class] cameraName]]];
             [driver retain];			//We keep our own reference
             [contrastSlider setEnabled:[driver canSetContrast]];
             [brightnessSlider setEnabled:[driver canSetBrightness]];
@@ -388,6 +393,8 @@ static NSString*	NextCamToolbarItemIdentifier 	= @"Next Camera Item Identifier";
             [sizePopup setEnabled:YES];
             [fpsPopup setEnabled:YES];
             [whiteBalancePopup setEnabled:[driver canSetWhiteBalanceMode]];
+            [horizontalFlipCheckbox setEnabled:[driver canSetHFlip]];
+
             [whiteBalancePopup selectItemAtIndex:[driver whiteBalanceMode]-1];
             [gainSlider setEnabled:([driver canSetGain])&&(![driver isAutoGain])];
             [shutterSlider setEnabled:([driver canSetShutter])&&(![driver isAutoGain])];
@@ -410,6 +417,7 @@ static NSString*	NextCamToolbarItemIdentifier 	= @"Next Camera Item Identifier";
             [fpsPopup selectItemAtIndex:([driver fps]/5)-1];
             [compressionSlider setFloatValue:((float)[driver compression])
                 /((float)(([driver maxCompression]>0)?[driver maxCompression]:1))];
+            [horizontalFlipCheckbox setIntValue:([driver hFlip]==YES)?1:0];
             [self formatChanged:self];
             cameraGrabbing=NO;
             if ([driver supportsCameraFeature:CameraFeatureInspectorClassName]) {
@@ -512,6 +520,7 @@ LStr(@"The camera you just plugged in contains %i stored images. Do you want to 
     [fpsPopup setEnabled:NO];
     [whiteBalancePopup setEnabled:NO];
     [compressionSlider setEnabled:NO];
+    [horizontalFlipCheckbox setEnabled:NO];
     [self updateCameraMediaCount];
     [inspectorDrawer close];
     if (inspector) {

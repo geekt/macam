@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCExpressADriver.m,v 1.11 2003/12/22 01:28:43 mattik Exp $
+ $Id: MyQCExpressADriver.m,v 1.12 2005/03/17 20:47:46 hxr Exp $
 */
 
 #include <IOKit/IOKitLib.h>
@@ -690,7 +690,8 @@ static bool StartNextIsochRead(STV600GrabContext* grabContext, int transferIdx) 
                        srcRowBytes: [self width] + extraBytesInLine
                        dstRowBytes: nextImageBufferRowBytes
                             dstBPP: nextImageBufferBPP
-                              flip: hFlip];
+                              flip: hFlip
+						 rotate180: NO];
     
     // advance buffer
     lastImageBuffer         = nextImageBuffer;

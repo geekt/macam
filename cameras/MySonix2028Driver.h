@@ -17,7 +17,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySonix2028Driver.h,v 1.8 2003/02/24 13:05:09 mattik Exp $
+ $Id: MySonix2028Driver.h,v 1.9 2005/03/17 20:47:46 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -118,5 +118,17 @@ typedef struct SONIXGrabContext {
 - (long) numberOfStoredMediaObjects;
 - (NSDictionary*) getStoredMediaObject:(long)idx;
 
+@end
+
+
+@interface MyViviCam3350BDriver : MySonix2028Driver 
+
++ (unsigned short) cameraUsbProductID;
++ (unsigned short) cameraUsbVendorID;
++ (NSString*) cameraName;
+
+// decoding is slightly different
+- (void) decode:(UInt8*)src to:(UInt8*)pixmap width:(int)width height:(int) height bpp:(short)bpp rowBytes:(long)rb;
 
 @end
+

@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySTV680Driver.m,v 1.6 2003/02/24 13:05:08 mattik Exp $
+ $Id: MySTV680Driver.m,v 1.7 2005/03/17 20:47:46 hxr Exp $
  */
 
 #import "MySTV680Driver.h"
@@ -478,7 +478,8 @@ static void handleFullChunk(void *refcon, IOReturn result, void *arg0) {
                                    srcRowBytes:grabWidth
                                    dstRowBytes:lastImageBufferRowBytes
                                         dstBPP:lastImageBufferBPP
-                                          flip:hFlip];
+                                          flip:hFlip
+									 rotate180:NO];
                 [imageBufferLock unlock];
                 [self mergeImageReady];
             } else {
@@ -583,7 +584,8 @@ static void handleFullChunk(void *refcon, IOReturn result, void *arg0) {
                               srcRowBytes:rawWidth
                               dstRowBytes:[imageRep bytesPerRow]
                                    dstBPP:[imageRep bitsPerPixel]/8
-                                     flip:NO];
+                                     flip:NO
+								rotate180:NO];
     }
 //Cleanup
     if (rawBuffer) [rawBuffer release]; rawBuffer=NULL;

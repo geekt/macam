@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySonix2028Driver.m,v 1.9 2003/01/04 10:26:21 mattik Exp $
+ $Id: MySonix2028Driver.m,v 1.10 2003/01/09 15:09:04 himori Exp $
 */
 
 /* Here's what I know (or guess) about the chipset so far:
@@ -674,9 +674,9 @@ static bool StartNextIsochRead(SONIXGrabContext* grabContext, int transferIdx) {
     SONIXChunkBuffer currChunk;
     long i;
     CameraError err=CameraErrorOK;
-    grabbingThreadRunning=NO;
     int width=[self width];	//Width and height are constant during a grab session, so ...
     int height=[self height];	//... they can safely be cached (to reduce Obj-C calls)
+    grabbingThreadRunning=NO;
     //Setup the stuff for the decoder.
     [bayerConverter setSourceWidth:width height:height];
     [bayerConverter setDestinationWidth:width height:height];
@@ -919,8 +919,8 @@ static bool StartNextIsochRead(SONIXGrabContext* grabContext, int transferIdx) {
     CameraError err;
 
     //Send write command
-    err=[self writeRegisterBlind:reg value:val];	
     UInt8 buf[4];
+    err=[self writeRegisterBlind:reg value:val];	
     //Wait for completion (?)
     do {
         if (![self usbReadVICmdWithBRequest:0 wValue:1 wIndex:0 buf:buf len:1]) return CameraErrorUSBProblem;

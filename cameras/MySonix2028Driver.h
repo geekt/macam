@@ -17,16 +17,12 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySonix2028Driver.h,v 1.1 2002/12/06 13:09:29 mattik Exp $
+ $Id: MySonix2028Driver.h,v 1.2 2002/12/12 15:48:23 mattik Exp $
 */
 
 #import <Cocoa/Cocoa.h>
 #import "MyCameraDriver.h"
-#include <Carbon/Carbon.h>
-#include <QuickTime/QuickTime.h>
-#include <IOKit/IOKitLib.h>
-#include <IOKit/IOCFPlugIn.h>
-#include <IOKit/usb/IOUSBLib.h>
+#import "BayerConverter.h"
 #include "GlobalDefs.h"
 
 
@@ -73,9 +69,10 @@ typedef struct SONIXGrabContext {
     short 	camSkipFrames;
 //The context for grabbingThread
    SONIXGrabContext grabContext;		//the grab context (everything the async usb read callbacks need)
-   unsigned char *mergeBuffer;		//a SONIX-style 422 yuv buffer to merge compressed images
    BOOL grabbingThreadRunning;		//For active wait for grabbingThread finish
-   long frameCounter;			//The first frame of a sequence will always be sent uncompressed to avoid old pixels
+
+   BayerConverter* bayerConverter;
+   UInt8* bayerBuffer;
 }
 
 + (unsigned short) cameraUsbProductID;
@@ -86,7 +83,15 @@ typedef struct SONIXGrabContext {
 - (void) dealloc;
 
 - (BOOL) supportsResolution:(CameraResolution)r fps:(short)fr;
-- (void) setResolution:(CameraResolution)r fps:(short)fr;
 - (CameraResolution) defaultResolutionAndRate:(short*)dFps;
+
+- (BOOL) canSetSharpness;
+- (void) setSharpness:(float)v;
+
+//DSC Image download
+- (BOOL) canStoreMedia;
+- (long) numberOfStoredMediaObjects;
+- (NSDictionary*) getStoredMediaObject:(long)idx;
+
 
 @end

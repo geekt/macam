@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.h,v 1.3 2002/10/24 18:16:59 mattik Exp $
+ $Id: MyCameraDriver.h,v 1.4 2002/12/06 13:18:06 mattik Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -243,8 +243,11 @@ Image buffers. There are two sets: lastIamgeBuffer and nextImageBuffer. The clie
 - (void) cameraEventHappened:(id)sender event:(CameraEvent)evt;	//sends "notification" to "delegate"	
 
 //USB tool functions - should be used internally only
-- (BOOL) usbReadCmdWithBRequest:(short)bReq wValue:(short)wVal wIndex:(short)wIdx buf:(void*)buf len:(short)len;
-- (BOOL) usbWriteCmdWithBRequest:(short)bReq wValue:(short)wVal wIndex:(short)wIdx buf:(void*)buf len:(short)len;//Sends command to pipe 0
+- (BOOL) usbReadCmdWithBRequest:(short)bReq wValue:(short)wVal wIndex:(short)wIdx buf:(void*)buf len:(short)len;//Sends a IN|VENDOR|DEVICE command
+- (BOOL) usbReadVICmdWithBRequest:(short)bReq wValue:(short)wVal wIndex:(short)wIdx buf:(void*)buf len:(short)len;//Sends a IN|VENDOR|INTERFACE command
+- (BOOL) usbWriteCmdWithBRequest:(short)bReq wValue:(short)wVal wIndex:(short)wIdx buf:(void*)buf len:(short)len;//Sends a OUT|VENDOR|DEVICE command
+- (BOOL) usbWriteVICmdWithBRequest:(short)bReq wValue:(short)wVal wIndex:(short)wIdx buf:(void*)buf len:(short)len;//Sends a OUT|VENDOR|INTERFACE command 
+
 - (BOOL) usbSetAltInterfaceTo:(short)alt testPipe:(short)pipe;	//Sets the alt interface and optionally tests if a pipe exists
 - (CameraError) usbConnectToCam:(io_service_t)usbDeviceRef;	//Standard open dev, reset device, set first config, open intf 
 - (void) usbCloseConnection;				//Close and release intf and dev

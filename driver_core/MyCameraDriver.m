@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.m,v 1.4 2002/11/12 16:15:33 mattik Exp $
+ $Id: MyCameraDriver.m,v 1.5 2002/12/06 13:18:06 mattik Exp $
 */
 
 #import "MyCameraDriver.h"
@@ -600,6 +600,7 @@
 
 //USB Tool functions for subclasses
 
+//sends a USB IN|VENDOR|DEVICE command
 - (BOOL) usbReadCmdWithBRequest:(short)bReq wValue:(short)wVal wIndex:(short)wIdx buf:(void*)buf len:(short)len {
     IOReturn err;
     IOUSBDevRequest req;
@@ -612,7 +613,7 @@
     if ((!isUSBOK)||(!intf)) return NO;
     err=(*intf)->ControlRequest(intf,0,&req);
 #ifdef LOG_USB_CALLS
-    NSLog(@"usb read req:%i val:%i idx:%i len:%i ret:%i",bReq,wVal,wIdx,len,err);
+    NSLog(@"usb read vendor,device req:%i val:%i idx:%i len:%i ret:%i",bReq,wVal,wIdx,len,err);
     if (len>0) DumpMem(buf,len);
 #endif
     CheckError(err,"usbReadCmdWithBRequest");
@@ -620,6 +621,28 @@
     return (!err);
 }
 
+//sends a USB IN|VENDOR|INTERFACE command
+- (BOOL) usbReadVICmdWithBRequest:(short)bReq wValue:(short)wVal wIndex:(short)wIdx buf:(void*)buf len:(short)len {
+    IOReturn err;
+    IOUSBDevRequest req;
+    req.bmRequestType=USBmakebmRequestType(kUSBIn, kUSBVendor, kUSBInterface);
+    req.bRequest=bReq;
+    req.wValue=wVal;
+    req.wIndex=wIdx;
+    req.wLength=len;
+    req.pData=buf;
+    if ((!isUSBOK)||(!intf)) return NO;
+    err=(*intf)->ControlRequest(intf,0,&req);
+#ifdef LOG_USB_CALLS
+    NSLog(@"usb read vendor,interface req:%i val:%i idx:%i len:%i ret:%i",bReq,wVal,wIdx,len,err);
+    if (len>0) DumpMem(buf,len);
+#endif
+    CheckError(err,"usbReadVICmdWithBRequest");
+    if (err==kIOUSBPipeStalled) (*intf)->ClearPipeStall(intf,0);
+    return (!err);
+}
+
+//sends a USB OUT|VENDOR|DEVICE command
 - (BOOL) usbWriteCmdWithBRequest:(short)bReq wValue:(short)wVal wIndex:(short)wIdx buf:(void*)buf len:(short)len {
     IOReturn err;
     IOUSBDevRequest req;
@@ -632,10 +655,31 @@
     if ((!isUSBOK)||(!intf)) return NO;
     err=(*intf)->ControlRequest(intf,0,&req);
 #ifdef LOG_USB_CALLS
-    NSLog(@"usb write req:%i val:%i idx:%i len:%i ret:%i",bReq,wVal,wIdx,len,err);
+    NSLog(@"usb write vendor,device req:%i val:%i idx:%i len:%i ret:%i",bReq,wVal,wIdx,len,err);
     if (len>0) DumpMem(buf,len);
 #endif
     CheckError(err,"usbWriteCmdWithBRequest");
+    if ((err==kIOUSBPipeStalled)&&(intf)) (*intf)->ClearPipeStall(intf,0);
+    return (!err);
+}
+
+//sends a USB OUT|VENDOR|INTERFACE command
+- (BOOL) usbWriteVICmdWithBRequest:(short)bReq wValue:(short)wVal wIndex:(short)wIdx buf:(void*)buf len:(short)len {
+    IOReturn err;
+    IOUSBDevRequest req;
+    req.bmRequestType=USBmakebmRequestType(kUSBOut, kUSBVendor, kUSBInterface);
+    req.bRequest=bReq;
+    req.wValue=wVal;
+    req.wIndex=wIdx;
+    req.wLength=len;
+    req.pData=buf;
+    if ((!isUSBOK)||(!intf)) return NO;
+    err=(*intf)->ControlRequest(intf,0,&req);
+#ifdef LOG_USB_CALLS
+    NSLog(@"usb write vendor,interface req:%i val:%i idx:%i len:%i ret:%i",bReq,wVal,wIdx,len,err);
+    if (len>0) DumpMem(buf,len);
+#endif
+    CheckError(err,"usbWriteVICmdWithBRequest");
     if ((err==kIOUSBPipeStalled)&&(intf)) (*intf)->ClearPipeStall(intf,0);
     return (!err);
 }

@@ -1,5 +1,6 @@
 /*
-    macam - webcam app and QuickTime driver component
+ MyQCWebDriver.m - macam camera driver class for Logitech QuickCam Web
+ 
     Copyright (C) 2002 Matthias Krauss (macam@matthias-krauss.de)
 
     This program is free software; you can redistribute it and/or modify
@@ -15,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCWebDriver.m,v 1.1 2002/05/22 04:57:13 dirkx Exp $
+ $Id: MyQCWebDriver.m,v 1.2 2002/07/01 15:49:23 mattik Exp $
 */
 
 #import "MyQCWebDriver.h"
@@ -33,6 +34,7 @@
 
     err=[super startupWithUsbDeviceRef:usbDeviceRef];
 
+    extraBytesInLine=4;
     mainToButtonThreadConnection=NULL;
     buttonToMainThreadConnection=NULL;
 
@@ -75,14 +77,12 @@
         length=1;
         (*intf)->ReadPipe(intf,2,&camData,&length);
         if (length==1) {
-//            NSLog(@"MyQCWebDriver: data on interrupt pipe:%i",camData);
-
-/*            switch (camData) {
+            switch (camData) {
                 case 16:	//Button down
-                    [self mergeCameraEventHappened:CameraEventSnapshotButtonDown];
+                    if (lastButtonData==17) [self mergeCameraEventHappened:CameraEventSnapshotButtonDown];
                     break;
                 case 17:	//Button up
-                    [self mergeCameraEventHappened:CameraEventSnapshotButtonUp];
+                    if (lastButtonData==16) [self mergeCameraEventHappened:CameraEventSnapshotButtonUp];
                     break;
                 case 194:	//sometimes sent on grab start / stop
                     break;
@@ -92,7 +92,7 @@
 #endif
                     break;
             }
-*/
+            lastButtonData=camData;
         }
     }
     [pool release];
@@ -109,6 +109,42 @@
         }
     }
     [self cameraEventHappened:self event:evt];
+}
+
+- (BOOL) camInit {
+    BOOL ok;
+    UInt8 direction;
+    UInt8 number;
+    UInt8 transferType;
+    UInt16 maxPacketSize;
+    UInt8 interval;
+    IOReturn err;
+
+    ok=[self writeSTVRegister:0x1500 value:1];
+    if (ok) ok=[self writeSTVRegister:0x1443 value:0];
+
+    if (ok) ok=[sensor resetSensor];
+
+    if (ok) {
+        if (intf&&isUSBOK) {
+            err=(*intf)->GetPipeProperties(intf,1,&direction,&number,&transferType,&maxPacketSize,&interval);
+            if (err) ok=NO;
+        } else ok=NO;
+    }
+    if (ok) ok=[self writeSTVRegister:0x15c1 value:(maxPacketSize&0xff)];		//isoch frame size lo
+    if (ok) ok=[self writeSTVRegister:0x15c2 value:((maxPacketSize>>8)&0xff)];		//isoch frame size hi
+
+    if (ok) ok=[self writeSTVRegister:0x1443 value:0x20];				//timing
+    if (ok) ok=[self writeSTVRegister:0x15c3 value:1];					//y subsampling
+    return ok;
+}
+
+- (CameraError) decodingThread {
+    CameraError err;
+    [self writeSTVRegister:0x1445 value:0x01];	//LED
+    err=[super decodingThread];
+    [self writeSTVRegister:0x1445 value:0x00];	//LED
+    return err;
 }
 
 

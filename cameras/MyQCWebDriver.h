@@ -1,6 +1,7 @@
 /*
-    macam - webcam app and QuickTime driver component
-    Copyright (C) 2002 Matthias Krauss (macam@matthias-krauss.de)
+ MyQCWebDriver.h - macam camera driver class for Logitech QuickCam Web
+
+ Copyright (C) 2002 Matthias Krauss (macam@matthias-krauss.de)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCWebDriver.h,v 1.1 2002/05/22 04:57:13 dirkx Exp $
+ $Id: MyQCWebDriver.h,v 1.2 2002/07/01 15:49:14 mattik Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -29,6 +30,7 @@
     BOOL buttonThreadRunning;
     NSConnection* mainToButtonThreadConnection;
     NSConnection* buttonToMainThreadConnection;
+    unsigned char lastButtonData;
 }
 
 + (unsigned short) cameraUsbProductID;
@@ -40,6 +42,8 @@
 
 - (void) buttonThread:(id)data;
 - (void) mergeCameraEventHappened:(CameraEvent)evt;
+
+- (BOOL) camInit;
 
 
 @end

@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.16 2003/01/21 17:39:37 mattik Exp $
+ $Id: MyCameraCentral.m,v 1.17 2003/01/27 17:23:35 mattik Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -49,7 +49,7 @@
 
 void DeviceAdded(void *refCon, io_iterator_t iterator);
 
-static NSString* driverBundleName=@"de.matthias-krauss.webcam";
+static NSString* driverBundleName=@"net.sourceforge.webcam-osx.common";
 static NSMutableDictionary* prefsDict=NULL;
 
 @interface MyCameraCentral (Private)

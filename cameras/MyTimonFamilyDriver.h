@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyTimonFamilyDriver.h,v 1.1 2002/05/22 04:57:14 dirkx Exp $
+ $Id: MyTimonFamilyDriver.h,v 1.2 2003/01/20 16:20:58 mattik Exp $
  */
 
 #import <Cocoa/Cocoa.h>
@@ -30,6 +30,7 @@
 @interface MyTimonFamilyDriver : MyPhilipsCameraDriver {
 
 }
++ (NSArray*) cameraUsbDescriptions;
 - (CameraError) startupWithUsbDeviceRef:(io_service_t)usbDeviceRef;
 - (BOOL) canSetSaturation;					//Override to disable
 - (BOOL) supportsResolution:(CameraResolution)r fps:(short)fr;	//Returns if this combination is supported

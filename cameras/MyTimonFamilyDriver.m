@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyTimonFamilyDriver.m,v 1.1 2002/05/22 04:57:14 dirkx Exp $
+ $Id: MyTimonFamilyDriver.m,v 1.2 2003/01/20 16:20:58 mattik Exp $
  */
 
 #import "MyTimonFamilyDriver.h"
@@ -54,7 +54,27 @@ static VestaFormatEntry formats[]={
 
 static long numFormats=19;
 
+#define PRODUCT_VESTA 0x0307
+#define PRODUCT_VESTA_PRO 0x0308
+#define PRODUCT_VESTA_SCAN 0x030c
+
 @implementation MyTimonFamilyDriver
+
++ (NSArray*) cameraUsbDescriptions {
+    NSDictionary* dict1=[NSDictionary dictionaryWithObjectsAndKeys:
+        [NSNumber numberWithUnsignedShort:PRODUCT_VESTA],@"idProduct",
+        [NSNumber numberWithUnsignedShort:VENDOR_PHILIPS],@"idVendor",
+        @"Philips Vesta",@"name",NULL];
+    NSDictionary* dict2=[NSDictionary dictionaryWithObjectsAndKeys:
+        [NSNumber numberWithUnsignedShort:PRODUCT_VESTA_PRO],@"idProduct",
+        [NSNumber numberWithUnsignedShort:VENDOR_PHILIPS],@"idVendor",
+        @"Philips Vesta Pro",@"name",NULL];
+    NSDictionary* dict3=[NSDictionary dictionaryWithObjectsAndKeys:
+        [NSNumber numberWithUnsignedShort:PRODUCT_VESTA_SCAN],@"idProduct",
+        [NSNumber numberWithUnsignedShort:VENDOR_PHILIPS],@"idVendor",
+        @"Philips Vesta Scan",@"name",NULL];
+    return [NSArray arrayWithObjects:dict1,dict2,dict3,NULL];
+}
 
 - (CameraError) startupWithUsbDeviceRef:(io_service_t)usbDeviceRef {
     return [super startupWithUsbDeviceRef:usbDeviceRef];

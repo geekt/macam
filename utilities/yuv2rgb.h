@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: yuv2rgb.h,v 1.1 2002/05/22 04:57:22 dirkx Exp $
+ $Id: yuv2rgb.h,v 1.2 2002/10/25 10:00:36 mattik Exp $
 */
 
 #ifndef _YUV2RGB_
@@ -63,7 +63,8 @@ Someone interested in AltiVec optimization?
 typedef enum YUVStyle {
     YUVPhilipsStyle	=0,
     YUVCPIA420Style	=1,
-    YUVCPIA422Style	=2
+    YUVCPIA422Style	=2,
+    YUVOV420Style	=3
 } YUVStyle;
 
  void yuv2rgb(int width,

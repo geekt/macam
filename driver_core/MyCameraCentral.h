@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.h,v 1.4 2003/01/30 11:31:48 mattik Exp $
+ $Id: MyCameraCentral.h,v 1.5 2003/02/24 13:04:20 mattik Exp $
  */
 
 #import <Cocoa/Cocoa.h>
@@ -83,6 +83,7 @@
 - (short) numCameras;
 - (short) indexOfCamera:(MyCameraDriver*)driver;
 - (unsigned long) idOfCameraWithIndex:(short)idx;
+- (unsigned long) idOfCameraWithLocationID:(UInt32)locID;
 - (CameraError) useCameraWithID:(unsigned long)cid to:(MyCameraDriver**)outCam acceptDummy:(BOOL)acceptDummy;
 - (MyCameraDriver*) useDummyForError:(CameraError)err;
 - (NSString*) nameForID:(unsigned long)cid;

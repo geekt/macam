@@ -15,7 +15,7 @@ macam - webcam app and QuickTime driver component
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySTV600Sensor.m,v 1.2 2002/07/08 22:53:33 mattik Exp $
+ $Id: MySTV600Sensor.m,v 1.3 2002/09/03 23:01:27 mattik Exp $
  */
 
 
@@ -47,10 +47,15 @@ macam - webcam app and QuickTime driver component
     NSAssert(reg23Value>=0,@"Your subclass of MySTV600Sensor must set reg23Value on init");
     NSAssert(i2cIdentityRegister>=0,@"Your subclass of MySTV600Sensor must set i2cIdentityRegister on init");
     NSAssert(i2cIdentityValue>=0,@"Your subclass of MySTV600Sensor must set i2cIdentityValue on init");
+
     [camera writeSTVRegister:0x0423 value:reg23Value];
     ok=[self readI2CRegister:i2cIdentityRegister to:&sensorID];
     if (!ok) return NO;
     if (sensorID!=i2cIdentityValue) return NO;	//It's not our sensor...
+    //Remote debugging: Give out the sensor and camera class to the console
+    NSLog(@"Found image sensor of class:%@, camera of class:%@",
+        NSStringFromClass([self class]),
+        NSStringFromClass([camera class]));
     return YES;
 }
 

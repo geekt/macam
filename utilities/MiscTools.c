@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MiscTools.c,v 1.1 2002/05/22 04:57:21 dirkx Exp $
+ $Id: MiscTools.c,v 1.2 2002/12/30 17:50:58 mattik Exp $
  */
 
 #include "MiscTools.h"
@@ -133,6 +133,7 @@ short WidthOfResolution(CameraResolution r) {
         case ResolutionSIF:   ret = 320; break;
         case ResolutionCIF:   ret = 352; break;
         case ResolutionVGA:   ret = 640; break;
+        case ResolutionSVGA:  ret = 800; break;
         default:              ret =  -1; break;
     }
     return ret;
@@ -147,6 +148,7 @@ short HeightOfResolution(CameraResolution r) {
         case ResolutionSIF:   ret = 240; break;
         case ResolutionCIF:   ret = 288; break;
         case ResolutionVGA:   ret = 480; break;
+        case ResolutionSVGA:  ret = 600; break;
         default:              ret =  -1; break;
     }
     return ret;

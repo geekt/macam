@@ -16,7 +16,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  
-    $Id: GlobalDefs.h,v 1.2 2002/05/27 05:43:28 dirkx Exp $
+    $Id: GlobalDefs.h,v 1.3 2002/12/30 17:50:51 mattik Exp $
 */
 
 /*
@@ -41,6 +41,7 @@ typedef enum CameraResolution {
     ResolutionSIF   = 4,	//sif   = 320 x 240
     ResolutionCIF   = 5,	//cif   = 352 x 288
     ResolutionVGA   = 6,	//vga   = 640 x 480
+    ResolutionSVGA  = 7		//svga  = 800 x 600
 } CameraResolution;
 
 typedef enum CameraError {

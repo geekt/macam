@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCExpressADriver.m,v 1.7 2003/01/16 15:36:09 mattik Exp $
+ $Id: MyQCExpressADriver.m,v 1.8 2003/01/16 17:51:01 mattik Exp $
 */
 
 #include <IOKit/IOKitLib.h>
@@ -539,7 +539,6 @@ static bool StartNextIsochRead(STV600GrabContext* grabContext, int transferIdx) 
 - (CameraError) decodingThread
 {
     STV600ChunkBuffer  currChunk;
-    long               i;
     CameraError        err = CameraErrorOK;
 
     grabbingThreadRunning = NO;
@@ -605,27 +604,28 @@ static bool StartNextIsochRead(STV600GrabContext* grabContext, int transferIdx) 
 
 - (void) decodeChunk:(STV600ChunkBuffer*) chunkBuffer
 {
-	if (!nextImageBufferSet)
-		return;			//No need to decode
+    if (!nextImageBufferSet)
+        return;			//No need to decode
 
     [imageBufferLock lock];				//lock image buffer access
     if (!nextImageBuffer)
-	{
-		[imageBufferLock unlock];				//release lock
-		return;
-	}
-	
-	[bayerConverter convertFromSrc:chunkBuffer->buffer
-							toDest:nextImageBuffer
-						srcRowBytes:[self width]+extraBytesInLine
-						dstRowBytes:nextImageBufferRowBytes
-							dstBPP:nextImageBufferBPP];
-	lastImageBuffer=nextImageBuffer;			//Copy nextBuffer info into lastBuffer
-	lastImageBufferBPP=nextImageBufferBPP;
-	lastImageBufferRowBytes=nextImageBufferRowBytes;
-	nextImageBufferSet=NO;				//nextBuffer has been eaten up
+    {
+        [imageBufferLock unlock];				//release lock
+        return;
+    }
 
-	[imageBufferLock unlock];				//release lock
+    [bayerConverter convertFromSrc:chunkBuffer->buffer
+                            toDest:nextImageBuffer
+                       srcRowBytes:[self width]+extraBytesInLine
+                       dstRowBytes:nextImageBufferRowBytes
+                            dstBPP:nextImageBufferBPP
+                              flip:NO];
+    lastImageBuffer=nextImageBuffer;			//Copy nextBuffer info into lastBuffer
+    lastImageBufferBPP=nextImageBufferBPP;
+    lastImageBufferRowBytes=nextImageBufferRowBytes;
+    nextImageBufferSet=NO;				//nextBuffer has been eaten up
+
+    [imageBufferLock unlock];				//release lock
 
     [self mergeImageReady];				//notify delegate about the image. perhaps get a new buffer
     if (autoGain) {

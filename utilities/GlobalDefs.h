@@ -16,7 +16,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  
-    $Id: GlobalDefs.h,v 1.3 2002/12/30 17:50:51 mattik Exp $
+    $Id: GlobalDefs.h,v 1.4 2003/01/27 17:22:01 mattik Exp $
 */
 
 /*
@@ -35,6 +35,7 @@ typedef enum WhiteBalanceMode {
 } WhiteBalanceMode;
 
 typedef enum CameraResolution {
+    ResolutionInvalid = 0,	//Indicates a wrong or not applicable resolution
     ResolutionSQSIF = 1,	//sqsif = 128 x  96
     ResolutionQSIF  = 2,	//qsif  = 160 x 120
     ResolutionQCIF  = 3,	//qcif  = 176 x 144

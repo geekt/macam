@@ -16,12 +16,14 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  
-    $Id: main.m,v 1.2 2002/05/27 05:43:28 dirkx Exp $
+    $Id: main.m,v 1.3 2002/11/12 15:54:19 mattik Exp $
 */
 
 #import <Cocoa/Cocoa.h>
+#import <QuickTime/QuickTime.h>
 
 int main(int argc, const char *argv[])
 {
+    EnterMovies();
     return NSApplicationMain(argc, argv);
 }

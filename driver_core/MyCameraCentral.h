@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.h,v 1.3 2003/01/21 17:39:37 mattik Exp $
+ $Id: MyCameraCentral.h,v 1.4 2003/01/30 11:31:48 mattik Exp $
  */
 
 #import <Cocoa/Cocoa.h>
@@ -44,6 +44,7 @@
 
     IBOutlet id delegate;
     BOOL doNotificationsOnMainThread;
+    BOOL recognizeLaterPlugins;
     
 //Localized error messages
     char localizedErrorCStrs[10][256];
@@ -66,7 +67,9 @@
 //Init, startup, shutdown, dealloc
 
 - (void) dealloc;
-- (BOOL) startupWithNotificationsOnMainThread:(BOOL)nomt;//You should have set the delegate when calling this. Returns success.
+- (BOOL) startupWithNotificationsOnMainThread:(BOOL)nomt recognizeLaterPlugins:(BOOL)rlp;
+//You should have set the delegate when calling this. Returns success.
+
 - (void) shutdown;	//Stops all cams and stops USB notification process
 
 //Property get/set

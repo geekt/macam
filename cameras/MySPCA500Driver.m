@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySPCA500Driver.m,v 1.2 2003/01/16 15:41:57 mattik Exp $
+ $Id: MySPCA500Driver.m,v 1.3 2003/01/16 18:18:42 mattik Exp $
  */
 
 #include "GlobalDefs.h"
@@ -236,8 +236,9 @@ extern UInt8 QTables[];
         default: subsampleCode=0x00; break;
     }
     compressionCode=(compression)?0x00:0x02;
+    usleep(200000);
     //Do someting unknown
-    //    if (![self usbWriteCmdWithBRequest:0x00 wValue:0x0002 wIndex:0x0d01 buf:NULL len:0]) return NO;
+        if (![self usbWriteCmdWithBRequest:0x00 wValue:0x0002 wIndex:0x0d01 buf:NULL len:0]) return NO;
     //Enable drop packet
         if (![self usbWriteCmdWithBRequest:0x00 wValue:0x0001 wIndex:0x850a buf:NULL len:0]) return NO;
     //Set agc transfer: synced inbetween frames
@@ -290,6 +291,7 @@ extern UInt8 QTables[];
 - (void) shutdownGrabStream {
     //Set camera to idle
     [self usbWriteCmdWithBRequest:0x00 wValue:0x0000 wIndex:0x8000 buf:NULL len:0];
+    usleep(200000);
 }
 
 - (BOOL) setupGrabContext {
@@ -1022,6 +1024,7 @@ bail2:
 
 - (void) flipImage:(UInt8*)ptr width:(long)width height:(long)height bpp:(short)bpp rowBytes:(long)rb {
     short x,y,left,right;
+    
     UInt8 ch;
     if (bpp==3) {
         for (y=height;y>0;y--) {

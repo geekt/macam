@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCWebDriver.m,v 1.3 2002/07/02 14:17:18 mattik Exp $
+ $Id: MyQCWebDriver.m,v 1.4 2002/09/03 23:04:18 mattik Exp $
 */
 
 #import "MyQCWebDriver.h"
@@ -30,7 +30,7 @@
 + (NSString*) cameraName { return [MyCameraCentral localizedStringFor:@"QuickCam Web"]; }
 
 - (BOOL) supportsResolution:(CameraResolution)r fps:(short)fr {
-    return ((r=ResolutionCIF)&&(fr==5));
+    return ((r==ResolutionCIF)&&(fr==5));
 }
 
 - (CameraError) startupWithUsbDeviceRef:(io_service_t)usbDeviceRef {

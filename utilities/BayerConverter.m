@@ -8,14 +8,14 @@
  (at your option) any later version.
 
  This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
+ but WITHOUT ANY WARRANTY; without even the implied warranty of>
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: BayerConverter.m,v 1.2 2002/06/07 13:26:56 mattik Exp $
+ $Id: BayerConverter.m,v 1.3 2002/07/01 17:28:03 mattik Exp $
  */
 #import "BayerConverter.h"
 

@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.m,v 1.3 2002/10/24 18:16:59 mattik Exp $
+ $Id: MyCameraDriver.m,v 1.4 2002/11/12 16:15:33 mattik Exp $
 */
 
 #import "MyCameraDriver.h"
@@ -878,10 +878,11 @@
                 bufRun+=lastImageBufferRowBytes-width*lastImageBufferBPP;
             }
             time=CFAbsoluteTimeGetCurrent();
-            h=(((unsigned long)time)/(60*60))%24;
-            m=(((unsigned long)time)/(60))%60;
-            s=((unsigned long)time)%60;
-            f=((unsigned long)(time*100.0f))%100;
+            h=(((long long)time)/(60*60))%24;
+            m=(((long long)time)/(60))%60;
+            s=((long long)time)%60;
+            time*=100.0;
+            f=((long long)(time))%100;
             sprintf(cstr,"%02i:%02i:%02i:%02i",h,m,s,f);
             MiniDrawString(lastImageBuffer,lastImageBufferBPP,lastImageBufferRowBytes,10,10,cstr);
         }

@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraInfo.h,v 1.1 2002/05/22 04:57:17 dirkx Exp $
+ $Id: MyCameraInfo.h,v 1.2 2003/02/24 13:02:13 mattik Exp $
  */
 
 /*
@@ -35,7 +35,6 @@ MyCameraCentral keeps an object for each connected camera and sets the driver ob
 #import <Cocoa/Cocoa.h>
 
 @interface MyCameraInfo : NSObject {
-    io_service_t	usbDeviceRef;	//A reference to our device in case we want to open it
     io_object_t		notification;	//A reference to our notification we want when we are unplugged
     Class		driverClass;	//The driver class if we want a driver
     id			driver;		//A driver - if we have one
@@ -44,14 +43,12 @@ MyCameraCentral keeps an object for each connected camera and sets the driver ob
     NSString*		name;		//the name of the camera type (e.g. "Philips ToUCam Pro")
     long 		pid;		//the usb product id
     long 		vid;		//the usb vendor id
+    UInt32		lid;		//The usb location id (only for connected cameras)
 }
 
 - (id) init;
 - (void) dealloc;
 - (id) copy;
-
-- (io_service_t) usbDeviceRef;
-- (void) setUsbDeviceRef:(io_service_t)devRef;
 
 - (io_object_t) notification;
 - (void) setNotification:(io_object_t)n;
@@ -75,5 +72,8 @@ MyCameraCentral keeps an object for each connected camera and sets the driver ob
 
 - (long) vendorID;
 - (void) setVendorID:(long)vendID;
+
+- (UInt32) locationID;
+- (void) setLocationID:(UInt32)locID;
 
 @end

@@ -15,9 +15,9 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: BayerConverter.h,v 1.1 2002/05/22 04:57:20 dirkx Exp $
+ $Id: BayerConverter.h,v 1.2 2002/12/12 15:47:15 mattik Exp $
 
- $Id: BayerConverter.h,v 1.1 2002/05/22 04:57:20 dirkx Exp $
+ $Id: BayerConverter.h,v 1.2 2002/12/12 15:47:15 mattik Exp $
  */
 #import <Cocoa/Cocoa.h>
 #include "GlobalDefs.h"
@@ -47,6 +47,7 @@ sourceFormat specifies serialization type. Examples show first two lines of a 6-
     short sourceFormat;
     BOOL updateGains;
     BOOL produceColorStats;
+    BOOL needsTransferLookup;
 //Individual gains for white balance correction
     float redGain;
     float greenGain;

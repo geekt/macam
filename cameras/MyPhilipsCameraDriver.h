@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyPhilipsCameraDriver.h,v 1.3 2003/02/24 13:05:09 mattik Exp $
+ $Id: MyPhilipsCameraDriver.h,v 1.4 2003/07/27 04:55:56 tmolteno Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -63,6 +63,8 @@ Doing these amounts of defines is often called bad style. We should find a bette
 #define TO_POWERSAVE(a) ((a)?0x0:0xff)
 #define CLAMP_UNIT(a) (CLAMP((a),0.0f,1.0f))
 
+#define TO_LEDON(a) ((a)?0xFF00:0x00FF) // OxFF00 is LED on 0x00FF is LED off
+
 //Command groups and selectors
 
 #define INTF_CONTROL	3
@@ -75,6 +77,7 @@ Doing these amounts of defines is often called bad style. We should find a bette
 #define SEL_GAIN			0x2100
 
 #define GRP_SET_CHROMA		0x03
+#define SEL_COLORMODE			0x1500
 #define SEL_SATURATION			0x1600
 
 #define GRP_SET_STATUS		0x05
@@ -159,6 +162,8 @@ typedef struct PhilipsGrabContext {	//Everything the grabbing thread internals n
 - (void) setGain:(float)v;
 - (void) setShutter:(float)v;
 - (void) setAutoGain:(BOOL)v;
+- (void) setBlackWhiteMode:(BOOL)newMode;	// set to color / black & white
+
 
 - (WhiteBalanceMode) defaultWhiteBalanceMode;
 

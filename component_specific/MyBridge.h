@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyBridge.h,v 1.1 2002/05/22 04:57:14 dirkx Exp $
+ $Id: MyBridge.h,v 1.2 2003/07/27 04:55:56 tmolteno Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -135,8 +135,17 @@ typedef enum BridgeClientState {
 - (void) setCompression:(short)v;	//Sets the current compression [0 .. maxCompression]
 - (BOOL) canSetWhiteBalanceMode;	//If camera can adjust white balance at all
 - (BOOL) canSetWhiteBalanceModeTo:(WhiteBalanceMode)m;	//If the camera supports a specific whiute balance setting
-- (WhiteBalanceMode) whiteBalanceMode;	//TRhe current white balance mode
+- (WhiteBalanceMode) whiteBalanceMode;	//The current white balance mode
 - (void) setWhiteBalanceMode:(WhiteBalanceMode)m;	//Set the current white balance mode
+
+- (BOOL) canBlackWhiteMode;		//If camera can adjust color/greyscale at all
+- (BOOL) blackWhiteMode;		//The current color mode
+- (void) setBlackWhiteModeMode:(BOOL)m;	//Set the current color mode
+
+- (BOOL) canSetLed;			//Can the camera toggle its LED
+- (BOOL) isLedOn;			//The current LED status
+- (void) setLed:(BOOL)v;		//Set the LED status
+
 - (short) width;			//Returns the current grabbing width in pixels
 - (short) height;			//Returns the current grabbing height in pixels
 - (void) nativeBounds:(Rect*)r;		//Returns the native grabbing rect ( = <0,0,[width],[height]> )

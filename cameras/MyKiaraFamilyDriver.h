@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyKiaraFamilyDriver.h,v 1.3 2003/02/24 13:05:09 mattik Exp $
+ $Id: MyKiaraFamilyDriver.h,v 1.4 2003/07/27 04:55:56 tmolteno Exp $
  */
 
 #import <Cocoa/Cocoa.h>
@@ -32,6 +32,7 @@
 - (BOOL) supportsResolution:(CameraResolution)r fps:(short)fr;	//Returns if this combination is supported
 - (void) setResolution:(CameraResolution)r fps:(short)fr;	//Set a resolution and frame rate.
 - (CameraResolution) defaultResolutionAndRate:(short*)fps;
+- (void) setLed:(BOOL)v;		// switch LED on/off
 
 
 

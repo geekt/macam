@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyBridge.m,v 1.1 2002/05/22 04:57:15 dirkx Exp $
+ $Id: MyBridge.m,v 1.2 2003/07/27 04:55:56 tmolteno Exp $
 */
 
 
@@ -431,6 +431,45 @@
 - (void) setWhiteBalanceMode:(WhiteBalanceMode)m {
     if (driver) [driver setWhiteBalanceMode:m];
 }
+
+
+// ================= Color & Grey Mode
+
+- (BOOL) canBlackWhiteMode {
+    if (driver) return [driver canBlackWhiteMode];
+    else return NO;
+}
+
+
+- (BOOL) blackWhiteMode {
+    if (driver)
+		return [driver blackWhiteMode];
+    else
+		return NO; // default to color mode
+}
+
+- (void) setBlackWhiteMode:(BOOL)m {
+    if (driver) [driver setBlackWhiteMode:m];
+}
+
+// =================== LED state
+
+- (BOOL) canSetLed {
+    if (driver) return [driver canSetLed];
+    else return NO;
+}
+
+
+- (BOOL) isLedOn {
+    if (driver) return [driver isLedOn];
+    else return FALSE;
+}
+
+- (void) setLed:(BOOL)v {
+    if (driver) [driver setLed:v];
+}
+
+// =============================
 
 - (short) width {
     if (driver) return [driver width];

@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.m,v 1.9 2003/02/24 13:04:01 mattik Exp $
+ $Id: MyCameraDriver.m,v 1.10 2003/07/27 04:55:56 tmolteno Exp $
 */
 
 #import "MyCameraDriver.h"
@@ -68,6 +68,7 @@
     hFlip=NO;
     compression=0;
     whiteBalanceMode=WhiteBalanceLinear;
+    blackWhiteMode = FALSE;
     isStarted=NO;
     isGrabbing=NO;
     shouldBeGrabbing=NO;
@@ -311,6 +312,45 @@
         whiteBalanceMode=newMode;
     }
 }
+
+
+// ============== Color Mode ======================
+
+- (BOOL) canBlackWhiteMode {
+    return NO;
+}
+
+
+- (BOOL) blackWhiteMode {
+    return blackWhiteMode;
+}
+
+- (void) setBlackWhiteMode:(BOOL)newMode {
+    if ([self canBlackWhiteMode]) {
+        blackWhiteMode=newMode;
+    }
+}
+ 
+ 
+//================== Light Emitting Diode
+
+- (BOOL) canSetLed {
+    return NO;
+}
+
+
+- (BOOL) isLedOn {
+    return LEDon;
+}
+
+- (void) setLed:(BOOL)v {
+    if ([self canSetLed]) {
+        LEDon=v;
+    }
+}
+ 
+
+// =========================
 
 - (short) width {						//Current image width
     return WidthOfResolution(resolution);

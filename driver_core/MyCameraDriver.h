@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.h,v 1.6 2003/02/24 13:04:01 mattik Exp $
+ $Id: MyCameraDriver.h,v 1.7 2003/07/27 04:55:56 tmolteno Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -60,6 +60,8 @@ typedef enum CameraFeature {
     BOOL hFlip;
     CameraResolution resolution;
     WhiteBalanceMode whiteBalanceMode;
+    BOOL blackWhiteMode;	// is color or Black and White (greyscale)
+    BOOL LEDon;			// is the LED on or off (Philips cameras)
     short fps;
     short compression;			//0 = uncompressed, higher means more compressed
 
@@ -165,6 +167,11 @@ Image buffers. There are two sets: lastIamgeBuffer and nextImageBuffer. The clie
 - (BOOL) isAutoGain;
 - (void) setAutoGain:(BOOL)v;
 
+//LED ON / OFF
+- (BOOL) canSetLed;
+- (BOOL) isLedOn;
+- (void) setLed:(BOOL)v;
+
 //Horizontal flipping
 - (BOOL) canSetHFlip;		//Horizontal flipping
 - (BOOL) hFlip;
@@ -181,6 +188,12 @@ Image buffers. There are two sets: lastIamgeBuffer and nextImageBuffer. The clie
 - (WhiteBalanceMode) defaultWhiteBalanceMode;
 - (WhiteBalanceMode) whiteBalanceMode;
 - (void) setWhiteBalanceMode:(WhiteBalanceMode)newMode;
+
+//Black & White Mode
+- (BOOL) canBlackWhiteMode;
+- (BOOL) blackWhiteMode;
+- (void) setBlackWhiteMode:(BOOL)newMode;
+
 
 //Resolution and frame rate
 - (short) width;						//Current image width

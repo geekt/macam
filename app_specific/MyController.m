@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.m,v 1.13 2003/02/05 13:27:16 mattik Exp $
+ $Id: MyController.m,v 1.14 2003/07/27 04:55:56 tmolteno Exp $
 */
 
 #import "MyController.h"
@@ -267,6 +267,16 @@ The following is a workaround for a quite weird thing. If there are classes that
 - (IBAction)whiteBalanceChanged:(id)sender {
     WhiteBalanceMode wb=[whiteBalancePopup indexOfSelectedItem]+1;
     [driver setWhiteBalanceMode:wb];
+}
+
+- (IBAction)blackwhiteCheckboxChanged:(id)sender {
+    BOOL BlackWhite =[blackwhiteCheckbox intValue];
+    [driver setBlackWhiteMode:BlackWhite];
+}
+
+- (IBAction)ledCheckboxChanged:(id)sender {
+    BOOL ledOn =[ledCheckbox intValue];
+    [driver setLed:ledOn];
 }
 
 - (IBAction)horizontalFlipChanged:(id)sender {
@@ -558,6 +568,7 @@ The following is a workaround for a quite weird thing. If there are classes that
             [fpsPopup setEnabled:YES];
             [whiteBalancePopup setEnabled:[driver canSetWhiteBalanceMode]];
             [horizontalFlipCheckbox setEnabled:[driver canSetHFlip]];
+            [blackwhiteCheckbox setEnabled:[driver canBlackWhiteMode]];
 
             [whiteBalancePopup selectItemAtIndex:[driver whiteBalanceMode]-1];
             [gainSlider setEnabled:([driver canSetGain])&&(![driver isAutoGain])];

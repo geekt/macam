@@ -16,7 +16,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  
-    $Id: GlobalDefs.h,v 1.4 2003/01/27 17:22:01 mattik Exp $
+    $Id: GlobalDefs.h,v 1.5 2003/07/27 04:55:57 tmolteno Exp $
 */
 
 /*
@@ -57,6 +57,11 @@ typedef enum CameraError {
     CameraErrorUnimplemented	= 8,	//A feature that is not (yet) implemented
     CameraErrorInternal		= 9	//Some other, probably serious, error
 } CameraError;
+
+typedef enum ColorMode {
+    ColorModeColor		= 1,
+    ColorModeGray		= 2
+} ColorMode;
 
 
 //Global build settings. Comment unwanted stuff out

@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.h,v 1.4 2002/11/12 15:54:46 mattik Exp $
+ $Id: MyController.h,v 1.5 2003/07/27 04:55:56 tmolteno Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -43,12 +43,16 @@
     IBOutlet NSImageView* previewView;
     IBOutlet NSTextField* statusText;
     IBOutlet NSPopUpButton* whiteBalancePopup;
+    IBOutlet NSPopUpButton* colorModePopup;
     IBOutlet NSPopUpButton* sizePopup;
     IBOutlet NSPopUpButton* fpsPopup;
     IBOutlet MyCameraCentral* central;
     IBOutlet NSWindow* disclaimerWindow;
     IBOutlet NSDrawer* settingsDrawer;
     IBOutlet NSDrawer* inspectorDrawer;
+    IBOutlet id blackwhiteCheckbox;
+	IBOutlet id ledCheckbox;
+	
     MyCameraInspector* inspector;
     MyCameraDriver* driver;
     NSBitmapImageRep* imageRep;
@@ -87,6 +91,8 @@
 - (IBAction)compressionChanged:(id)sender;
 - (IBAction)whiteBalanceChanged:(id)sender;
 - (IBAction)horizontalFlipChanged:(id)sender;
+- (IBAction)blackwhiteCheckboxChanged:(id)sender;
+- (IBAction)ledCheckboxChanged:(id)sender;
 
 //UI: Actions to do
 - (IBAction)doGrab:(id)sender;

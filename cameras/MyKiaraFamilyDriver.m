@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyKiaraFamilyDriver.m,v 1.2 2003/01/20 16:21:40 mattik Exp $
+ $Id: MyKiaraFamilyDriver.m,v 1.3 2003/01/30 23:04:10 mattik Exp $
  */
 
 #import "MyKiaraFamilyDriver.h"
@@ -48,16 +48,16 @@ static long numFormats=7;
 
 + (NSArray*) cameraUsbDescriptions {
     NSDictionary* dict1=[NSDictionary dictionaryWithObjectsAndKeys:
-        [NSNumber numberWithUnsignedShort:VENDOR_PHILIPS],@"idProduct",
-        [NSNumber numberWithUnsignedShort:PRODUCT_TOUCAM_PRO],@"idVendor",
+        [NSNumber numberWithUnsignedShort:VENDOR_PHILIPS],@"idVendor",
+        [NSNumber numberWithUnsignedShort:PRODUCT_TOUCAM_PRO],@"idProduct",
         @"Philips ToUCam Pro",@"name",NULL];
     NSDictionary* dict2=[NSDictionary dictionaryWithObjectsAndKeys:
-        [NSNumber numberWithUnsignedShort:VENDOR_PHILIPS],@"idProduct",
-        [NSNumber numberWithUnsignedShort:PRODUCT_TOUCAM_PRO_3D],@"idVendor",
+        [NSNumber numberWithUnsignedShort:VENDOR_PHILIPS],@"idVendor",
+        [NSNumber numberWithUnsignedShort:PRODUCT_TOUCAM_PRO_3D],@"idProduct",
         @"Philips ToUCam Pro 3D",@"name",NULL];
     NSDictionary* dict3=[NSDictionary dictionaryWithObjectsAndKeys:
-        [NSNumber numberWithUnsignedShort:PRODUCT_QUICKCAM_PRO_4000],@"idProduct",
         [NSNumber numberWithUnsignedShort:VENDOR_LOGITECH],@"idVendor",
+        [NSNumber numberWithUnsignedShort:PRODUCT_QUICKCAM_PRO_4000],@"idProduct",
         @"Logitech QuickCam Pro 4000",@"name",NULL];
     return [NSArray arrayWithObjects:dict1,dict2,dict3,NULL];
 }

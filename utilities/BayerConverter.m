@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: BayerConverter.m,v 1.1 2002/05/22 04:57:20 dirkx Exp $
+ $Id: BayerConverter.m,v 1.2 2002/06/07 13:26:56 mattik Exp $
  */
 #import "BayerConverter.h"
 
@@ -379,8 +379,8 @@
 
     BOOL leftBorder=(destinationWidth>width);		//Find which borders we need to blit (without sharpening)
     BOOL rightBorder=(destinationWidth>(width+1));	//Note that when rightBorder is YES, we can also expect leftBorder
-    BOOL topBorder=(destinationHeight>=height);
-    BOOL bottomBorder=(destinationHeight>=(height+1));	//Note that when bottomBorder is YES, we can also expect topBorder
+    BOOL topBorder=(destinationHeight>height);
+    BOOL bottomBorder=(destinationHeight>(height+1));	//Note that when bottomBorder is YES, we can also expect topBorder
 
     unsigned char* dst1Run=dst+((leftBorder)?3:0)+((topBorder)?dstRB:0);
     unsigned char* dst2Run=dst1Run+dstRB;

@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.m,v 1.12 2003/01/30 11:26:59 mattik Exp $
+ $Id: MyController.m,v 1.13 2003/02/05 13:27:16 mattik Exp $
 */
 
 #import "MyController.h"
@@ -66,7 +66,7 @@ extern NSString* SnapshotQualityPrefsKey;
 - (void) awakeFromNib {
     NSString* disclaimerOKVersion;
     NSString* shortVersion;
-
+    NSDictionary* dict;
 /*
 
 The following is a workaround for a quite weird thing. If there are classes that were not instantiated before the QuickTime component loads, the app will quit with a strange error message: "objc: thread is already initializing this class!". No crash log, nothing. Just a quit with error code 1. I guess its cause is that these classes have two implementations loaded. And I guess it's a rare bug in Apple's code (might also be mine, I couldn't find anything in the web. Please someone tell me what's going on... 
@@ -76,10 +76,14 @@ The following is a workaround for a quite weird thing. If there are classes that
     [[[RGBScaler alloc] init] release];
 
     //Get our short version string
-    shortVersion=[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-
+    if ([[NSBundle mainBundle] respondsToSelector:@selector(objectForInfoDictionaryKey:)]) {
+        shortVersion=[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    } else {
+        shortVersion=@"<Unknown: Probably Pre-Jaguar System>";
+    }
+    
     //Create a fallback preference if no version was ever used
-    NSDictionary* dict=[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:0.0f] forKey:@"DisclaimerOKVersion"];
+    dict=[NSDictionary dictionaryWithObject:[NSNumber numberWithFloat:0.0f] forKey:@"DisclaimerOKVersion"];
     [[NSUserDefaults standardUserDefaults] registerDefaults:dict];
 
     //Get the latest version the user has agreed to
@@ -97,7 +101,13 @@ The following is a workaround for a quite weird thing. If there are classes that
 - (void) disclaimerOK:(id) sender {
 
     //Get our short version string
-    NSString* shortVersion=[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    NSString* shortVersion;
+    
+    if ([[NSBundle mainBundle] respondsToSelector:@selector(objectForInfoDictionaryKey:)]) {
+        shortVersion=[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+    } else {
+        shortVersion=@"<Unknown: Probably Pre-Jaguar System>";
+    }
 
     //Remove disclaimer window
     [disclaimerWindow orderOut:self];

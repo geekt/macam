@@ -17,7 +17,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySonix2028Driver.h,v 1.2 2002/12/12 15:48:23 mattik Exp $
+ $Id: MySonix2028Driver.h,v 1.3 2002/12/17 09:41:05 mattik Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -25,10 +25,14 @@
 #import "BayerConverter.h"
 #include "GlobalDefs.h"
 
-
 #define SONIX_NUM_CHUNK_BUFFERS 5
 #define SONIX_NUM_TRANSFERS 10
 #define SONIX_FRAMES_PER_TRANSFER 50
+
+#define SONIX_AE_WANTED_BRIGHTNESS 5000
+#define SONIX_AE_ACCEPTED_TOLERANCE 1000
+#define SONIX_AE_ADJUST_LATENCY 3
+#define SONIX_AE_ADJUST_STEP 0.01
 
 typedef struct SONIXTransferContext {	//Everything a usb completion callback need to know
     IOUSBIsocFrame frameList[SONIX_FRAMES_PER_TRANSFER];		//The results of the usb frames I received
@@ -58,6 +62,9 @@ typedef struct SONIXGrabContext {
     BOOL* shouldBeGrabbing;		//Ref to the global indicator if the grab should go on
     CameraError err;			//Return value for common errors during grab
     long framesSinceLastChunk;		//Counter to find out an invalid data stream
+    long underexposuredFrames;		//Counter for the sequence of underexposured frames
+    long overexposuredFrames;		//Counter for the sequence of overexposured frames
+    float autoExposure;			//Value for shutter/exposure [0..1]
 } SONIXGrabContext;
 
 @interface MySonix2028Driver : MyCameraDriver {
@@ -87,7 +94,21 @@ typedef struct SONIXGrabContext {
 
 - (BOOL) canSetSharpness;
 - (void) setSharpness:(float)v;
-
+- (BOOL) canSetBrightness;
+- (void) setBrightness:(float)v;
+- (BOOL) canSetContrast;
+- (void) setContrast:(float)v;
+- (BOOL) canSetSaturation;
+- (void) setSaturation:(float)v;
+- (BOOL) canSetGamma;
+- (void) setGamma:(float)v;
+- (BOOL) canSetGain;
+- (BOOL) canSetShutter;
+- (BOOL) canSetAutoGain;
+- (void) setAutoGain:(BOOL)v;
+- (void) setGain:(float)val;
+- (void) setShutter:(float)val;
+    
 //DSC Image download
 - (BOOL) canStoreMedia;
 - (long) numberOfStoredMediaObjects;

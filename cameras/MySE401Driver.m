@@ -17,7 +17,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySE401Driver.m,v 1.5 2003/01/02 18:25:14 mattik Exp $
+ $Id: MySE401Driver.m,v 1.6 2003/02/24 13:05:09 mattik Exp $
  */
 
 #import "MySE401Driver.h"
@@ -108,7 +108,7 @@
     [super dealloc];
 }
 
-- (CameraError) startupWithUsbDeviceRef:(io_service_t)usbDeviceRef {
+- (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId {
     CameraError err;
     UInt8 buf[64];
     int numSizes;
@@ -117,7 +117,7 @@
     int height=240;
     
     //setup connection to camera
-    err=[self usbConnectToCam:usbDeviceRef];
+    err=[self usbConnectToCam:usbLocationId configIdx:0];
     if (err!=CameraErrorOK) return err;
 
     //Do the camera startup sequence
@@ -163,7 +163,7 @@
     [self setWhiteBalanceMode:WhiteBalanceLinear];
     
     //Do the remaining, usual connection stuff
-    err=[super startupWithUsbDeviceRef:usbDeviceRef];
+    err=[super startupWithUsbLocationId:usbLocationId];
     if (err!=CameraErrorOK) return err;
 
     return err;
@@ -695,39 +695,38 @@ static void handleFullChunk(void *refcon, IOReturn result, void *arg0) {
             [chunkReadyLock lock];					//wait for new chunks to arrive
             while ((shouldBeGrabbing)&&([fullChunks count]>0)) {	//decode all full chunks we have
                 currChunk=[self getOldestFullChunkBuffer];
-                [imageBufferLock lock];					//Get image data
-                lastImageBuffer=nextImageBuffer;
-                lastImageBufferBPP=nextImageBufferBPP;
-                lastImageBufferRowBytes=nextImageBufferRowBytes;
-                bufferSet=nextImageBufferSet;
-                nextImageBufferSet=NO;
-                if (bufferSet) {
-                    imgData=[currChunk mutableBytes];
-                    if (streamIsCompressed) {				//Decode JangGu-compressed Stream
-                        [self decompressJangGuFrom:imgData
-                                                to:lastImageBuffer
-                                          rowBytes:lastImageBufferRowBytes
-                                               bpp:lastImageBufferBPP
-                                              flip:!hFlip];
-                    } else {						//Decode raw Bayer stream
-                        [bayerConverter convertFromSrc:imgData+width
-                                                toDest:lastImageBuffer
-                                           srcRowBytes:width
-                                           dstRowBytes:lastImageBufferRowBytes
-                                                dstBPP:lastImageBufferBPP
+                if (currChunk) {
+                    [imageBufferLock lock];					//Get image data
+                    lastImageBuffer=nextImageBuffer;
+                    lastImageBufferBPP=nextImageBufferBPP;
+                    lastImageBufferRowBytes=nextImageBufferRowBytes;
+                    bufferSet=nextImageBufferSet;
+                    nextImageBufferSet=NO;
+                    if (bufferSet) {
+                        imgData=[currChunk mutableBytes];
+                        if (streamIsCompressed) {				//Decode JangGu-compressed Stream
+                            [self decompressJangGuFrom:imgData
+                                                    to:lastImageBuffer
+                                              rowBytes:lastImageBufferRowBytes
+                                                   bpp:lastImageBufferBPP
                                                   flip:!hFlip];
+                        } else {						//Decode raw Bayer stream
+                            [bayerConverter convertFromSrc:imgData+width
+                                                    toDest:lastImageBuffer
+                                               srcRowBytes:width
+                                               dstRowBytes:lastImageBufferRowBytes
+                                                    dstBPP:lastImageBufferBPP
+                                                      flip:!hFlip];
+                        }
+                        [imageBufferLock unlock];
+                        [self mergeImageReady];
+                        if (autoGain) [self doAutoExposure];
+                    } else {
+                        [imageBufferLock unlock];
                     }
-                    [imageBufferLock unlock];
-                    [self mergeImageReady];
-                    if (autoGain) [self doAutoExposure];
-                } else {
-                    [imageBufferLock unlock];
+                    [self disposeChunkBuffer:currChunk];			//recycle our chunk - it's empty again
+                    currChunk=NULL;
                 }
-                [emptyChunkLock lock];			//recycle our chunk - it's empty again
-                [emptyChunks addObject:currChunk];
-                [currChunk release];
-                currChunk=NULL;
-                [emptyChunkLock unlock];
             }
         }
     }

@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyPhilipsCameraDriver.h,v 1.2 2003/01/20 16:22:38 mattik Exp $
+ $Id: MyPhilipsCameraDriver.h,v 1.3 2003/02/24 13:05:09 mattik Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -143,7 +143,7 @@ typedef struct PhilipsGrabContext {	//Everything the grabbing thread internals n
 + (NSString*) cameraName;
 
 //start/stop
-- (CameraError) startupWithUsbDeviceRef:(io_service_t)usbDeviceRef;
+- (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId;
 - (void) dealloc;
 
 //Note that we never read properties directly from the cam but use our own caches for the properties

@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCExpressBDriver.m,v 1.4 2003/02/23 19:07:59 markasbach Exp $
+ $Id: MyQCExpressBDriver.m,v 1.5 2003/02/24 13:05:09 mattik Exp $
 */
 
 #import "MyQCExpressBDriver.h"
@@ -30,10 +30,10 @@
 + (unsigned short) cameraUsbVendorID { return 0x46d; }
 + (NSString*) cameraName { return [MyCameraCentral localizedStringFor:@"QuickCam Express"]; }
 
-- (CameraError) startupWithUsbDeviceRef:(io_service_t)usbDeviceRef {
+- (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId {
     CameraError err;
 
-    err=[super startupWithUsbDeviceRef:usbDeviceRef];
+    err=[super startupWithUsbLocationId:usbLocationId];
     if (err==CameraErrorOK) {
 /*Start stv600 emulation (or whatever it is). Without it, image data is shifted by one byte which is 0x01 for the first image and 0x00 for the following ones */
         if (![self writeSTVRegister:0x1446 value:1]) {

@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyKiaraFlippedDriver.m,v 1.1 2003/01/20 16:20:20 mattik Exp $
+ $Id: MyKiaraFlippedDriver.m,v 1.2 2003/02/24 13:05:09 mattik Exp $
  */
 
 #import "MyKiaraFlippedDriver.h"
@@ -40,8 +40,8 @@
 
 
 
-- (CameraError) startupWithUsbDeviceRef:(io_service_t)usbDeviceRef {
-    CameraError err=[super startupWithUsbDeviceRef:usbDeviceRef];
+- (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId {
+    CameraError err=[super startupWithUsbLocationId:usbLocationId];
     camHFlip=YES;
     return err;
 }

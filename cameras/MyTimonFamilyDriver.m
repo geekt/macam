@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyTimonFamilyDriver.m,v 1.2 2003/01/20 16:20:58 mattik Exp $
+ $Id: MyTimonFamilyDriver.m,v 1.3 2003/02/24 13:05:09 mattik Exp $
  */
 
 #import "MyTimonFamilyDriver.h"
@@ -76,8 +76,8 @@ static long numFormats=19;
     return [NSArray arrayWithObjects:dict1,dict2,dict3,NULL];
 }
 
-- (CameraError) startupWithUsbDeviceRef:(io_service_t)usbDeviceRef {
-    return [super startupWithUsbDeviceRef:usbDeviceRef];
+- (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId {
+    return [super startupWithUsbLocationId:usbLocationId];
 }
 
 - (BOOL) canSetSaturation {	//Override for specific behaviour: Vesta cannot set saturation (or at least, I don't know about it)

@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCPIACameraDriver.m,v 1.3 2002/12/30 20:06:38 mattik Exp $
+ $Id: MyCPIACameraDriver.m,v 1.4 2003/02/24 13:05:08 mattik Exp $
 */
 
 #include <IOKit/IOKitLib.h>
@@ -101,8 +101,8 @@ Camera specific constants - see CPIA documentation for details. There is ONE VER
 + (unsigned short) cameraUsbVendorID { return VENDOR_VISION; }
 + (NSString*) cameraName { return [MyCameraCentral localizedStringFor:@"CPiA-based camera"]; }
 
-- (CameraError) startupWithUsbDeviceRef:(io_service_t)usbDeviceRef {
-    CameraError err=[self usbConnectToCam:usbDeviceRef];
+- (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId {
+    CameraError err=[self usbConnectToCam:usbLocationId configIdx:0];
 //setup connection to camera
     if (err!=CameraErrorOK) return err;
 //Set brightness, contrast and saturation
@@ -114,7 +114,7 @@ Camera specific constants - see CPIA documentation for details. There is ONE VER
     [self setGain:0.5f];
     [self setCompression:0];
     memset(&grabContext,0,sizeof(CPIAGrabContext));
-    return [super startupWithUsbDeviceRef:usbDeviceRef];
+    return [super startupWithUsbLocationId:usbLocationId];
 }
 
 - (void) dealloc {

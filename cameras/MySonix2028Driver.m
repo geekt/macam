@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySonix2028Driver.m,v 1.14 2003/01/30 11:30:48 mattik Exp $
+ $Id: MySonix2028Driver.m,v 1.15 2003/02/24 13:05:09 mattik Exp $
 */
 
 /* Here's what I know (or guess) about the chipset so far:
@@ -131,8 +131,8 @@ typedef enum SonixSensorType {
 + (unsigned short) cameraUsbVendorID { return VENDOR_AEL; }
 + (NSString*) cameraName { return [MyCameraCentral localizedStringFor:@"AEL Auracam DC-31UC"]; }
 
-- (CameraError) startupWithUsbDeviceRef:(io_service_t)usbDeviceRef {
-    CameraError err=[self usbConnectToCam:usbDeviceRef];
+- (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId {
+    CameraError err=[self usbConnectToCam:usbLocationId configIdx:0];
 //setup connection to camera
     if (err!=CameraErrorOK) return err;
     memset(&grabContext,0,sizeof(SONIXGrabContext));
@@ -151,7 +151,7 @@ typedef enum SonixSensorType {
     [super setShutter:0.5f];
     [super setGain:0.5f];
     [self setCompression:0];
-    return [super startupWithUsbDeviceRef:usbDeviceRef];
+    return [super startupWithUsbLocationId:usbLocationId];
 }
 
 - (void) dealloc {

@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyKiaraFamilyDriver.m,v 1.3 2003/01/30 23:04:10 mattik Exp $
+ $Id: MyKiaraFamilyDriver.m,v 1.4 2003/02/24 13:05:09 mattik Exp $
  */
 
 #import "MyKiaraFamilyDriver.h"
@@ -62,8 +62,8 @@ static long numFormats=7;
     return [NSArray arrayWithObjects:dict1,dict2,dict3,NULL];
 }
 
-- (CameraError) startupWithUsbDeviceRef:(io_service_t)usbDeviceRef {
-    CameraError err=[super startupWithUsbDeviceRef:usbDeviceRef];
+- (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId {
+    CameraError err=[super startupWithUsbLocationId:usbLocationId];
     if (!err) {
         chunkHeader=8;
         chunkFooter=4;

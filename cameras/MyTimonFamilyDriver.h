@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyTimonFamilyDriver.h,v 1.2 2003/01/20 16:20:58 mattik Exp $
+ $Id: MyTimonFamilyDriver.h,v 1.3 2003/02/24 13:05:09 mattik Exp $
  */
 
 #import <Cocoa/Cocoa.h>
@@ -31,7 +31,7 @@
 
 }
 + (NSArray*) cameraUsbDescriptions;
-- (CameraError) startupWithUsbDeviceRef:(io_service_t)usbDeviceRef;
+- (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId;
 - (BOOL) canSetSaturation;					//Override to disable
 - (BOOL) supportsResolution:(CameraResolution)r fps:(short)fr;	//Returns if this combination is supported
 - (void) setResolution:(CameraResolution)r fps:(short)fr;	//Set a resolution and frame rate.

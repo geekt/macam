@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyPhilipsCameraDriver.m,v 1.3 2002/12/30 20:07:13 mattik Exp $
+ $Id: MyPhilipsCameraDriver.m,v 1.4 2003/02/24 13:05:09 mattik Exp $
 */
 
 #include <IOKit/IOKitLib.h>
@@ -45,8 +45,8 @@
 + (unsigned short) cameraUsbVendorID { return VENDOR_PHILIPS; }
 + (NSString*) cameraName { return [MyCameraCentral localizedStringFor:@"abstract Philips generic camera"]; }
 
-- (CameraError) startupWithUsbDeviceRef:(io_service_t)usbDeviceRef {
-    CameraError err=[self usbConnectToCam:usbDeviceRef];
+- (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId {
+    CameraError err=[self usbConnectToCam:usbLocationId configIdx:0];
 //setup connection to camera
      if (err!=CameraErrorOK) return err;
 //set internals
@@ -61,7 +61,7 @@
     [self setGain:0.5f];
     [self setShutter:0.5f];
     [self setAutoGain:YES];
-    return [super startupWithUsbDeviceRef:usbDeviceRef];
+    return [super startupWithUsbLocationId:usbLocationId];
 }
 
 - (void) dealloc {

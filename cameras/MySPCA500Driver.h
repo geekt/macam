@@ -17,7 +17,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySPCA500Driver.h,v 1.2 2003/01/16 15:41:57 mattik Exp $
+ $Id: MySPCA500Driver.h,v 1.3 2003/02/24 13:05:08 mattik Exp $
  */
 
 #import <Cocoa/Cocoa.h>
@@ -74,7 +74,7 @@ typedef struct SPCA500GrabContext {
 + (unsigned short) cameraUsbVendorID;
 + (NSString*) cameraName;
 
-- (CameraError) startupWithUsbDeviceRef:(io_service_t)usbDeviceRef;
+- (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId;
 - (void) shutdown;
 
 - (BOOL) supportsResolution:(CameraResolution)r fps:(short)fr;
@@ -94,7 +94,6 @@ typedef struct SPCA500GrabContext {
 - (BOOL) canStoreMedia;
 - (long) numberOfStoredMediaObjects;
 - (NSDictionary*) getStoredMediaObject:(long)idx;
-- (void) eraseStoredMedia;
 
 
 

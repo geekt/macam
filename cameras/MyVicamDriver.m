@@ -18,7 +18,7 @@
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  
- $Id: MyVicamDriver.m,v 1.3 2002/12/30 20:06:24 mattik Exp $
+ $Id: MyVicamDriver.m,v 1.4 2003/02/24 13:05:09 mattik Exp $
 
  */
 
@@ -380,11 +380,11 @@ VicamInfo	gVicamInfo[] =
     return (!err);
 }
 
-- (CameraError) startupWithUsbDeviceRef:(io_service_t)usbDeviceRef
+- (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId
 {
 	CameraError	err;
 
-	err = [self usbConnectToCam:usbDeviceRef];
+	err = [self usbConnectToCam:usbLocationId configIdx:0];
 	controlChange = YES;
 	
 	//setup connection to camera
@@ -405,7 +405,7 @@ VicamInfo	gVicamInfo[] =
 	// LED - Need to pause before sending this, otherwise it does not seem to work...
 	[self usbIntfWriteCmdWithBRequest:0x55 wValue:3 wIndex:0 buf:0 len:0];
 	
-	return [super startupWithUsbDeviceRef:usbDeviceRef];
+	return [super startupWithUsbLocationId:usbLocationId];
 }
 
 // --------------------------------------------------------------------------------

@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyDummyCameraDriver.m,v 1.1 2002/05/22 04:57:17 dirkx Exp $
+ $Id: MyDummyCameraDriver.m,v 1.2 2003/02/24 13:05:18 mattik Exp $
 */
 
 #import "MyDummyCameraDriver.h"
@@ -43,8 +43,8 @@
     return [self initWithError:CameraErrorOK central:c];
 }
 
-- (CameraError) startupWithUsbDeviceRef:(io_service_t)usbDeviceRef {
-    return [super startupWithUsbDeviceRef:usbDeviceRef];
+- (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId {
+    return [super startupWithUsbLocationId:usbLocationId];
 }
 
 - (BOOL) realCamera {	//Returns if the camera is a real image grabber or a dummy

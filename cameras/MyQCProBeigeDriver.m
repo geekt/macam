@@ -18,7 +18,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCProBeigeDriver.m,v 1.2 2003/01/16 15:38:57 mattik Exp $
+ $Id: MyQCProBeigeDriver.m,v 1.3 2003/02/24 13:05:09 mattik Exp $
  */
 
 #import "MyQCProBeigeDriver.h"
@@ -65,11 +65,11 @@
     [super dealloc];
 }
 
-- (CameraError) startupWithUsbDeviceRef:(io_service_t)usbDeviceRef {
+- (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId {
     CameraError err;
     
     //setup connection to camera
-    err=[self usbConnectToCam:usbDeviceRef];
+    err=[self usbConnectToCam:usbLocationId configIdx:0];
     if (err!=CameraErrorOK) return err;
 
     //Do the general camera startup sequence, if any ***
@@ -85,7 +85,7 @@
     [self setWhiteBalanceMode:WhiteBalanceLinear];
     
     //Do the remaining, usual connection stuff
-    err=[super startupWithUsbDeviceRef:usbDeviceRef];
+    err=[super startupWithUsbLocationId:usbLocationId];
     if (err!=CameraErrorOK) return err;
 
     return err;

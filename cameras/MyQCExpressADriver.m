@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCExpressADriver.m,v 1.9 2003/02/23 19:07:59 markasbach Exp $
+ $Id: MyQCExpressADriver.m,v 1.10 2003/02/24 13:05:08 mattik Exp $
 */
 
 #include <IOKit/IOKitLib.h>
@@ -53,8 +53,8 @@
 + (unsigned short) cameraUsbVendorID { return 0x46d; }
 + (NSString*) cameraName { return [MyCameraCentral localizedStringFor:@"QuickCam Express"]; }
 
-- (CameraError) startupWithUsbDeviceRef:(io_service_t)usbDeviceRef {
-    CameraError err=[self usbConnectToCam:usbDeviceRef];
+- (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId {
+    CameraError err=[self usbConnectToCam:usbLocationId configIdx:0];
     if (err!=CameraErrorOK) return err;
     memset(&grabContext,0,sizeof(STV600GrabContext));
     if (![self camBoot]) return CameraErrorUnimplemented;
@@ -69,7 +69,7 @@
     [self setSharpness:1.0f];
     [self setAutoGain:YES];
     extraBytesInLine=0;
-    return [super startupWithUsbDeviceRef:usbDeviceRef];
+    return [super startupWithUsbLocationId:usbLocationId];
 }
 
 - (void) dealloc {

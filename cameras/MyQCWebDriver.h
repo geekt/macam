@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCWebDriver.h,v 1.4 2002/07/26 12:06:50 mattik Exp $
+ $Id: MyQCWebDriver.h,v 1.5 2003/02/24 13:05:08 mattik Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -39,7 +39,7 @@
 
 - (BOOL) supportsResolution:(CameraResolution)r fps:(short)fr;	//Does this combination work?
 
-- (CameraError) startupWithUsbDeviceRef:(io_service_t)usbDeviceRef;
+- (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId;
 - (void) shutdown;
 
 - (void) buttonThread:(id)data;

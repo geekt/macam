@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyOV511Driver.m,v 1.10 2003/02/02 13:26:09 himori Exp $
+ $Id: MyOV511Driver.m,v 1.11 2003/02/24 13:05:09 mattik Exp $
 */
 
 #include <IOKit/IOKitLib.h>
@@ -129,10 +129,10 @@ void tmpcopy32(u_char *buffer, int offset, int size, u_char *tmpbuf, long *tmpsi
 static unsigned char yQuanTable511[] = OV511_YQUANTABLE;
 static unsigned char uvQuanTable511[] = OV511_UVQUANTABLE;
 
-- (CameraError) startupWithUsbDeviceRef:(io_service_t)usbDeviceRef {
+- (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId {
     UInt8 buf[16], cid;
     long i;
-    CameraError err=[self usbConnectToCam:usbDeviceRef];
+    CameraError err=[self usbConnectToCam:usbLocationId configIdx:0];
 //setup connection to camera
      if (err!=CameraErrorOK) return err;
 
@@ -259,7 +259,7 @@ static unsigned char uvQuanTable511[] = OV511_UVQUANTABLE;
 //    [self setShutter:0.5f];
 //    [self setAutoGain:YES];
 
-    return [super startupWithUsbDeviceRef:usbDeviceRef];
+    return [super startupWithUsbLocationId:usbLocationId];
 }
 
 - (void) dealloc {

@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCExpressADriver.h,v 1.6 2003/02/23 19:07:59 markasbach Exp $
+ $Id: MyQCExpressADriver.h,v 1.7 2003/02/24 13:05:08 mattik Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -86,7 +86,7 @@ typedef struct STV600GrabContext {
 + (unsigned short) cameraUsbVendorID;
 + (NSString*) cameraName;
 
-- (CameraError) startupWithUsbDeviceRef:(io_service_t)usbDeviceRef;
+- (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId;
 - (void) dealloc;
 
 - (BOOL) supportsResolution:(CameraResolution)r fps:(short)fr;

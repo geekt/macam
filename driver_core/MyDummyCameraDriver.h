@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyDummyCameraDriver.h,v 1.1 2002/05/22 04:57:17 dirkx Exp $
+ $Id: MyDummyCameraDriver.h,v 1.2 2003/02/24 13:05:18 mattik Exp $
 */
 
 #include "GlobalDefs.h"
@@ -34,7 +34,7 @@
 //Start/stop
 - (id) initWithError:(CameraError)err central:(MyCameraCentral*)c;
 - (id) initWithCentral:(MyCameraCentral*)c;	//same as above with CameraErrorOK
-- (CameraError) startupWithUsbDeviceRef:(io_service_t)usbDeviceRef;
+- (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId;
 
 //Camera introspection
 - (BOOL) realCamera;

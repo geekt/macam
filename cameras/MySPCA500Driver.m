@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySPCA500Driver.m,v 1.3 2003/01/16 18:18:42 mattik Exp $
+ $Id: MySPCA500Driver.m,v 1.4 2003/02/24 13:05:08 mattik Exp $
  */
 
 #include "GlobalDefs.h"
@@ -77,9 +77,9 @@ extern UInt8 QTables[];
 }
 
 
-- (CameraError) startupWithUsbDeviceRef:(io_service_t)usbDeviceRef {
+- (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId {
     CameraError err;
-    err=[self usbConnectToCam:usbDeviceRef];
+    err=[self usbConnectToCam:usbLocationId configIdx:0];
     fps=5;
     resolution=ResolutionVGA;
     if (!err) {
@@ -130,7 +130,7 @@ extern UInt8 QTables[];
         (**pccamImgDesc).depth=24;
         (**pccamImgDesc).clutID=-1;
     }
-    if (err==CameraErrorOK) err=[super startupWithUsbDeviceRef:usbDeviceRef];
+    if (err==CameraErrorOK) err=[super startupWithUsbLocationId:usbLocationId];
     if (err==CameraErrorOK) err=[self openDSCInterface];
     
     return err;
@@ -701,12 +701,6 @@ static bool StartNextIsochRead(SPCA500GrabContext* gCtx, int transferIdx) {
     //We don't really count here - it was dont in [loadTocAndImage] when the camera dsc interface was opened.
     if (!storedFileInfo) return 0;
     return [storedFileInfo count];
-}
-
-- (void) eraseStoredMedia {
-#ifdef VERBOSE
-    NSLog(@"MySPCA500Driver: eraseStoredMedia not implemented");
-#endif
 }
 
 //DSC USB COMMAND FUNCTIONS

@@ -18,7 +18,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCProBeigeDriver.h,v 1.1 2003/01/09 15:18:52 mattik Exp $
+ $Id: MyQCProBeigeDriver.h,v 1.2 2003/02/24 13:05:09 mattik Exp $
  */
 
 #import <Cocoa/Cocoa.h>
@@ -57,7 +57,7 @@
 + (NSString*) cameraName;
 
 - (id) initWithCentral:(id)c;
-- (CameraError) startupWithUsbDeviceRef:(io_service_t)usbDeviceRef;
+- (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId;
 - (void) dealloc;
 
 - (BOOL) supportsResolution:(CameraResolution)res fps:(short)rate;

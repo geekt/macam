@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyOV511Driver.h,v 1.6 2003/01/21 15:59:56 himori Exp $
+ $Id: MyOV511Driver.h,v 1.7 2003/02/02 13:26:09 himori Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -286,6 +286,8 @@ typedef struct OV511GrabContext {	//Everything the grabbing thread internals nee
 
 //Compress
 - (int) ov511_upload_quan_tables;
+
+- (void) mergeCameraEventHappened:(CameraEvent)evt;
 
 @end
 

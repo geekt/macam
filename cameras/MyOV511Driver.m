@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyOV511Driver.m,v 1.9 2003/01/21 15:59:57 himori Exp $
+ $Id: MyOV511Driver.m,v 1.10 2003/02/02 13:26:09 himori Exp $
 */
 
 #include <IOKit/IOKitLib.h>
@@ -1101,6 +1101,23 @@ NSLog(@"OV511:%d %d %x", (*(grabContext.buffer+currChunk.start2+grabContext.byte
     NSLog(@"OV511:error chunk s = %d e =%d s2 = %d e2 = %d", currChunk.start,currChunk.end,currChunk.start2,currChunk.end2);
 }
         }
+
+        //Check if the snapshot button state has changed.
+        {
+        UInt8 buf[16];
+        BOOL buttonIsPressed;
+            [self usbReadCmdWithBRequest:2 wValue:0 wIndex:OV511_REG_SNAP buf:buf len:1];
+            buttonIsPressed = (buf[0] & 0x08);
+            if (buttonIsPressed) {
+                [self mergeCameraEventHappened:CameraEventSnapshotButtonDown];
+                buf[0] = 0;
+                [self usbWriteCmdWithBRequest:2 wValue:0 wIndex:OV511_REG_SNAP buf:buf len:1];
+                buf[0] = 2;
+                [self usbWriteCmdWithBRequest:2 wValue:0 wIndex:OV511_REG_SNAP buf:buf len:1];
+                buf[0] = 0;
+                [self usbWriteCmdWithBRequest:2 wValue:0 wIndex:OV511_REG_SNAP buf:buf len:1];
+            }
+        }
     }
 
     while (grabbingThreadRunning) { usleep(10000); }	//Wait for grabbingThread finish			
@@ -1109,7 +1126,19 @@ NSLog(@"OV511:%d %d %x", (*(grabContext.buffer+currChunk.start2+grabContext.byte
     [self cleanupGrabContext];				//grabbingThread doesn't need the context any more since it's done
     return err;
 }
-    
+
+- (void) mergeCameraEventHappened:(CameraEvent)evt {
+    if (doNotificationsOnMainThread) {
+        if ([NSRunLoop currentRunLoop]!=mainThreadRunLoop) {
+            if (decodingThreadConnection) {
+                [(id)[decodingThreadConnection rootProxy] mergeCameraEventHappened:evt];
+                return;
+            }
+        }
+    }
+    [self cameraEventHappened:self event:evt];
+}
+
 /*
     2 bytes write to i2c on ov511 bus
 */

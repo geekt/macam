@@ -17,7 +17,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySonix2028Driver.h,v 1.5 2002/12/30 17:49:15 mattik Exp $
+ $Id: MySonix2028Driver.h,v 1.6 2003/01/04 10:26:21 mattik Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -109,6 +109,9 @@ typedef struct SONIXGrabContext {
 - (void) setAutoGain:(BOOL)v;
 - (void) setGain:(float)val;
 - (void) setShutter:(float)val;
+- (BOOL) canSetWhiteBalanceMode;
+- (BOOL) canSetWhiteBalanceModeTo:(WhiteBalanceMode)newMode;
+- (void) setWhiteBalanceMode:(WhiteBalanceMode)newMode;
 - (BOOL) canSetHFlip;
 
     

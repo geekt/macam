@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.m,v 1.5 2002/10/24 18:20:10 mattik Exp $
+ $Id: MyController.m,v 1.6 2002/10/25 15:44:12 mattik Exp $
 */
 
 #import "MyController.h"
@@ -381,10 +381,10 @@ static NSString*	NextCamToolbarItemIdentifier 	= @"Next Camera Item Identifier";
             extension=NULL;
             if ([[media objectForKey:@"type"] isEqualToString:@"jpeg"]) {
                 mediaData=[media objectForKey:@"data"];
-                extension=@"tiff";
-            } else if ([[media objectForKey:@"type"] isEqualToString:@"jpeg"]) {
-                mediaData=[[media objectForKey:@"data"] 		TIFFRepresentationUsingCompression:NSTIFFCompressionLZW factor:0.0];
                 extension=@"jpg";
+            } else if ([[media objectForKey:@"type"] isEqualToString:@"bitmap"]) {
+                mediaData=[[media objectForKey:@"data"] 		TIFFRepresentationUsingCompression:NSTIFFCompressionLZW factor:0.0];
+                extension=@"tiff";
             }
             if (mediaData) {
                 idxFound=NO;

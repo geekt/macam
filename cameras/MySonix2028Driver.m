@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySonix2028Driver.m,v 1.11 2003/01/27 17:19:07 mattik Exp $
+ $Id: MySonix2028Driver.m,v 1.12 2003/01/27 17:33:05 mattik Exp $
 */
 
 /* Here's what I know (or guess) about the chipset so far:
@@ -902,7 +902,10 @@ static bool StartNextIsochRead(SONIXGrabContext* grabContext, int transferIdx) {
     if (!err) err=[self sonixIICSensorWriteByte:0x15 to:0xe0];
     if (!err) err=[self sonixIICSensorWriteByte:0x16 to:0x02];
     if (!err) err=[self sonixIICSensorWriteByte:0x17 to:0x80];
-    switch (resolution) {
+    if (!err) err=[self sonixSensorWrite2:0x20 byte1:0x00 byte2:0x2a];
+    if (!err) err=[self sonixSensorWrite2:0x20 byte1:0x00 byte2:0x2a];
+/*
+ switch (resolution) {
         case ResolutionVGA: if (!err) err=[self sonixSensorWrite2:0x20 byte1:0x00 byte2:0x2a]; break;
         case ResolutionSIF: if (!err) err=[self sonixSensorWrite2:0x20 byte1:0x00 byte2:0xc1]; break;
         case ResolutionQSIF: if (!err) err=[self sonixSensorWrite2:0x20 byte1:0x00 byte2:0xc1]; break;
@@ -914,6 +917,7 @@ static bool StartNextIsochRead(SONIXGrabContext* grabContext, int transferIdx) {
         case ResolutionQSIF: if (!err) err=[self sonixSensorWrite2:0x20 byte1:0x00 byte2:0xc1]; break;
         default: if (!err) err=CameraErrorInternal; break;
     }
+*/
     if (!err) err=[self sonixAsicWrite1:0x0134 byte1:0xa1];
 
     if (!err) [self setGain:[self gain]];

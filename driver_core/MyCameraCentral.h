@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.h,v 1.5 2003/02/24 13:04:20 mattik Exp $
+ $Id: MyCameraCentral.h,v 1.6 2003/12/22 01:23:24 mattik Exp $
  */
 
 #import <Cocoa/Cocoa.h>
@@ -54,6 +54,12 @@
 
 
 }
+
+//Access to the shared instance of MyCameraCentral
++ (MyCameraCentral*) sharedCameraCentral;
+
+//See if someone has requested (and therefore initialized) MyCameraCentral before
++ (BOOL) isCameraCentralExisting;
 
 //Localization services - we may be in an external application so system services won't work dirctly. Make sure you have an an AutoreleasePool
 + (NSString*) localizedStringFor:(NSString*) str;

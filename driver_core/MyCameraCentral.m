@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.19 2003/02/24 13:04:20 mattik Exp $
+ $Id: MyCameraCentral.m,v 1.20 2003/12/22 01:23:24 mattik Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -52,6 +52,8 @@ void DeviceAdded(void *refCon, io_iterator_t iterator);
 
 static NSString* driverBundleName=@"net.sourceforge.webcam-osx.common";
 static NSMutableDictionary* prefsDict=NULL;
+MyCameraCentral* sharedCameraCentral=NULL;
+
 
 @interface MyCameraCentral (Private)
 
@@ -65,6 +67,19 @@ static NSMutableDictionary* prefsDict=NULL;
     
 
 @implementation MyCameraCentral
+
+
+//MyCameraCentral is a singleton. Use this function to get the shared instance
++ (MyCameraCentral*) sharedCameraCentral {
+    if (!sharedCameraCentral) sharedCameraCentral=[[MyCameraCentral alloc] init];
+    return sharedCameraCentral;
+}
+
+//See if someone has requested MyCameraCentral before
++ (BOOL) isCameraCentralExisting {
+    return (sharedCameraCentral!=NULL)?YES:NO;
+}
+
 
 //Localization for driver-specific stuff. As a component, the standard stuff won't work...
 

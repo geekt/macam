@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySonix2028Driver.m,v 1.3 2002/12/13 08:31:14 mattik Exp $
+ $Id: MySonix2028Driver.m,v 1.4 2002/12/15 18:09:03 mattik Exp $
 */
 
 /* Here's what I know (or guess) about the chipset so far:
@@ -535,7 +535,7 @@ static bool StartNextIsochRead(SONIXGrabContext* grabContext, int transferIdx) {
 
 
 #define PUT_PIXEL_PAIR {\
-    SInt32 pp=(c1val<<8)+c2val;*/\
+    SInt32 pp=(c1val<<8)+c2val;\
     *((UInt16*)dst)=pp;\
     dst+=2; }
     

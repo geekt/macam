@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.h,v 1.1 2002/05/22 04:57:17 dirkx Exp $
+ $Id: MyCameraDriver.h,v 1.2 2002/09/12 22:09:52 mattik Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -96,10 +96,15 @@ Image buffers. There are two sets: lastIamgeBuffer and nextImageBuffer. The clie
     NSLock* 		imageBufferLock;
 }
 
-//Get info about the camera specifics
+//Get info about the camera specifics - simple mechanism
 + (unsigned short) cameraUsbProductID;
 + (unsigned short) cameraUsbVendorID;
 + (NSString*) cameraName;
+
+//Get info - new mechanism. Overload this one if you have more than one idVendor/idProduct pair
+
++ (NSArray*) cameraUsbDescriptions;
+//Should return an array of dictionaries with keys "idVendor" (NSNumber), "idProduct" (NSNumber) and "name" (NSString). The default implementation creates an array with one entry with values of the above methods.
 
 //Start/stop
 - (id) initWithCentral:(id)c;

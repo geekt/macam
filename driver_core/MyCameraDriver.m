@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.m,v 1.1 2002/05/22 04:57:17 dirkx Exp $
+ $Id: MyCameraDriver.m,v 1.2 2002/09/12 22:09:52 mattik Exp $
 */
 
 #import "MyCameraDriver.h"
@@ -39,6 +39,14 @@
 + (NSString*) cameraName {
     NSAssert(0,@"You have to override cameraName");
     return @"";
+}
+
++ (NSArray*) cameraUsbDescriptions {
+    NSDictionary* dict=[NSDictionary dictionaryWithObjectsAndKeys:
+        [NSNumber numberWithUnsignedShort:[self cameraUsbProductID]],@"idProduct",
+        [NSNumber numberWithUnsignedShort:[self cameraUsbVendorID]],@"idVendor",
+        [self cameraName],@"idVendor",NULL];
+    return [NSArray arrayWithObject:dict];
 }
 
 - (id) initWithCentral:(id)c {

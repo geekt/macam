@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.8 2002/10/25 10:01:18 mattik Exp $
+ $Id: MyCameraCentral.m,v 1.9 2002/11/06 16:40:22 himori Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -169,6 +169,7 @@ static NSMutableDictionary* prefsDict=NULL;
     [self registerCameraDriver:[MyVicamDriver class]];
     [self registerCameraDriver:[MySPCA504Driver class]];
     [self registerCameraDriver:[MyOV511Driver class]];
+    [self registerCameraDriver:[MyOV511PlusDriver class]];
 //    [self registerCameraDriver:[MyIntelPCCameraPro class]];
 //    [self registerCameraDriver:[MyIntelPCCamera class]];
 //    [self registerCameraDriver:[MyGrandtecVcap class]];

@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySTV680Driver.m,v 1.2 2002/07/16 16:28:52 mattik Exp $
+ $Id: MySTV680Driver.m,v 1.3 2002/10/24 18:18:55 mattik Exp $
  */
 
 #import "MySTV680Driver.h"
@@ -508,7 +508,7 @@ static void handleFullChunk(void *refcon, IOReturn result, void *arg0) {
     return num;
 }
 
-- (id) getStoredMediaObject:(long)idx {
+- (NSDictionary*) getStoredMediaObject:(long)idx {
     UInt8 buf[16];
     long rawWidth=1;
     long rawHeight=1;
@@ -581,7 +581,8 @@ static void handleFullChunk(void *refcon, IOReturn result, void *arg0) {
     if (rawBuffer) [rawBuffer release]; rawBuffer=NULL;
     if ((imageRep)&&(!ok)) { [imageRep release]; imageRep=NULL; }
     [stateLock unlock];
-    return imageRep;
+    return [NSDictionary dictionaryWithObjectsAndKeys:
+        imageRep,@"data",@"bitmap",@"type",NULL];
 }
 
 - (void) eraseStoredMedia {

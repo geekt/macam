@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyPhilipsCameraDriver.m,v 1.2 2002/12/12 15:54:13 mattik Exp $
+ $Id: MyPhilipsCameraDriver.m,v 1.3 2002/12/30 20:07:13 mattik Exp $
 */
 
 #include <IOKit/IOKitLib.h>
@@ -26,6 +26,7 @@
 #import "Resolvers.h"
 #import "yuv2rgb.h"
 #import "MiscTools.h"
+#include "unistd.h"
 
 //camera modes and the necessary data for them
 
@@ -492,7 +493,9 @@ static bool StartNextIsochRead(PhilipsGrabContext* grabContext, int transferIdx)
             }
         }
     }
-    while (grabbingThreadRunning) {}
+    while (grabbingThreadRunning) { usleep(10000); }	//Wait for grabbingThread finish
+    //We need to sleep here because otherwise the compiler would optimize the loop away
+
     if (!err) err=grabContext.err;
     [self cleanupGrabContext];				//grabbingThread doesn't need the context any more since it's done
     return err;

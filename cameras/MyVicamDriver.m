@@ -18,7 +18,7 @@
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  
- $Id: MyVicamDriver.m,v 1.2 2002/12/30 17:48:25 mattik Exp $
+ $Id: MyVicamDriver.m,v 1.3 2002/12/30 20:06:24 mattik Exp $
 
  */
 
@@ -256,6 +256,8 @@ no data
 #import "Resolvers.h"
 #import "vicamurbs.h"
 #import "RGBScaler.h"
+#include "unistd.h"
+
 
 // --------------------------------------------------------------------------------
 
@@ -936,7 +938,9 @@ static void handleFullChunk(void *refcon, IOReturn result, void *arg0) {
         }
     }
     //wait until grabbingThread has finished
-    while (grabbingThreadRunning) {};
+    while (grabbingThreadRunning) { usleep(10000); }	//Wait for grabbingThread finish
+    //We need to sleep here because otherwise the compiler would optimize the loop away
+
     //if the first error occurred on grabbingThread, take the result from there
     if (!err) err=grabbingError;
     //Cleanup everything

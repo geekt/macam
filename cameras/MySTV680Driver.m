@@ -15,13 +15,14 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySTV680Driver.m,v 1.4 2002/12/30 17:49:27 mattik Exp $
+ $Id: MySTV680Driver.m,v 1.5 2002/12/30 20:07:49 mattik Exp $
  */
 
 #import "MySTV680Driver.h"
 #import "MyCameraCentral.h"
 #include "Resolvers.h"
 #include "MiscTools.h"
+#include "unistd.h"
 
 #define PRODUCT_STV680 0x202
 #define VENDOR_STM 0x553
@@ -490,7 +491,8 @@ static void handleFullChunk(void *refcon, IOReturn result, void *arg0) {
             [emptyChunkLock unlock];
         }
     }
-    while (grabbingThreadRunning) {}
+    while (grabbingThreadRunning) { usleep(10000); }	//Wait for grabbingThread finish
+    //We need to sleep here because otherwise the compiler would optimize the loop away
     if (!err) err=grabbingError;	//Take error from grabbing thread
     [self shutdownGrabbing];
     return err;

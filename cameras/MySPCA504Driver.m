@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySPCA504Driver.m,v 1.5 2002/10/24 18:17:59 mattik Exp $
+ $Id: MySPCA504Driver.m,v 1.6 2002/12/30 20:06:14 mattik Exp $
  */
 
 #import "MySPCA504Driver.h"
@@ -867,7 +867,8 @@ static bool StartNextIsochRead(SPCA504GrabContext* gCtx, int transferIdx) {
     }
 
     //Shutdown
-    while (grabbingThreadRunning) {}	//Active wait for grabbingThread finish
+    while (grabbingThreadRunning) { usleep(10000); }	//Wait for grabbingThread finish
+    //We need to sleep here because otherwise the compiler would optimize the loop away
     [self cleanupGrabContext];
     if (!err) err=grabContext.err;	//Take error from context
     return err;

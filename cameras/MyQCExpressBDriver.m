@@ -16,12 +16,13 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCExpressBDriver.m,v 1.2 2002/07/01 16:06:39 mattik Exp $
+ $Id: MyQCExpressBDriver.m,v 1.3 2002/12/30 20:06:56 mattik Exp $
 */
 
 #import "MyQCExpressBDriver.h"
 #import "MyCameraCentral.h"
 #include "MiscTools.h"
+#include "unistd.h"
 
 @implementation MyQCExpressBDriver
 
@@ -62,7 +63,7 @@
 - (void) shutdown {
     buttonThreadShouldBeRunning=NO;
     if ((intf)&&(isUSBOK)) (*intf)->AbortPipe(intf,2);
-    while (buttonThreadRunning) {}
+    while (buttonThreadRunning) { usleep(10000); }
     if (buttonToMainThreadConnection) [buttonToMainThreadConnection release];
     if (mainToButtonThreadConnection) [mainToButtonThreadConnection release];
     buttonToMainThreadConnection=NULL;

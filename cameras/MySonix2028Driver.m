@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySonix2028Driver.m,v 1.7 2002/12/30 17:49:15 mattik Exp $
+ $Id: MySonix2028Driver.m,v 1.8 2002/12/30 20:05:53 mattik Exp $
 */
 
 /* Here's what I know (or guess) about the chipset so far:
@@ -81,6 +81,7 @@ After the line header, the actual pixels follow. Th line lengths don't match exa
 #import "Resolvers.h"
 #import "yuv2rgb.h"
 #include "MiscTools.h"
+#include "unistd.h"
 
 #define VENDOR_AEL	0x0c45
 #define PRODUCT_DC31UC	0x8000
@@ -715,7 +716,8 @@ static bool StartNextIsochRead(SONIXGrabContext* grabContext, int transferIdx) {
         }
     }
 
-    while (grabbingThreadRunning) {}			//Active wait for grabbingThread finish
+    while (grabbingThreadRunning) { usleep(10000); }	//Wait for grabbingThread finish
+    //We need to sleep here because otherwise the compiler would optimize the loop away
     
     [self cleanupGrabContext];				//grabbingThread doesn't need the context any more since it's done
     

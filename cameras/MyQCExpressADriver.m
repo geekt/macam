@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCExpressADriver.m,v 1.4 2002/12/30 17:48:39 mattik Exp $
+ $Id: MyQCExpressADriver.m,v 1.5 2002/12/30 20:06:49 mattik Exp $
 */
 
 #include <IOKit/IOKitLib.h>
@@ -31,6 +31,7 @@
 #import "MyHDCS1000Sensor.h"
 #import "MyHDCS1020Sensor.h"
 #import "MyVV6410Sensor.h"
+#include "unistd.h"
 
 @interface MyQCExpressADriver (Private)
 
@@ -566,7 +567,8 @@ static bool StartNextIsochRead(STV600GrabContext* grabContext, int transferIdx) 
             [grabContext.chunkListLock unlock];			//we're done accessing the chunk list.
         }
     }
-    while (grabbingThreadRunning) {}			//Active wait until decoding thread is done
+    while (grabbingThreadRunning) { usleep(10000); }	//Wait for grabbingThread finish
+    //We need to sleep here because otherwise the compiler would optimize the loop away
     
     [self cleanupGrabContext];				//grabbingThread doesn't need the context any more since it's done
 

@@ -16,12 +16,13 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCWebDriver.m,v 1.4 2002/09/03 23:04:18 mattik Exp $
+ $Id: MyQCWebDriver.m,v 1.5 2002/12/30 20:07:05 mattik Exp $
 */
 
 #import "MyQCWebDriver.h"
 #import "MyCameraCentral.h"
 #include "MiscTools.h"
+#include "unistd.h"
 
 @implementation MyQCWebDriver
 
@@ -61,7 +62,7 @@
 - (void) shutdown {
     buttonThreadShouldBeRunning=NO;
     if ((intf)&&(isUSBOK)) (*intf)->AbortPipe(intf,2);
-    while (buttonThreadRunning) {}
+    while (buttonThreadRunning) { usleep(10000); }
     if (buttonToMainThreadConnection) [buttonToMainThreadConnection release];
     if (mainToButtonThreadConnection) [mainToButtonThreadConnection release];
     buttonToMainThreadConnection=NULL;

@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyOV511Driver.m,v 1.4 2002/11/27 22:59:45 himori Exp $
+ $Id: MyOV511Driver.m,v 1.5 2002/12/30 20:06:05 mattik Exp $
 */
 
 #include <IOKit/IOKitLib.h>
@@ -27,6 +27,7 @@
 #import "Resolvers.h"
 #import "yuv2rgb.h"
 #import "MiscTools.h"
+#include "unistd.h"
 
 //#define OV511_DEBUG
 //#define USE_COMPRESS
@@ -997,7 +998,9 @@ NSLog(@"OV511:%d %d %x", (*(grabContext.buffer+currChunk.start2+grabContext.byte
 }
         }
     }
-    while (grabbingThreadRunning) {}
+
+    while (grabbingThreadRunning) { usleep(10000); }	//Wait for grabbingThread finish			
+    //We need to sleep here because otherwise the compiler would optimize the loop away
     if (!err) err=grabContext.err;
     [self cleanupGrabContext];				//grabbingThread doesn't need the context any more since it's done
     return err;

@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCPIACameraDriver.m,v 1.2 2002/09/02 18:26:52 mattik Exp $
+ $Id: MyCPIACameraDriver.m,v 1.3 2002/12/30 20:06:38 mattik Exp $
 */
 
 #include <IOKit/IOKitLib.h>
@@ -26,6 +26,7 @@
 #import "Resolvers.h"
 #import "yuv2rgb.h"
 #include "MiscTools.h"
+#include "unistd.h"
 
 
 /*Some Camera specifics:
@@ -705,7 +706,8 @@ static bool StartNextIsochRead(CPIAGrabContext* grabContext, int transferIdx) {
         }
     }
 
-    while (grabbingThreadRunning) {}			//Active wait for grabbingThread finish
+    while (grabbingThreadRunning) { usleep(10000); }	//Wait for grabbingThread finish
+    //We need to sleep here because otherwise the compiler would optimize the loop away
     
     [self cleanupGrabContext];				//grabbingThread doesn't need the context any more since it's done
     if (mergeBuffer) {

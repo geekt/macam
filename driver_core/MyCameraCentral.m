@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.1 2002/05/22 04:57:17 dirkx Exp $
+ $Id: MyCameraCentral.m,v 1.2 2002/07/08 22:34:58 mattik Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -42,6 +42,7 @@
 #import "MyQCExpressADriver.h"
 #import "MyQCExpressBDriver.h"
 #import "MyQCWebDriver.h"
+#import "MyVicamDriver.h"
 
 static NSString* driverBundleName=@"de.matthias-krauss.webcam";
 static NSMutableDictionary* prefsDict=NULL;
@@ -164,6 +165,7 @@ static NSMutableDictionary* prefsDict=NULL;
     [self registerCameraDriver:[MyQCExpressADriver class]];
     [self registerCameraDriver:[MyQCExpressBDriver class]];
     [self registerCameraDriver:[MyQCWebDriver class]];
+    [self registerCameraDriver:[MyVicamDriver class]];
 
     doNotificationsOnMainThread=nomt;	//Remember this!
     if (doNotificationsOnMainThread) {	//The client wants merged threads: Build a connection to the new thread

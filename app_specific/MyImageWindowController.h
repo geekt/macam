@@ -1,4 +1,3 @@
-//
 /*
 macam - webcam app and QuickTime driver component
  Copyright (C) 2002 Matthias Krauss (macam@matthias-krauss.de)
@@ -16,7 +15,7 @@ macam - webcam app and QuickTime driver component
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyImageWindowController.h,v 1.1 2002/05/22 04:56:42 dirkx Exp $
+ $Id: MyImageWindowController.h,v 1.2 2002/05/22 05:40:58 dirkx Exp $
  */
 
 

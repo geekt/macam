@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyPhilipsCameraDriver.h,v 1.1 2002/05/22 04:57:12 dirkx Exp $
+ $Id: MyPhilipsCameraDriver.h,v 1.2 2003/01/20 16:22:38 mattik Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -48,7 +48,8 @@ Next: Camera constants and conversions. This information has partly been obtaine
 Doing these amounts of defines is often called bad style. We should find a better way.
 */
 
-#define VENDOR_PHILIPS 1137
+#define VENDOR_PHILIPS 0x0471
+#define VENDOR_LOGITECH 0x046d
 
 //Conversions into the values of the camera
 

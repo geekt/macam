@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySPCA504Driver.h,v 1.5 2002/12/05 19:22:11 mattik Exp $
+ $Id: MySPCA504Driver.h,v 1.6 2003/02/24 13:01:42 mattik Exp $
  */
 
 #import <Cocoa/Cocoa.h>
@@ -75,6 +75,7 @@ typedef struct SPCA504GrabContext {
     ImageDescriptionHandle pccamImgDesc;		//Image Description for JFIF decompress (PC Cam video)
     short pccamQTabIdx;					//Current Q Table index
 
+    BOOL fileInfoValid;			//Indicating if the file info arrays are up to date
     NSMutableArray* sdramFileInfo;	//Array of Dictionaries for each object
     NSMutableArray* flashFileInfo;	//Array of Dictionaries for each object
     NSMutableArray* cardFileInfo;	//Array of Dictionaries for each object
@@ -84,7 +85,7 @@ typedef struct SPCA504GrabContext {
 
 + (NSArray*) cameraUsbDescriptions;
 
-- (CameraError) startupWithUsbDeviceRef:(io_service_t)usbDeviceRef;
+- (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId;
 - (void) shutdown;
 
 - (BOOL) supportsResolution:(CameraResolution)r fps:(short)fr;
@@ -104,7 +105,6 @@ typedef struct SPCA504GrabContext {
 - (BOOL) canStoreMedia;
 - (long) numberOfStoredMediaObjects;
 - (NSDictionary*) getStoredMediaObject:(long)idx;
-- (void) eraseStoredMedia;
 
 
 

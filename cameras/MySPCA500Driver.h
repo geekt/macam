@@ -1,5 +1,7 @@
 /*
  macam - webcam app and QuickTime driver component
+ MySPCA500ADriver - Driver for Sunplus SPCA500A-based cameras
+ 
  Copyright (C) 2002 Matthias Krauss (macam@matthias-krauss.de)
 
  This program is free software; you can redistribute it and/or modify
@@ -15,7 +17,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySPCA500Driver.h,v 1.1 2003/01/10 10:08:41 mattik Exp $
+ $Id: MySPCA500Driver.h,v 1.2 2003/01/16 15:41:57 mattik Exp $
  */
 
 #import <Cocoa/Cocoa.h>
@@ -54,15 +56,15 @@ typedef struct SPCA500GrabContext {
     bool fillingChunk;			//If we're currently filling a buffer
     SPCA500ChunkBuffer fillingChunkBuffer;	//The chunk buffer currently filling up (if fillingChunk==true)
     NSLock* chunkListLock;		//The lock for access to the empty buffer pool/ full chunk queue
+    BOOL compressed;			//If YES, it's JPEG, otherwise YUV420
 } SPCA500GrabContext;
-
-/* Note that the memory pointers of the chunk buffer do not directly point to the start of the allocated memory. Instead, there's space for a JFIF header before - this eliminates the need to copy them again for decompression and makes the grabbing thread more readable. */
 
 
 @interface MySPCA500Driver : MyCameraDriver {
     IOUSBInterfaceInterface** dscIntf;
     SPCA500GrabContext grabContext;
     BOOL grabbingThreadRunning;
+    ImageDescriptionHandle pccamImgDesc;		//Image Description for JFIF decompress (PC Cam video)
 
     NSMutableArray* storedFileInfo;
 }

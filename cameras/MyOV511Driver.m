@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyOV511Driver.m,v 1.5 2002/12/30 20:06:05 mattik Exp $
+ $Id: MyOV511Driver.m,v 1.6 2003/01/09 23:51:25 himori Exp $
 */
 
 #include <IOKit/IOKitLib.h>
@@ -697,6 +697,8 @@ static void isocComplete(void *refcon, IOReturn result, void *arg0) {
     short transferIdx=0;
     bool frameListFound=false;
     int currStart;
+
+    if (result==kIOReturnUnderrun) result=0;
 
     if (result) {						//USB error handling
         *(grabContext->shouldBeGrabbing)=NO;			//We'll stop no matter what happened

@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCPIACameraDriver.m,v 1.1 2002/05/22 04:57:11 dirkx Exp $
+ $Id: MyCPIACameraDriver.m,v 1.2 2002/09/02 18:26:52 mattik Exp $
 */
 
 #include <IOKit/IOKitLib.h>
@@ -453,6 +453,9 @@ static void isocComplete(void *refcon, IOReturn result, void *arg0) {
     long currFrameLength;
     unsigned char* frameBase;
 
+    //Ignore data underruns - timeouts will be detected by framesSinceLastChunk
+    if (result==kIOReturnUnderrun) result=0;
+    
     if (result) {						//USB error handling
         *(gCtx->shouldBeGrabbing)=NO;				//We'll stop no matter what happened
         if (!gCtx->err) {

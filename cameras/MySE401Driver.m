@@ -17,7 +17,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySE401Driver.m,v 1.4 2003/01/02 18:08:09 mattik Exp $
+ $Id: MySE401Driver.m,v 1.5 2003/01/02 18:25:14 mattik Exp $
  */
 
 #import "MySE401Driver.h"
@@ -185,7 +185,7 @@
 }
 
 - (BOOL) canSetSharpness {
-    return YES;
+    return NO;
 /* Well, basically, we can adjust this (the Bayer Converter does it for non-compressed video). But doing it with JangGu-compressed video would take much more processing time and high frame rates are probably more valuable... */
 }
 
@@ -526,7 +526,7 @@ static void handleFullChunk(void *refcon, IOReturn result, void *arg0) {
     int iBrightness=(brightness*256.0f)-128.0f;
     int iContrast=contrast*512.0f;
     int iSaturation=saturation*512.0f;
-    UInt32 sum;
+    UInt32 sum=0;
     
     if (flip) {
         dstRowSkip+=2*dstBPP*width;

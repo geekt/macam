@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySmartMegaCamDriver.m,v 1.1 2002/08/29 10:57:26 mattik Exp $
+ $Id: MySmartMegaCamDriver.m,v 1.2 2002/08/29 11:03:32 mattik Exp $
  */
 
 #import "MySmartMegaCamDriver.h"
@@ -24,8 +24,10 @@
 @implementation MySmartMegaCamDriver
 
 #define PRODUCT_SPCA504B 0x504b
+#define VENDOR_SUNPLUS 0x4fc
 
 + (unsigned short) cameraUsbProductID { return PRODUCT_SPCA504B; }
++ (unsigned short) cameraUsbVendorID { return VENDOR_SUNPLUS; }
 + (NSString*) cameraName { return @"Aiptek Smart MegaCam";}
 
 

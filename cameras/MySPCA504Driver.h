@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySPCA504Driver.h,v 1.2 2002/07/12 14:49:49 mattik Exp $
+ $Id: MySPCA504Driver.h,v 1.3 2002/07/16 16:14:54 mattik Exp $
  */
 
 #import <Cocoa/Cocoa.h>
@@ -23,6 +23,9 @@
 
 @interface MySPCA504Driver : MyCameraDriver {
     IOUSBInterfaceInterface** dscIntf;
+
+    long storedMediaCount;
+    NSMutableData* toc;
 }
 
 + (unsigned short) cameraUsbProductID;

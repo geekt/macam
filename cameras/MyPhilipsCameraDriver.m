@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyPhilipsCameraDriver.m,v 1.1 2002/05/22 04:57:13 dirkx Exp $
+ $Id: MyPhilipsCameraDriver.m,v 1.2 2002/12/12 15:54:13 mattik Exp $
 */
 
 #include <IOKit/IOKitLib.h>
@@ -287,6 +287,8 @@ static void isocComplete(void *refcon, IOReturn result, void *arg0) {
     bool frameListFound=false;
     long currFrameLength;
     bool fullFrame;
+    if (result==kIOReturnUnderrun) result=0;                  //Data underrun is not too bad (Jaguar fix)
+    //Thanks to Arthur Petry for checking this!
     if (result) {						//USB error handling
         *(grabContext->shouldBeGrabbing)=NO;			//We'll stop no matter what happened
         if (!grabContext->err) {

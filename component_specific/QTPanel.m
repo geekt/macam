@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: QTPanel.m,v 1.2 2003/01/30 11:26:08 mattik Exp $
+ $Id: QTPanel.m,v 1.3 2003/12/22 01:25:05 mattik Exp $
 */
 
 #include "QTPanel.h"
@@ -57,7 +57,7 @@ pascal ComponentResult sgpnMainEntry (ComponentParameters *params, Handle storag
 #ifdef LOG_QT_CALLS
     char selectorName[200];
     if(ResolveVDSelector(params->what, selectorName)) {
-        printf("QT call to %s\n",selectorName);
+        printf("QT call to sgpn:%s\n",selectorName);
     } else {
         printf("QT call unknown selector %d\n",params->what);
     }
@@ -127,10 +127,20 @@ pascal ComponentResult sgpnRegister(sgpnGlobals storage) {
     short num,i;
     unsigned long cid;
     Component comp;
-    MyCameraCentral* central=[[MyCameraCentral alloc] init];
+    
+    //Bail if the camera central has already been loaded (might register-loop infinitely...)
+    if ([MyCameraCentral isCameraCentralExisting]) {
+#ifdef VERBOSE
+        NSLog(@"Camera central already inited - probably duplicate register. Skipping...");
+#endif
+        return 1;
+    }
+    
+    MyCameraCentral* central;
     MyBridge* bridge;
     char cname[256];
     Str255 pname;
+    central=[MyCameraCentral sharedCameraCentral];
     if (!central) return 0;
     if (![central startupWithNotificationsOnMainThread:NO recognizeLaterPlugins:NO]) return 0;
     num=[central numCameras];

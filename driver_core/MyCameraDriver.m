@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.m,v 1.6 2003/01/09 15:24:54 mattik Exp $
+ $Id: MyCameraDriver.m,v 1.7 2003/01/20 16:19:16 mattik Exp $
 */
 
 #import "MyCameraDriver.h"
@@ -23,6 +23,7 @@
 #import "Resolvers.h"
 #import "MiniGraphicsTools.h"
 #import "MiscTools.h"
+#include <unistd.h>		//usleep
 
 @implementation MyCameraDriver
 
@@ -708,20 +709,24 @@
 //IOPlugin interface is done
     (*iodev)->Release(iodev);
     
-//open device interface
-    err = (*dev)->USBDeviceOpen(dev);
-    CheckError(err,"usbConnectToCam-USBDeviceOpen");
-    if (err==kIOReturnExclusiveAccess) {			//If soneone else has our device, bail out as if nothing happened...
+//open device interface. Retry this to get it from Classic (see ClassicUSBDeviceArb.html - simplified mechanism)
+    for (retries=10;retries>0;retries--) {
+        err = (*dev)->USBDeviceOpen(dev);
+        CheckError(err,"usbConnectToCam-USBDeviceOpen");
+        if (err!=kIOReturnExclusiveAccess) break;	//Loop only if the device is busy
+        usleep(500000);
+    }
+    if (err) {			//If soneone else has our device, bail out as if nothing happened...
         err = (*dev)->Release(dev);
         CheckError(err,"usbConnectToCam-Release Device (exclusive access)");
         dev=NULL;
         return CameraErrorBusy;
     }
-//do a device reset. Shouldn't harm.
+    //do a device reset. Shouldn't harm.
     err = (*dev)->ResetDevice(dev);
     CheckError(err,"usbConnectToCam-ResetDevice");
-    
-//Count configurations
+
+    //Count configurations
     err = (*dev)->GetNumberOfConfigurations(dev, &numConf);
     CheckError(err,"usbConnectToCam-GetNumberOfConfigurations");
     assert(numConf);

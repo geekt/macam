@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.5 2002/08/29 10:40:02 mattik Exp $
+ $Id: MyCameraCentral.m,v 1.6 2002/09/03 22:59:59 mattik Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -168,13 +168,13 @@ static NSMutableDictionary* prefsDict=NULL;
     [self registerCameraDriver:[MyQCWebDriver class]];
     [self registerCameraDriver:[MyVicamDriver class]];
     [self registerCameraDriver:[MySPCA504Driver class]];
-    [self registerCameraDriver:[MyIntelPCCameraPro class]];
-    [self registerCameraDriver:[MyIntelPCCamera class]];
-    [self registerCameraDriver:[MyGrandtecVcap class]];
-    [self registerCameraDriver:[MyViewQuestM318B class]];
-    [self registerCameraDriver:[MyViewQuestVQ110 class]];
-    [self registerCameraDriver:[MyDVC325 class]];
-    [self registerCameraDriver:[MySmartMegaCamDriver class]];
+//    [self registerCameraDriver:[MyIntelPCCameraPro class]];
+//    [self registerCameraDriver:[MyIntelPCCamera class]];
+//    [self registerCameraDriver:[MyGrandtecVcap class]];
+//    [self registerCameraDriver:[MyViewQuestM318B class]];
+//    [self registerCameraDriver:[MyViewQuestVQ110 class]];
+//    [self registerCameraDriver:[MyDVC325 class]];
+//    [self registerCameraDriver:[MySmartMegaCamDriver class]];
 
     doNotificationsOnMainThread=nomt;	//Remember this!
     if (doNotificationsOnMainThread) {	//The client wants merged threads: Build a connection to the new thread
@@ -618,7 +618,7 @@ void DeviceAdded(void *refCon, io_iterator_t iterator) {
         matchingDict = IOServiceMatching(kIOUSBDeviceClassName);
         if (!matchingDict) {
             NSLog(@"MyCameraCentral:wiringThread:Can't create a USB matching dictionary");
-            mach_port_deallocate(mach_task_self(), masterPort);
+//            mach_port_deallocate(mach_task_self(), masterPort);
             return;
         }
         // Add our vendor and product IDs to the matching criteria
@@ -638,7 +638,7 @@ void DeviceAdded(void *refCon, io_iterator_t iterator) {
                                               &gAddedIter);
         DeviceAdded(info, gAddedIter);
     }
-    mach_port_deallocate(mach_task_self(), masterPort); masterPort = NULL;
+//    mach_port_deallocate(mach_task_self(), masterPort); masterPort = NULL;
     if (startupLock) [startupLock unlock];	//First cams have been collected. Let startup return.
     // Start the run loop. Now we'll receive notifications.
     CFRunLoopRun();

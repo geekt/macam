@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySTV680Driver.m,v 1.1 2002/05/22 04:57:14 dirkx Exp $
+ $Id: MySTV680Driver.m,v 1.2 2002/07/16 16:28:52 mattik Exp $
  */
 
 #import "MySTV680Driver.h"
@@ -176,7 +176,7 @@
 }
 
 - (CameraError) startupGrabbing {
-    UInt16 val;
+    UInt16 val=0x0000;
     UInt8 buf[16];
     UInt8 originalPhotoResolution;
     CameraError ret=CameraErrorOK;

@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyImageDocument.m,v 1.2 2002/05/22 05:40:58 dirkx Exp $
+ $Id: MyImageDocument.m,v 1.3 2002/11/12 15:55:34 mattik Exp $
  */
 
 #import "MyImageDocument.h"
@@ -35,7 +35,7 @@
 
 - (void)windowControllerDidLoadNib:(NSWindowController *) aController
 {
-    NSBitmapImageRep* newRep; 
+    NSBitmapImageRep* newRep;
     if (deferredOpenImageRep) [deferredOpenImageRep autorelease];
     newRep=deferredOpenImageRep;
     [self setHasUndoManager:NO];
@@ -57,8 +57,24 @@
     [super windowControllerDidLoadNib:aController];
 }
 
+- (BOOL)shouldRunSavePanelWithAccessoryView {
+    return NO;
+}
+
+- (BOOL) prepareSavePanel:(NSSavePanel*)panel {
+    if (![super prepareSavePanel:panel]) return NO;
+    [panel setAccessoryView:NULL];
+    return YES;
+}
+
 - (NSData *)dataRepresentationOfType:(NSString *)aType {
-    return [imageRep TIFFRepresentationUsingCompression:NSTIFFCompressionLZW factor:0.0f];
+    if ([aType isEqualToString:@"JPEG Image"]) {
+        NSDictionary* dict=[NSDictionary dictionaryWithObjectsAndKeys:
+            [NSNumber numberWithFloat:quality],NSImageCompressionFactor,NULL];
+        return [imageRep representationUsingType:NSJPEGFileType properties:dict];
+    } else {
+        return [imageRep TIFFRepresentationUsingCompression:NSTIFFCompressionLZW factor:0.0f];
+    }
 }
 
 - (BOOL)loadDataRepresentation:(NSData *)data ofType:(NSString *)aType {
@@ -268,6 +284,16 @@
         }
     }
     [self setImageRep:newRep];
+}
+
+- (float) quality {
+    return quality;
+}
+
+- (void) setQuality:(float)newQuality {
+    quality=newQuality;
+    if (quality<0.0f) quality=0.0f;
+    if (quality>1.0f) quality=1.0f;
 }
 
 @end

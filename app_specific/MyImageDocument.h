@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyImageDocument.h,v 1.2 2002/05/22 05:40:58 dirkx Exp $
+ $Id: MyImageDocument.h,v 1.3 2002/11/12 15:55:34 mattik Exp $
  */
 
 #import <Cocoa/Cocoa.h>
@@ -26,6 +26,7 @@
     NSBitmapImageRep* imageRep;
     BOOL started;
     NSBitmapImageRep* deferredOpenImageRep;
+    float quality;		//Only used for JPEG
 }
 - (void) dealloc;
 - (void)makeWindowControllers;
@@ -36,4 +37,6 @@
 - (NSBitmapImageRep*) imageRep;
 - (void) rotateCW:(id)sender;
 - (void) rotateCCW:(id)sender;
+- (float) quality;
+- (void) setQuality:(float)quality;
 @end

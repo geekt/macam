@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySE401Driver.h,v 1.1 2002/12/30 17:50:07 mattik Exp $
+ $Id: MySE401Driver.h,v 1.2 2002/12/31 10:55:09 mattik Exp $
  */
 
 #import <Cocoa/Cocoa.h>
@@ -48,9 +48,16 @@
     SInt16 lastResetLevel;		//The last reset level setting sent to the sensor
     SInt16 resetLevel;			//The current reset level
     int resetLevelFrameCounter;		//The reset level shouldn't be changed each frame (see Hynix docs)
+
+    float whiteBalanceRed;		//White balance gain correction
+    float whiteBalanceGreen;		//White balance gain correction
+    float whiteBalanceBlue;		//White balance gain correction
+
+    int maxWidth;			//real camera sensor size
+    int maxHeight;			//real camera sensor size
 }
 
-#define SE401_NUM_CHUNKS 5
+#define SE401_NUM_CHUNKS 3
 #define SE401_CHUNK_SPARE 400000
 
 + (NSArray*) cameraUsbDescriptions;
@@ -76,6 +83,9 @@
 - (void) setSaturation:(float)v;
 - (BOOL) canSetGamma;
 - (void) setGamma:(float)v;
+- (BOOL) canSetWhiteBalanceMode;
+- (BOOL) canSetWhiteBalanceModeTo:(WhiteBalanceMode)newMode;
+- (void) setWhiteBalanceMode:(WhiteBalanceMode)newMode;
 
 //Grabbing
 - (CameraError) startupGrabbing;

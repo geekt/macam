@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.m,v 1.3 2002/08/29 09:45:54 mattik Exp $
+ $Id: MyController.m,v 1.4 2002/09/03 23:09:30 mattik Exp $
 */
 
 #import "MyController.h"
@@ -171,7 +171,7 @@ static NSString*	NextCamToolbarItemIdentifier 	= @"Next Camera Item Identifier";
             winFrame=[window frame];
             screenFrame=[[window screen] frame];
             minWinSize.width=[driver width]+40;
-            minWinSize.height=[driver height]+80;
+            minWinSize.height=[driver height]+48;
 //If the window is to small to show the whole preview, resize it to fit
             if ((minWinSize.width>winFrame.size.width)||(minWinSize.height>winFrame.size.height)) {
                 if (minWinSize.width>winFrame.size.width) {
@@ -311,7 +311,7 @@ static NSString*	NextCamToolbarItemIdentifier 	= @"Next Camera Item Identifier";
 }
 
 - (void)downloadSaveSheetEnded:(NSWindow *)sheet returnCode:(int)returnCode contextInfo:(void*)con {
-    NSOpenPanel* panel=sheet;
+    NSOpenPanel* panel=(NSOpenPanel*)sheet;
     long i,saveIdx;
     id media;
     NSBitmapImageRep* imgMedia;

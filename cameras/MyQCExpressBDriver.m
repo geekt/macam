@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCExpressBDriver.m,v 1.3 2002/12/30 20:06:56 mattik Exp $
+ $Id: MyQCExpressBDriver.m,v 1.4 2003/02/23 19:07:59 markasbach Exp $
 */
 
 #import "MyQCExpressBDriver.h"
@@ -90,6 +90,8 @@
                 case 17:	//Button up
                     [self mergeCameraEventHappened:CameraEventSnapshotButtonUp];
                     break;
+				case   0:
+					// with CIF happening on grab start/stopon my QCE w/o button [added by mark.asbach]
                 case 194:	//sometimes sent on grab start / stop
                     break;
                 default:

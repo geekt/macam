@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCExpressADriver.h,v 1.5 2003/01/11 19:43:47 markasbach Exp $
+ $Id: MyQCExpressADriver.h,v 1.6 2003/02/23 19:07:59 markasbach Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -117,8 +117,11 @@ typedef struct STV600GrabContext {
 
 - (CameraError) decodingThread;				//Entry method for the chunk to image decoding thread
 
-- (BOOL) writeSTVRegister:(long)reg value:(unsigned char)val; //Sets a controller chip register. Public for the sensors.
 
-- (BOOL) writeWideSTVRegister:(long)reg value:(unsigned short int)val; //Sets two controller chip registers with hi- and lo-word. Public for the sensors.
+/// Set a controller chip register. Public for the sensors.
+- (BOOL) writeSTVRegister:    (long)reg   value:(unsigned char)val; 
+
+/// Set two controller chip registers with hi- and lo-word. Public for the sensors.
+- (BOOL) writeWideSTVRegister:(long)reg   value:(unsigned short int)val; 
 
 @end

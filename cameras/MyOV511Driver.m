@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyOV511Driver.m,v 1.12 2003/03/17 17:19:51 himori Exp $
+ $Id: MyOV511Driver.m,v 1.13 2003/12/22 01:28:43 mattik Exp $
 */
 
 #include <IOKit/IOKitLib.h>
@@ -1088,7 +1088,9 @@ NSLog(@"OV511:%d %d %x", (*(grabContext.buffer+currChunk.start2+grabContext.byte
 //                                grabContext.tmpBuffer, &grabContext.tmpLength);
                         }
 {
+//To avoid compiler warning when NSLog is commented out - mattik
                         int size = Decompress420(grabContext.tmpBuffer, grabContext.chunkBuffer, NULL, width, height, grabContext.tmpLength);
+#pragma unused (size) 
 //NSLog(@"OV511:org size %d decomp size = %d", grabContext.tmpLength,size);
 }
                     } else {

@@ -17,7 +17,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySonix2028Driver.h,v 1.3 2002/12/17 09:41:05 mattik Exp $
+ $Id: MySonix2028Driver.h,v 1.4 2002/12/17 14:09:08 mattik Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -32,7 +32,8 @@
 #define SONIX_AE_WANTED_BRIGHTNESS 5000
 #define SONIX_AE_ACCEPTED_TOLERANCE 1000
 #define SONIX_AE_ADJUST_LATENCY 3
-#define SONIX_AE_ADJUST_STEP 0.01
+#define SONIX_AE_MIN_ADJUST_STEP 0.01
+#define SONIX_AE_MAX_ADJUST_STEP 0.02
 
 typedef struct SONIXTransferContext {	//Everything a usb completion callback need to know
     IOUSBIsocFrame frameList[SONIX_FRAMES_PER_TRANSFER];		//The results of the usb frames I received
@@ -64,7 +65,7 @@ typedef struct SONIXGrabContext {
     long framesSinceLastChunk;		//Counter to find out an invalid data stream
     long underexposuredFrames;		//Counter for the sequence of underexposured frames
     long overexposuredFrames;		//Counter for the sequence of overexposured frames
-    float autoExposure;			//Value for shutter/exposure [0..1]
+    float autoExposure;			//Value for shutter/exposure [0..1] - higher means less amplification
 } SONIXGrabContext;
 
 @interface MySonix2028Driver : MyCameraDriver {

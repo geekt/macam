@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.m,v 1.7 2002/11/12 15:54:46 mattik Exp $
+ $Id: MyController.m,v 1.8 2002/11/14 15:08:34 mattik Exp $
 */
 
 #import "MyController.h"
@@ -289,7 +289,9 @@ extern NSString* SnapshotQualityPrefsKey;
 - (void) stopMovieRecording {
     if (movieRecorder) {
         NSString* tempMoviePath;
-        double time=(movieRecordStart>0.0)?(CFAbsoluteTimeGetCurrent()-movieRecordStart):1.0f;
+        double time;
+        if (movieRecordStart>0.0) time=(CFAbsoluteTimeGetCurrent()-movieRecordStart)/movieRecordingTimeFactor;
+        else time=1.0f;
         [self setImageOfToolbarItem:RecordMovieToolbarItemIdentifier to:@"RecordMovieToolbarItem"];   
         [movieRecorder finishRecordingAt:time];
         tempMoviePath=[movieRecorder moviePath];

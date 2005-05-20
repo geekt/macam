@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySPCA500Driver.m,v 1.4 2003/02/24 13:05:08 mattik Exp $
+ $Id: MySPCA500Driver.m,v 1.5 2005/05/20 15:59:31 hxr Exp $
  */
 
 #include "GlobalDefs.h"
@@ -1251,5 +1251,25 @@ static inline void decode420Block(SInt8* srcy,SInt8* srcu,SInt8* srcv,UInt8* dst
     }
 }
 
+@end
+
+
+@implementation MyAiptekPocketDV
+
++ (unsigned short) cameraUsbProductID 
+{ 
+	return 0x0103;  //  AIPTEK?
+}
+
++ (unsigned short) cameraUsbVendorID 
+{ 
+	return 0x08ca;  //  PocketDV?
+}
+
++ (NSString*) cameraName 
+{ 
+	return [MyCameraCentral localizedStringFor:@"AIPTEK Pocket DV"]; 
+}
 
 @end
+

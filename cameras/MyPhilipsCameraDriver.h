@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyPhilipsCameraDriver.h,v 1.4 2003/07/27 04:55:56 tmolteno Exp $
+ $Id: MyPhilipsCameraDriver.h,v 1.5 2005/05/20 16:29:53 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -50,6 +50,7 @@ Doing these amounts of defines is often called bad style. We should find a bette
 
 #define VENDOR_PHILIPS 0x0471
 #define VENDOR_LOGITECH 0x046d
+#define VENDOR_CREATIVE_LABS 0x041e
 
 //Conversions into the values of the camera
 

@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySPCA504Driver.m,v 1.8 2003/02/24 13:01:42 mattik Exp $
+ $Id: MySPCA504Driver.m,v 1.9 2005/05/20 14:57:14 hxr Exp $
  */
 
 #import "MySPCA504Driver.h"
@@ -106,7 +106,7 @@ extern UInt8 ZigZagLookup[];
 
 - (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId {
     UInt8 buf[2];
-    CameraError err;
+    CameraError err = CameraErrorOK;
 
     firmwareVersion=0;
     sdramSize=0;

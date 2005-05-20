@@ -8,7 +8,7 @@
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
  * Free Software Foundation; version 2 of the License.
- * $Id: ov511_decomp.c,v 1.1 2003/01/10 00:28:23 himori Exp $
+ * $Id: ov511_decomp.c,v 1.2 2005/05/20 14:58:37 hxr Exp $
  */
 
 #define __NO_VERSION__
@@ -466,7 +466,10 @@ Decompress420HiNoMMX(unsigned char *pIn,
  * Output format is YUV400
  * Returns uncompressed data length if success, or zero if error
  */
-static int
+#if !(__FreeBSD__) && !defined(__APPLE__)
+static 
+#endif
+int
 Decompress400(unsigned char *pIn,
 	      unsigned char *pOut,
 	      unsigned char *pTmp,

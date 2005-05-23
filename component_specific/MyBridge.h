@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyBridge.h,v 1.3 2005/03/16 17:23:20 hxr Exp $
+ $Id: MyBridge.h,v 1.4 2005/05/23 20:11:06 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -75,6 +75,7 @@ typedef enum BridgeClientState {
 //----------------------
 
 - (id) initWithCentral:(MyCameraCentral*)central cid:(unsigned long)cid;
+- (unsigned long) cid;
 - (void) dealloc;
 - (BOOL) startup;				//Opens the camera driver and starts up bridge (reflect VDOpen)
 - (void) shutdown;				//Closes the camera driver shuts down bridge (reflect VDClose)

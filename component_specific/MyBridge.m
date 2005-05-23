@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyBridge.m,v 1.2 2003/07/27 04:55:56 tmolteno Exp $
+ $Id: MyBridge.m,v 1.3 2005/05/23 20:12:43 hxr Exp $
 */
 
 
@@ -91,6 +91,10 @@
         return NULL;
     }
     return self;
+}
+
+- (unsigned long) cid {
+    return cid;
 }
 
 - (void) dealloc {

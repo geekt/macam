@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: QTVideoDigitizer.h,v 1.1 2002/05/22 04:57:16 dirkx Exp $
+ $Id: QTVideoDigitizer.h,v 1.2 2005/05/23 20:33:14 hxr Exp $
 */
 
 #ifndef	_QT_VIDEO_DIGITIZER_
@@ -105,6 +105,8 @@ pascal VideoDigitizerError vdigSetSaturation(vdigGlobals storage,unsigned short*
 pascal VideoDigitizerError vdigGetSharpness(vdigGlobals storage,unsigned short* val);
 pascal VideoDigitizerError vdigSetSharpness(vdigGlobals storage,unsigned short* val);
 pascal VideoDigitizerError vdigGetPreferredTimeScale(vdigGlobals storage,TimeScale* ts);
+
+pascal VideoDigitizerError vdigGetUniqueIDs(vdigGlobals storage, UInt64* device, UInt64* input);
 
 // The compressed source devices function suite - e.g. needed for BTV and Oculus
 

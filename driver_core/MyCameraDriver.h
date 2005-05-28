@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.h,v 1.7 2003/07/27 04:55:56 tmolteno Exp $
+ $Id: MyCameraDriver.h,v 1.8 2005/05/28 04:11:45 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -243,6 +243,9 @@ Image buffers. There are two sets: lastIamgeBuffer and nextImageBuffer. The clie
 
 - (BOOL) canDeleteOne;			//Does the camera support [deleteOne:]?
 - (CameraError) deleteOne:(long)idx;	//Clears one camera media object
+
+- (BOOL) canDeleteLast;			//Does the camera support [deleteLast]?
+- (CameraError) deleteLast;		//Clears the last camera media object
 
 - (BOOL) canCaptureOne;			//Does the camera support [CaptureOne]?
 - (CameraError) captureOne;		//Captures one image (or whatever - camera's current setting)

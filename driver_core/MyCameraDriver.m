@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.m,v 1.10 2003/07/27 04:55:56 tmolteno Exp $
+ $Id: MyCameraDriver.m,v 1.11 2005/05/28 04:14:43 hxr Exp $
 */
 
 #import "MyCameraDriver.h"
@@ -559,6 +559,14 @@
 }
 
 - (CameraError) deleteOne:(long)idx {
+    return CameraErrorUnimplemented;
+}
+
+- (BOOL) canDeleteLast {
+    return NO;
+}
+
+- (CameraError) deleteLast {
     return CameraErrorUnimplemented;
 }
 

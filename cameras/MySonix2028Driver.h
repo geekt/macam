@@ -17,7 +17,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySonix2028Driver.h,v 1.9 2005/03/17 20:47:46 hxr Exp $
+ $Id: MySonix2028Driver.h,v 1.10 2005/05/28 04:32:53 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -79,6 +79,8 @@ typedef struct SONIXGrabContext {
    SONIXGrabContext grabContext;		//the grab context (everything the async usb read callbacks need)
    BOOL grabbingThreadRunning;		//For active wait for grabbingThread finish
 
+   short writeSkipBytes;			//  Used in getStoredMediaObject
+   
    BayerConverter* bayerConverter;
    UInt8* bayerBuffer;
 }
@@ -118,6 +120,15 @@ typedef struct SONIXGrabContext {
 - (long) numberOfStoredMediaObjects;
 - (NSDictionary*) getStoredMediaObject:(long)idx;
 
+- (BOOL) canDeleteAll;			//Does the camera support [deleteAll]?
+- (CameraError) deleteAll;		//Clears the camera media memory
+
+- (BOOL) canDeleteLast;			//Does the camera support [deleteLast:]?
+- (CameraError) deleteLast;		//Clears the last camera media object
+
+- (BOOL) canCaptureOne;			//Does the camera support [CaptureOne]?
+- (CameraError) captureOne;		//Captures one image (or whatever - camera's current setting)
+
 @end
 
 
@@ -126,6 +137,8 @@ typedef struct SONIXGrabContext {
 + (unsigned short) cameraUsbProductID;
 + (unsigned short) cameraUsbVendorID;
 + (NSString*) cameraName;
+
+- (CameraError) startupWithUsbLocationId:(UInt32) usbLocationId;
 
 // decoding is slightly different
 - (void) decode:(UInt8*)src to:(UInt8*)pixmap width:(int)width height:(int) height bpp:(short)bpp rowBytes:(long)rb;

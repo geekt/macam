@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.h,v 1.5 2003/07/27 04:55:56 tmolteno Exp $
+ $Id: MyController.h,v 1.6 2005/06/03 04:49:10 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -99,6 +99,10 @@
 - (IBAction)doNextCam:(id)sender;
 - (IBAction)doDownloadMedia:(id)sender;
 - (IBAction)doSaveImage:(id)sender;
+- (IBAction)doDeleteAll:(id)sender;
+- (IBAction)doDeleteOne:(id)sender;
+- (IBAction)doDeleteLast:(id)sender;
+- (IBAction)doTakeStillImage:(id)sender;
 - (IBAction)doSavePrefs:(id)sender;
 - (IBAction)toggleSettingsDrawer:(id)sender;
 - (IBAction)doQuit:(id)sender;

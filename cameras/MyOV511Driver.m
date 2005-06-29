@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyOV511Driver.m,v 1.13 2003/12/22 01:28:43 mattik Exp $
+ $Id: MyOV511Driver.m,v 1.14 2005/06/29 21:31:33 hxr Exp $
 */
 
 #include <IOKit/IOKitLib.h>
@@ -81,6 +81,7 @@ int Decompress420(unsigned char *pIn, unsigned char *pOut, unsigned char *pTmp, 
     short size;
     switch(altInterface) {
         case 7:
+		default:
             size = 961;
             break;
         case 6:
@@ -437,6 +438,7 @@ static unsigned char uvQuanTable511[] = OV511_UVQUANTABLE;
             size = 768;
             break;
         case 1:
+		default:
             size = 993;
             break;
         case 0:

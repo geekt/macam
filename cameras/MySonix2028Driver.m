@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySonix2028Driver.m,v 1.17 2005/05/28 04:32:53 hxr Exp $
+ $Id: MySonix2028Driver.m,v 1.18 2005/06/29 21:31:33 hxr Exp $
 */
 
 /* Here's what I know (or guess) about the chipset so far:
@@ -1072,8 +1072,8 @@ static bool StartNextIsochRead(SONIXGrabContext* grabContext, int transferIdx) {
 }
 
 - (CameraError) captureOne {
-    short num;
-    SonixSensorType sensorType;
+//  short num;
+//  SonixSensorType sensorType;
 	CameraError err = CameraErrorOK;
 	if (!err) err = [self sonixSetModeToDSC];
 //  if (!err) err = [self sonixGetSensorType:&sensorType];

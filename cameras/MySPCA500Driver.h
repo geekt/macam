@@ -17,7 +17,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySPCA500Driver.h,v 1.4 2005/05/20 15:59:31 hxr Exp $
+ $Id: MySPCA500Driver.h,v 1.5 2005/06/29 05:53:20 hxr Exp $
  */
 
 #import <Cocoa/Cocoa.h>
@@ -69,10 +69,8 @@ typedef struct SPCA500GrabContext {
     NSMutableArray* storedFileInfo;
 }
 
-//Get info about the camera specifics - simple mechanism
-+ (unsigned short) cameraUsbProductID;
-+ (unsigned short) cameraUsbVendorID;
-+ (NSString*) cameraName;
+//Get info about the camera specifics
++ (NSArray*) cameraUsbDescriptions;
 
 - (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId;
 - (void) shutdown;
@@ -95,17 +93,12 @@ typedef struct SPCA500GrabContext {
 - (long) numberOfStoredMediaObjects;
 - (NSDictionary*) getStoredMediaObject:(long)idx;
 
-
 @end
 
 
 @interface MyAiptekPocketDV : MySPCA500Driver {}
 
-//  Get info about the camera specifics - use the simple mechanism
-
-+ (unsigned short) cameraUsbProductID;
-+ (unsigned short) cameraUsbVendorID;
-+ (NSString*) cameraName;
+//  Get info about the camera specifics
++ (NSArray*) cameraUsbDescriptions;
 
 @end
-

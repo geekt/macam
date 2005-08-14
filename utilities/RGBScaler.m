@@ -17,7 +17,7 @@
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
- $Id: RGBScaler.m,v 1.1 2002/07/08 22:33:30 mattik Exp $
+ $Id: RGBScaler.m,v 1.2 2005/08/14 05:21:30 hxr Exp $
  */
 
 #import "RGBScaler.h"
@@ -52,9 +52,18 @@
     return self;
 }
 
-- (void) dealloc {
-    if (internalDst) free(internalDst); internalDst=NULL;
-    if (tmpRow1) free(tmpRow1); tmpRow1=NULL; tmpRow2=NULL;
+- (void) dealloc 
+{
+    if (internalDst) 
+        free(internalDst); 
+    internalDst=NULL;
+    
+    if (tmpRow1) 
+        free(tmpRow1); 
+    tmpRow1=NULL; 
+    tmpRow2=NULL;
+    
+    [super dealloc];
 }
 
 - (BOOL) setSourceWidth:(int)sw height:(int)sh bytesPerPixel:(int)sbpp rowBytes:(int)srb {

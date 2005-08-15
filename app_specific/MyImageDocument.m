@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyImageDocument.m,v 1.3 2002/11/12 15:55:34 mattik Exp $
+ $Id: MyImageDocument.m,v 1.4 2005/08/15 05:51:32 hxr Exp $
  */
 
 #import "MyImageDocument.h"
@@ -23,8 +23,13 @@
 
 @implementation MyImageDocument
 
-- (void) dealloc {
-    if (imageRep) [imageRep release];
+- (void) dealloc 
+{
+    if (imageRep) 
+        [imageRep release];
+//    imageRep = NULL;
+    
+    [super dealloc];
 }
 
 - (void)makeWindowControllers {

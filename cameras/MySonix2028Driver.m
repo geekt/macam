@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySonix2028Driver.m,v 1.18 2005/06/29 21:31:33 hxr Exp $
+ $Id: MySonix2028Driver.m,v 1.19 2005/08/15 05:37:59 hxr Exp $
 */
 
 /* Here's what I know (or guess) about the chipset so far:
@@ -87,10 +87,8 @@ width and height are wrong in decoding...
 #import "yuv2rgb.h"
 #include "MiscTools.h"
 #include "unistd.h"
+#include "USB_VendorProductIDs.h"
 
-#define VENDOR_SONIX	0x0c45
-#define PRODUCT_DC31UC	0x8000
-#define PRODUCT_VIVICAM3350B 0x800A
 
 #define MAX_SHUTTER 2560000.0f
 
@@ -1297,10 +1295,25 @@ static bool StartNextIsochRead(SONIXGrabContext* grabContext, int transferIdx) {
 
 @implementation MyViviCam3350BDriver
 
++ (NSArray*) cameraUsbDescriptions 
+{
+    NSDictionary* dict1=[NSDictionary dictionaryWithObjectsAndKeys:
+        [NSNumber numberWithUnsignedShort:VENDOR_SONIX],@"idVendor",
+        [NSNumber numberWithUnsignedShort:PRODUCT_VIVICAM3350B],@"idProduct",
+        @"Vivitar ViviCam 3350B",@"name",NULL];
+    
+	NSDictionary* dict2=[NSDictionary dictionaryWithObjectsAndKeys:
+        [NSNumber numberWithUnsignedShort:PRODUCT_SMARTCAM_VGAS],@"idProduct",
+        [NSNumber numberWithUnsignedShort:VENDOR_SWEDA],@"idVendor",
+        @"Sweda SmartCam VGAs",@"name",NULL];
+	
+    return [NSArray arrayWithObjects:dict1,dict2,NULL];
+}
+
 //  Class methods needed
-+ (unsigned short) cameraUsbProductID { return PRODUCT_VIVICAM3350B; }
-+ (unsigned short) cameraUsbVendorID { return VENDOR_SONIX; }
-+ (NSString*) cameraName { return [MyCameraCentral localizedStringFor:@"Vivitar ViviCam 3350B"]; }
+//+ (unsigned short) cameraUsbProductID { return PRODUCT_VIVICAM3350B; }
+//+ (unsigned short) cameraUsbVendorID { return VENDOR_SONIX; }
+//+ (NSString*) cameraName { return [MyCameraCentral localizedStringFor:@"Vivitar ViviCam 3350B"]; }
 
 - (CameraError) startupWithUsbLocationId:(UInt32) usbLocationId 
 {

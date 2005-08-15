@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.22 2005/05/20 16:04:32 hxr Exp $
+ $Id: MyCameraCentral.m,v 1.23 2005/08/15 05:41:40 hxr Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -148,10 +148,18 @@ MyCameraCentral* sharedCameraCentral=NULL;
     return self;
 }
 
-- (void) dealloc {
+- (void) dealloc 
+{
     [self shutdown];	//Make sure everything's shut down
-    if (cameraTypes!=NULL) [cameraTypes release]; cameraTypes=NULL;
-    if (cameras!=NULL) [cameras release]; cameras=NULL;
+    if (cameraTypes!=NULL) 
+        [cameraTypes release]; 
+    cameraTypes=NULL;
+    
+    if (cameras!=NULL) 
+        [cameras release]; 
+    cameras=NULL;
+    
+    [super dealloc]; // where is the constructor?
 }
 
 - (BOOL) startupWithNotificationsOnMainThread:(BOOL)nomt recognizeLaterPlugins:(BOOL)rlp{
@@ -183,6 +191,7 @@ MyCameraCentral* sharedCameraCentral=NULL;
     [self registerCameraDriver:[MyTimonFamilyDriver class]];
     [self registerCameraDriver:[MyCPIACameraDriver class]];
     [self registerCameraDriver:[MyQX3Driver class]];
+    [self registerCameraDriver:[MyQX5Driver class]];
     [self registerCameraDriver:[MySTV680Driver class]];
     [self registerCameraDriver:[MyQCExpressADriver class]];
     [self registerCameraDriver:[MyQCExpressBDriver class]];

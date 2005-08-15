@@ -17,7 +17,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQX3Driver.m,v 1.2 2002/05/27 05:43:31 dirkx Exp $
+ $Id: MyQX3Driver.m,v 1.3 2005/08/15 05:34:53 hxr Exp $
  */
 
 #import "MyQX3Driver.h"
@@ -254,3 +254,36 @@ o Intel Play QX3 Microscope@2100000  <class IOUSBDevice>
     return r;
 }
 @end
+
+@implementation MyQX5Driver 
+
++ (unsigned short) cameraUsbProductID 
+{ 
+    return 0x0553;
+}
+
++ (unsigned short) cameraUsbVendorID 
+{ 
+    return 0x0151; 
+}
+
++ (NSString*) cameraName 
+{
+    return [MyCameraCentral localizedStringFor:@"Digital Blue QX5 Microscope"];
+}
+
+// user interface issues, can we have both lights on the QX5?
+
+// is the light communication the same?
+// - doLights
+
+// same or different color balance values?
+
+// same routines for collecting the data?
+
+// methods to deal with new image encoding etc
+
+// separate program to turn on/off lights? script or simple unix tool?
+
+@end
+

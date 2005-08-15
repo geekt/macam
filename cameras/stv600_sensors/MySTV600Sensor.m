@@ -15,7 +15,7 @@ macam - webcam app and QuickTime driver component
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySTV600Sensor.m,v 1.3 2002/09/03 23:01:27 mattik Exp $
+ $Id: MySTV600Sensor.m,v 1.4 2005/08/15 05:17:55 hxr Exp $
  */
 
 
@@ -41,7 +41,7 @@ macam - webcam app and QuickTime driver component
 
 - (BOOL) checkSensor {
     BOOL ok=YES;
-    short sensorID;
+    unsigned short sensorID;
     NSAssert(bytePerRegister>0,@"Your subclass of MySTV600Sensor must set bytePerRegister on init");
     NSAssert(i2cSensorAddress>=0,@"Your subclass of MySTV600Sensor must set i2cSensorAddress on init");
     NSAssert(reg23Value>=0,@"Your subclass of MySTV600Sensor must set reg23Value on init");

@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySPCA504Driver.m,v 1.9 2005/05/20 14:57:14 hxr Exp $
+ $Id: MySPCA504Driver.m,v 1.10 2005/08/15 05:19:28 hxr Exp $
  */
 
 #import "MySPCA504Driver.h"
@@ -798,7 +798,7 @@ static bool StartNextIsochRead(SPCA504GrabContext* gCtx, int transferIdx) {
     GetGWorld(&oldPort,&oldGDev);
     SetGWorld(gw,NULL);
     (**pccamImgDesc).dataSize=jfifLength;
-    DecompressImage(jfifBuf,pccamImgDesc,pm,&srcBounds,&dstBounds,srcCopy,NULL);
+    DecompressImage((Ptr) jfifBuf,pccamImgDesc,pm,&srcBounds,&dstBounds,srcCopy,NULL);
     SetGWorld(oldPort,oldGDev);
     UnlockPixels(pm);
     DisposeGWorld(gw);
@@ -1394,7 +1394,7 @@ static bool StartNextIsochRead(SPCA504GrabContext* gCtx, int transferIdx) {
     UInt8 save2714;
     UInt8 save2715;
     IOReturn err;
-    long actCount=count;
+    UInt32 actCount=(UInt32) count;
     
     //Set mode to upload
     if (![self dscSetCameraModeTo:4]) return NO;
@@ -1440,7 +1440,7 @@ static bool StartNextIsochRead(SPCA504GrabContext* gCtx, int transferIdx) {
 - (BOOL) dscReadBulkTo:(UInt8*)buf count:(long)bytesToTransfer {
     UInt8 tmpBuf[256];
     long bytesTransferred=0;
-    long readLength;
+    UInt32 readLength;
     IOReturn err;
 
     //Wait until a page is ready

@@ -17,7 +17,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySPCA500Driver.h,v 1.5 2005/06/29 05:53:20 hxr Exp $
+ $Id: MySPCA500Driver.h,v 1.6 2005/08/15 05:31:10 hxr Exp $
  */
 
 #import <Cocoa/Cocoa.h>
@@ -98,7 +98,6 @@ typedef struct SPCA500GrabContext {
 
 @interface MyAiptekPocketDV : MySPCA500Driver {}
 
-//  Get info about the camera specifics
 + (NSArray*) cameraUsbDescriptions;
 
 @end

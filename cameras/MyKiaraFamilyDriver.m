@@ -15,10 +15,13 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyKiaraFamilyDriver.m,v 1.6 2005/05/20 15:35:42 hxr Exp $
+ $Id: MyKiaraFamilyDriver.m,v 1.7 2005/08/15 05:22:32 hxr Exp $
  */
 
 #import "MyKiaraFamilyDriver.h"
+
+#include "USB_VendorProductIDs.h"
+
 
 typedef struct _ToUCamFormatEntry {
     CameraResolution res;
@@ -345,7 +348,8 @@ Here is a table of sniffed data. I have no idea what this means
  - patch added by hxr
  */
 
-+ (NSArray*) cameraUsbDescriptions {
++ (NSArray*) cameraUsbDescriptions 
+{
     NSDictionary* dict1=[NSDictionary dictionaryWithObjectsAndKeys:
         [NSNumber numberWithUnsignedShort:VENDOR_PHILIPS],@"idVendor",
         [NSNumber numberWithUnsignedShort:PRODUCT_TOUCAM_PRO],@"idProduct",
@@ -362,7 +366,11 @@ Here is a table of sniffed data. I have no idea what this means
         [NSNumber numberWithUnsignedShort:VENDOR_LOGITECH],@"idVendor",
         [NSNumber numberWithUnsignedShort:PRODUCT_QUICKCAM_ZOOM],@"idProduct",
         @"Logitech QuickCam Zoom USB",@"name",NULL];
-    return [NSArray arrayWithObjects:dict1,dict2,dict3,dict4,NULL];
+    NSDictionary* dict5=[NSDictionary dictionaryWithObjectsAndKeys:
+        [NSNumber numberWithUnsignedShort:VENDOR_LOGITECH],@"idVendor",
+        [NSNumber numberWithUnsignedShort:PRODUCT_QUICKCAM_NOTEBOOK_PRO],@"idProduct",
+        @"Logitech QuickCam Notebook Pro",@"name",NULL];
+    return [NSArray arrayWithObjects:dict1,dict2,dict3,dict4,dict5,NULL];
 }
 
 

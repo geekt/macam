@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.m,v 1.11 2005/05/28 04:14:43 hxr Exp $
+ $Id: MyCameraDriver.m,v 1.12 2005/08/15 05:45:22 hxr Exp $
 */
 
 #import "MyCameraDriver.h"
@@ -773,7 +773,7 @@
     io_service_t			usbInterfaceRef;
     short    				retries;
     kern_return_t			ret;
-    io_service_t			usbDeviceRef=NULL;
+    io_service_t			usbDeviceRef=IO_OBJECT_NULL;
     mach_port_t				masterPort;
     CFMutableDictionaryRef 		matchingDict;
     
@@ -838,7 +838,7 @@
         }            
     }
 
-    IOObjectRelease(iterator); iterator=NULL;
+    IOObjectRelease(iterator); iterator=IO_OBJECT_NULL;
     
     if (!dev) return CameraErrorNoCam;
     

@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyBridge.h,v 1.4 2005/05/23 20:11:06 hxr Exp $
+ $Id: MyBridge.h,v 1.5 2005/08/15 05:27:30 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -85,7 +85,7 @@ typedef enum BridgeClientState {
 //-----------------
 
 - (BOOL) grabOneFrameCompressedAsync;		//Starts grabbing one frame to compressed target
-- (BOOL) compressionDoneTo:(Ptr*)data		//Returns if grabOneFrameCompressedAsync has finished
+- (BOOL) compressionDoneTo:(unsigned char **)data		//Returns if grabOneFrameCompressedAsync has finished
                       size:(long*)size
                 similarity:(UInt8*)similarity;
 - (void) takeBackCompressionBuffer:(Ptr)buf;	//returns a buffer (they are taken out when starting a compressed grab)

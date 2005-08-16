@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: QTVideoDigitizer.m,v 1.3 2005/05/23 20:33:14 hxr Exp $
+ $Id: QTVideoDigitizer.m,v 1.4 2005/08/16 04:35:13 hxr Exp $
 */
 
 #include "QTVideoDigitizer.h"
@@ -531,7 +531,7 @@ pascal VideoDigitizerError vdigCompressOneFrameAsync(vdigGlobals storage) {
 
 pascal VideoDigitizerError vdigCompressDone(vdigGlobals storage,Boolean* done,Ptr* theData,long* dataSize,
                                             UInt8* similarity,TimeRecord* t) {
-    Ptr myData;
+    unsigned char * myData;
     long mySize;
     UInt8 mySimilarity;
     if (!done) return qtParamErr;
@@ -539,7 +539,7 @@ pascal VideoDigitizerError vdigCompressDone(vdigGlobals storage,Boolean* done,Pt
     OSXYieldToAnyThread();
     if ([(**storage).bridge compressionDoneTo:&myData size:&mySize similarity:&mySimilarity]) {
         *done=true;
-        if (theData) *theData=myData;
+        if (theData) *theData = (Ptr) myData;
         if (dataSize) *dataSize=mySize;
         if (similarity) *similarity=mySimilarity;
         if ((t)&&((**storage).timeBase)) {

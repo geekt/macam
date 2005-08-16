@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: QTPanel.m,v 1.3 2003/12/22 01:25:05 mattik Exp $
+ $Id: QTPanel.m,v 1.4 2005/08/16 04:37:54 hxr Exp $
 */
 
 #include "QTPanel.h"
@@ -130,7 +130,7 @@ pascal ComponentResult sgpnRegister(sgpnGlobals storage) {
     
     //Bail if the camera central has already been loaded (might register-loop infinitely...)
     if ([MyCameraCentral isCameraCentralExisting]) {
-#ifdef VERBOSE
+#ifdef REALLY_VERBOSE
         NSLog(@"Camera central already inited - probably duplicate register. Skipping...");
 #endif
         return 1;

@@ -16,7 +16,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  
-    $Id: GlobalDefs.h,v 1.5 2003/07/27 04:55:57 tmolteno Exp $
+    $Id: GlobalDefs.h,v 1.6 2005/08/16 04:37:46 hxr Exp $
 */
 
 /*
@@ -67,6 +67,8 @@ typedef enum ColorMode {
 //Global build settings. Comment unwanted stuff out
 
 #define VERBOSE 1
+
+//#define REALLY_VERBOSE 1
 
 /*
 malloc/free tracking: Since I sometimes have to do "remote debugging" (send the code to someone else and ask what happens), I cannot use elaborate tools there. So I use macros for malloc and free so we can switch on memory logging to the console. The testers then can send the console log back. To switch on or off, uncomment or comment the next #define statement.

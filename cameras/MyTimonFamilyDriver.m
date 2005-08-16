@@ -15,10 +15,13 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyTimonFamilyDriver.m,v 1.3 2003/02/24 13:05:09 mattik Exp $
+ $Id: MyTimonFamilyDriver.m,v 1.4 2005/08/16 21:27:59 hxr Exp $
  */
 
 #import "MyTimonFamilyDriver.h"
+
+#include "USB_VendorProductIDs.h"
+
 
 typedef struct _VestaFormatEntry {
     CameraResolution res;
@@ -54,26 +57,36 @@ static VestaFormatEntry formats[]={
 
 static long numFormats=19;
 
-#define PRODUCT_VESTA 0x0307
-#define PRODUCT_VESTA_PRO 0x0308
-#define PRODUCT_VESTA_SCAN 0x030c
-
 @implementation MyTimonFamilyDriver
 
-+ (NSArray*) cameraUsbDescriptions {
++ (NSArray*) cameraUsbDescriptions 
+{
     NSDictionary* dict1=[NSDictionary dictionaryWithObjectsAndKeys:
         [NSNumber numberWithUnsignedShort:PRODUCT_VESTA],@"idProduct",
         [NSNumber numberWithUnsignedShort:VENDOR_PHILIPS],@"idVendor",
         @"Philips Vesta",@"name",NULL];
+    
     NSDictionary* dict2=[NSDictionary dictionaryWithObjectsAndKeys:
         [NSNumber numberWithUnsignedShort:PRODUCT_VESTA_PRO],@"idProduct",
         [NSNumber numberWithUnsignedShort:VENDOR_PHILIPS],@"idVendor",
         @"Philips Vesta Pro",@"name",NULL];
+    
     NSDictionary* dict3=[NSDictionary dictionaryWithObjectsAndKeys:
         [NSNumber numberWithUnsignedShort:PRODUCT_VESTA_SCAN],@"idProduct",
         [NSNumber numberWithUnsignedShort:VENDOR_PHILIPS],@"idVendor",
         @"Philips Vesta Scan",@"name",NULL];
-    return [NSArray arrayWithObjects:dict1,dict2,dict3,NULL];
+    
+    NSDictionary* dict4=[NSDictionary dictionaryWithObjectsAndKeys:
+        [NSNumber numberWithUnsignedShort:PRODUCT_MPC_C10],@"idProduct",
+        [NSNumber numberWithUnsignedShort:VENDOR_SAMSUNG],@"idVendor",
+        @"Samsung MPC-C10",@"name",NULL];
+    
+    NSDictionary* dict5=[NSDictionary dictionaryWithObjectsAndKeys:
+        [NSNumber numberWithUnsignedShort:PRODUCT_MPC_C30],@"idProduct",
+        [NSNumber numberWithUnsignedShort:VENDOR_SAMSUNG],@"idVendor",
+        @"Samsung MPC-C30",@"name",NULL];
+    
+    return [NSArray arrayWithObjects:dict1,dict2,dict3,dict4,dict5,NULL];
 }
 
 - (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId {

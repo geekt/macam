@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.23 2005/08/15 05:41:40 hxr Exp $
+ $Id: MyCameraCentral.m,v 1.24 2005/08/16 04:48:07 hxr Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -278,7 +278,7 @@ MyCameraCentral* sharedCameraCentral=NULL;
         [info setDriverClass:[MyDummyCameraDriver class]];
         [info setProductID:[MyDummyCameraDriver cameraUsbProductID]];
         [info setVendorID:[MyDummyCameraDriver cameraUsbVendorID]];
-        [info setCameraName:[MyDummyCameraDriver cameraName]];
+        [info setCameraName: [NSString stringWithFormat:@"%@ #%i", [MyDummyCameraDriver cameraName], i+1]];
         [info setCentral: self];
         [cameras addObject:info];
     }
@@ -392,6 +392,7 @@ MyCameraCentral* sharedCameraCentral=NULL;
     }
     if (cam!=NULL) {
         [dev setDriver:cam];
+        [cam setCameraInfo:dev];
         [self setCameraToDefaults:cam];
         if (outCam) *outCam=cam;
     }

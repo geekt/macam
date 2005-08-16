@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.m,v 1.12 2005/08/15 05:45:22 hxr Exp $
+ $Id: MyCameraDriver.m,v 1.13 2005/08/16 04:48:07 hxr Exp $
 */
 
 #import "MyCameraDriver.h"
@@ -676,6 +676,13 @@
     }
 }
 
+- (MyCameraInfo*) getCameraInfo {
+       return cameraInfo;
+}
+
+- (void) setCameraInfo:(MyCameraInfo *)info {
+       cameraInfo = info;
+}
 
 //USB Tool functions for subclasses
 
@@ -1048,6 +1055,8 @@
             f=((long long)(time))%100;
             sprintf(cstr,"%02i:%02i:%02i:%02i",h,m,s,f);
             MiniDrawString(lastImageBuffer,lastImageBufferBPP,lastImageBufferRowBytes,10,10,cstr);
+            MiniDrawString(lastImageBuffer,lastImageBufferBPP,lastImageBufferRowBytes,10,23,
+                            (char*)[[[self getCameraInfo] cameraName] cString]);
         }
         [self mergeImageReady];				//notify delegate about the image. perhaps get a new buffer
     }

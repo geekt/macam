@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyImageDocument.m,v 1.4 2005/08/15 05:51:32 hxr Exp $
+ $Id: MyImageDocument.m,v 1.5 2005/08/23 17:12:14 hxr Exp $
  */
 
 #import "MyImageDocument.h"
@@ -72,12 +72,29 @@
     return YES;
 }
 
-- (NSData *)dataRepresentationOfType:(NSString *)aType {
-    if ([aType isEqualToString:@"JPEG Image"]) {
-        NSDictionary* dict=[NSDictionary dictionaryWithObjectsAndKeys:
-            [NSNumber numberWithFloat:quality],NSImageCompressionFactor,NULL];
+- (NSData *)dataRepresentationOfType:(NSString *)aType 
+{
+    NSDictionary* dict=[NSDictionary dictionaryWithObjectsAndKeys:
+        [NSNumber numberWithFloat:quality], NSImageCompressionFactor, NULL];
+    
+    if ([aType isEqualToString:@"JPEG Image"]) 
+    {
         return [imageRep representationUsingType:NSJPEGFileType properties:dict];
-    } else {
+    } 
+    else if ([aType isEqualToString:@"PNG Image"]) 
+    {
+        return [imageRep representationUsingType:NSPNGFileType properties:dict];
+    } 
+    else if ([aType isEqualToString:@"BMP Image"]) 
+    {
+        return [imageRep representationUsingType:NSBMPFileType properties:dict];
+    } 
+    else if ([aType isEqualToString:@"GIF Image"]) 
+    {
+        return [imageRep representationUsingType:NSGIFFileType properties:dict];
+    } 
+    else 
+    {
         return [imageRep TIFFRepresentationUsingCompression:NSTIFFCompressionLZW factor:0.0f];
     }
 }

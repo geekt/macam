@@ -17,7 +17,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySonix2028Driver.h,v 1.11 2005/08/15 05:37:59 hxr Exp $
+ $Id: MySonix2028Driver.h,v 1.12 2005/08/27 15:06:07 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -85,9 +85,7 @@ typedef struct SONIXGrabContext {
    UInt8* bayerBuffer;
 }
 
-+ (unsigned short) cameraUsbProductID;
-+ (unsigned short) cameraUsbVendorID;
-+ (NSString*) cameraName;
++ (NSArray*) cameraUsbDescriptions;
 
 - (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId;
 - (void) dealloc;
@@ -139,6 +137,18 @@ typedef struct SONIXGrabContext {
 - (CameraError) startupWithUsbLocationId:(UInt32) usbLocationId;
 
 // decoding is slightly different
+- (void) decode:(UInt8*)src to:(UInt8*)pixmap width:(int)width height:(int) height bpp:(short)bpp rowBytes:(long)rb;
+
+@end
+
+
+@interface MySwedaSSP09BDriver : MySonix2028Driver 
+
++ (NSArray*) cameraUsbDescriptions;
+
+- (CameraError) startupWithUsbLocationId:(UInt32) usbLocationId;
+
+// decoding is different
 - (void) decode:(UInt8*)src to:(UInt8*)pixmap width:(int)width height:(int) height bpp:(short)bpp rowBytes:(long)rb;
 
 @end

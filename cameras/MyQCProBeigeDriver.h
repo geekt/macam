@@ -18,7 +18,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCProBeigeDriver.h,v 1.2 2003/02/24 13:05:09 mattik Exp $
+ $Id: MyQCProBeigeDriver.h,v 1.3 2005/09/13 20:15:06 hxr Exp $
  */
 
 #import <Cocoa/Cocoa.h>
@@ -48,6 +48,8 @@
     float lastShutter;			//The last exposure setting sent to the sensor
     float aeGain;			//The computed auto gain value  
     float aeShutter;			//The computed auto exposure value
+    
+    BOOL rotate;            // "NO" for QCProBeige, "YES" for QCVC
 }
 
 #define QCPROBEIGE_NUM_CHUNKS 3
@@ -93,5 +95,14 @@
 - (void) grabbingThread:(id)data;
 - (CameraError) decodingThread;
 
+@end
+
+
+@interface MyQCVCDriver : MyQCProBeigeDriver 
+
++ (NSArray*) cameraUsbDescriptions;
+
+- (CameraError) startupWithUsbLocationId:(UInt32) usbLocationId;
 
 @end
+

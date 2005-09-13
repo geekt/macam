@@ -18,7 +18,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCProBeigeDriver.m,v 1.4 2005/03/17 20:47:46 hxr Exp $
+ $Id: MyQCProBeigeDriver.m,v 1.5 2005/09/13 20:16:14 hxr Exp $
  */
 
 #import "MyQCProBeigeDriver.h"
@@ -26,9 +26,7 @@
 #include "Resolvers.h"
 #include "MiscTools.h"
 #include "unistd.h"	//usleep
-
-#define VENDOR_LOGITECH 0x046d
-#define PRODUCT_QCPROBEIGE 0x0810
+#include "USB_VendorProductIDs.h"
 
 @interface MyQCProBeigeDriver (Private)
 
@@ -88,6 +86,8 @@
     err=[super startupWithUsbLocationId:usbLocationId];
     if (err!=CameraErrorOK) return err;
 
+    rotate = NO;
+    
     return err;
 }
 
@@ -477,7 +477,7 @@ static void handleFullChunk(void *refcon, IOReturn result, void *arg0) {
                                        dstRowBytes:lastImageBufferRowBytes
                                             dstBPP:lastImageBufferBPP
                                               flip:hFlip
-										 rotate180:NO];
+										 rotate180:rotate];
                     [imageBufferLock unlock];
                     [self mergeImageReady];
                 } else {
@@ -715,5 +715,30 @@ static void handleFullChunk(void *refcon, IOReturn result, void *arg0) {
     return (ok)?CameraErrorOK:CameraErrorUSBProblem;
 }    
 
-
 @end		
+
+
+@implementation MyQCVCDriver
+
++ (NSArray*) cameraUsbDescriptions 
+{
+	NSDictionary* dict1=[NSDictionary dictionaryWithObjectsAndKeys:
+        [NSNumber numberWithUnsignedShort:PRODUCT_QUICKCAM_VC],@"idProduct",
+        [NSNumber numberWithUnsignedShort:VENDOR_CONNECTIX],@"idVendor",
+        @"Logitech QuickCam VC",@"name",NULL];
+	
+    return [NSArray arrayWithObjects:dict1,NULL];
+}
+
+- (CameraError) startupWithUsbLocationId:(UInt32) usbLocationId 
+{
+	CameraError err = [super startupWithUsbLocationId:usbLocationId];
+    if (err != CameraErrorOK) 
+		return err;
+	
+	rotate = YES;
+	
+	return CameraErrorOK;
+}
+
+@end

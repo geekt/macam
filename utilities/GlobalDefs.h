@@ -16,7 +16,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  
-    $Id: GlobalDefs.h,v 1.6 2005/08/16 04:37:46 hxr Exp $
+    $Id: GlobalDefs.h,v 1.7 2005/09/29 18:52:47 hxr Exp $
 */
 
 /*
@@ -111,6 +111,9 @@ USB control tracking. Another sometimes interesting thing is to track the sequen
 //A shortcut for localization
 #define LStr(a) NSLocalizedString(a,NULL)	
 
-
+// This was only defined in 10.4, and is needed for compilation on previous systems
+#ifndef IO_OBJECT_NULL
+#define IO_OBJECT_NULL  NULL
+#endif
 
 #endif

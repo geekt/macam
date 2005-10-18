@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySonix2028Driver.m,v 1.20 2005/08/27 15:08:03 hxr Exp $
+ $Id: MySonix2028Driver.m,v 1.21 2005/10/18 17:54:16 hxr Exp $
 */
 
 /* Here's what I know (or guess) about the chipset so far:
@@ -1453,6 +1453,7 @@ static bool StartNextIsochRead(SONIXGrabContext* grabContext, int transferIdx) {
     return YES;
 }
 
+#undef PARSE_PIXEL_NEW
 
 #define PARSE_PIXEL_NEW(val) {\
     PEEK_BITS(10,bits);\
@@ -1665,6 +1666,7 @@ static bool StartNextIsochRead(SONIXGrabContext* grabContext, int transferIdx) {
     return YES;
 }
 
+#undef PARSE_PIXEL_NEW
 
 #define PARSE_PIXEL_NEW(val) {\
     PEEK_BITS(10,bits);\

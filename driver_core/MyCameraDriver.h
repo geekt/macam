@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.h,v 1.9 2005/08/16 04:48:07 hxr Exp $
+ $Id: MyCameraDriver.h,v 1.10 2005/10/18 17:50:24 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -129,6 +129,8 @@ Image buffers. There are two sets: lastIamgeBuffer and nextImageBuffer. The clie
 
 //Camera introspection
 - (BOOL) realCamera;	//Returns if the camera is a real image grabber or a dummy
+- (BOOL) hasSpecificName; // Returns is the camera has a more specific name (derived from USB connection perhaps)
+- (NSString *) getSpecificName;
 
 //Image / camera property get/set: All continuous data in the range [0 .. 1]. Their use should be quite obvious.
 

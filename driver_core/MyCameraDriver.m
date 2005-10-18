@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.m,v 1.13 2005/08/16 04:48:07 hxr Exp $
+ $Id: MyCameraDriver.m,v 1.14 2005/10/18 17:50:24 hxr Exp $
 */
 
 #import "MyCameraDriver.h"
@@ -166,6 +166,14 @@
 
 - (BOOL) realCamera {	//Returns if the camera is a real image grabber or a dummy
     return YES;		//By default, subclasses are real cams. Dummys should override this
+}
+
+- (BOOL) hasSpecificName { // Returns is the camera has a more specific name (derived from USB connection perhaps)
+    return NO;
+}
+
+- (NSString *) getSpecificName {
+    return @"Error!: Name has not been specified";
 }
 
 //Image / camera properties get/set
@@ -784,7 +792,7 @@
     mach_port_t				masterPort;
     CFMutableDictionaryRef 		matchingDict;
     
-//Get a master port (we should rlease it later...) *******
+//Get a master port (we should release it later...) *******
 
     ret=IOMasterPort(MACH_PORT_NULL,&masterPort);
     if (ret) {

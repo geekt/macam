@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.m,v 1.17 2005/08/23 20:37:34 hxr Exp $
+ $Id: MyController.m,v 1.18 2005/10/18 17:51:37 hxr Exp $
 */
 
 #import "MyController.h"
@@ -684,7 +684,10 @@ extern NSString* SnapshotQualityPrefsKey;
         err=[central useCameraWithID:cid to:&driver acceptDummy:NO];
         if (err) driver=NULL;
         if (driver!=NULL) {
-            [statusText setStringValue:[LStr(@"Status: Connected to ") stringByAppendingString:[central nameForID:cid]]];
+            if ([driver hasSpecificName]) 
+                [statusText setStringValue:[LStr(@"Status: Connected to ") stringByAppendingString:[driver getSpecificName]]];
+            else
+                [statusText setStringValue:[LStr(@"Status: Connected to ") stringByAppendingString:[central nameForID:cid]]];
             [driver retain];			//We keep our own reference
             [contrastSlider setEnabled:[driver canSetContrast]];
             [brightnessSlider setEnabled:[driver canSetBrightness]];
@@ -697,6 +700,7 @@ extern NSString* SnapshotQualityPrefsKey;
             [whiteBalancePopup setEnabled:[driver canSetWhiteBalanceMode]];
             [horizontalFlipCheckbox setEnabled:[driver canSetHFlip]];
             [blackwhiteCheckbox setEnabled:[driver canBlackWhiteMode]];
+            [ledCheckbox setEnabled:[driver canSetLed]];
 
             [whiteBalancePopup selectItemAtIndex:[driver whiteBalanceMode]-1];
             [gainSlider setEnabled:([driver canSetGain])&&(![driver isAutoGain])];

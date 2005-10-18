@@ -18,7 +18,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCProBeigeDriver.m,v 1.5 2005/09/13 20:16:14 hxr Exp $
+ $Id: MyQCProBeigeDriver.m,v 1.6 2005/10/18 17:52:59 hxr Exp $
  */
 
 #import "MyQCProBeigeDriver.h"
@@ -46,7 +46,7 @@
 @end
 @implementation MyQCProBeigeDriver
 
-+ (unsigned short) cameraUsbProductID { return PRODUCT_QCPROBEIGE; }
++ (unsigned short) cameraUsbProductID { return PRODUCT_QUICKCAM_PRO_BEIGE; }
 + (unsigned short) cameraUsbVendorID { return VENDOR_LOGITECH; }
 + (NSString*) cameraName { return [MyCameraCentral localizedStringFor:@"QuickCam Pro (beige)"]; }
 

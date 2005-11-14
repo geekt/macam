@@ -16,7 +16,7 @@
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
- $Id: BayerConverter.h,v 1.6 2005/03/17 20:48:27 hxr Exp $
+ $Id: BayerConverter.h,v 1.7 2005/11/14 20:38:31 hxr Exp $
  */
 #import <Cocoa/Cocoa.h>
 #include "GlobalDefs.h"
@@ -28,6 +28,7 @@ sourceFormat specifies serialization type. Examples show first two lines of a 6-
 2 = GRBG Bayer, sent interleaved, correct matrix order.         GRGRGR BGBGBG (STV600-type)
 3 = GRBG Bayer, ?/green line, red/blue line			xGxGxG RBRBRB (QuickCam Pro subsampled-style)
 4 = BGGR Bayer, sent interleaved, correct matrix order.         BGBGBG GRGRGR (OV7630-style)
+5 = RGGB Bayer, sent interleaved, correct matrix order.         RGRGRG GBGBGB (rotated BGGR)
 */
 
 @interface BayerConverter : NSObject {

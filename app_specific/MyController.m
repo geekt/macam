@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.m,v 1.19 2005/11/14 21:03:09 hxr Exp $
+ $Id: MyController.m,v 1.20 2005/11/16 18:25:00 hxr Exp $
 */
 
 #import "MyController.h"
@@ -513,7 +513,7 @@ OSStatus PathToFSSpec (NSString *path, FSSpec *outSpec)
     
     Rect srcRect;
     GWorldPtr gw;
-    PixMapHandle pm;
+    PixMapHandle pm = NULL;
     long maxDataLength;
     
     // Setup GWorld / PixMap
@@ -630,7 +630,7 @@ OSStatus PathToFSSpec (NSString *path, FSSpec *outSpec)
     BOOL problem = NO;
     OSErr err = noErr;
     Track videoTrack;
-    Media videoTrackMedia;
+    Media videoTrackMedia = NULL;
     int index;
     
     if ([media count] < 1) 

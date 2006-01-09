@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySPCA500Driver.m,v 1.8 2005/08/16 21:25:34 hxr Exp $
+ $Id: MySPCA500Driver.m,v 1.9 2006/01/09 19:01:41 hxr Exp $
  */
 
 
@@ -120,7 +120,7 @@ extern UInt8 QTables[];
 	NSDictionary* dict7=[NSDictionary dictionaryWithObjectsAndKeys:
         [NSNumber numberWithUnsignedShort:PRODUCT_S_CAM_F5],@"idProduct",
         [NSNumber numberWithUnsignedShort:VENDOR_MINTON],@"idVendor",
-        @"Minton S-Cam F5 (experimental)",@"name",NULL];
+        @"Minton S-Cam F5 or D-Link DSC-350F",@"name",NULL];
 	
 	return [NSArray arrayWithObjects:dict1,dict2,dict3,dict4,dict5,dict6,dict7,NULL];
 }

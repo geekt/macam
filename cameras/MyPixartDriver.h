@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyPixartDriver.h,v 1.1 2006/01/09 18:55:49 hxr Exp $
+ $Id: MyPixartDriver.h,v 1.2 2006/01/11 20:57:36 hxr Exp $
  */
 
 #import <Cocoa/Cocoa.h>
@@ -64,6 +64,8 @@ struct code_table_t {
 
 	BayerConverter* bayerConverter;	// Our decoder for Bayer Matrix sensors
 }
+
++ (NSArray *) cameraUsbDescriptions;
 
 // private
 - (BOOL) startTransfer;

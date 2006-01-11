@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyOV511Driver.h,v 1.8 2003/02/24 13:05:09 mattik Exp $
+ $Id: MyOV511Driver.h,v 1.9 2006/01/11 21:00:40 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -49,9 +49,6 @@ Next: Camera constants and conversions. This information has partly been obtaine
 Doing these amounts of defines is often called bad style. We should find a better way.
 */
 
-#define VENDOR_OVT 0x05A9
-#define PRODUCT_OV511 0x511
-#define PRODUCT_OV511PLUS 0xA511
 
 //Conversions into the values of the camera
 
@@ -230,6 +227,7 @@ typedef struct OV511GrabContext {	//Everything the grabbing thread internals nee
     CameraError err;		//Collector f errors occurred during grab. [cleanupGrabContext] will leave this as it is
 } OV511GrabContext;
 
+
 @interface MyOV511Driver : MyCameraDriver {
     
 //Camera Type
@@ -252,9 +250,7 @@ typedef struct OV511GrabContext {	//Everything the grabbing thread internals nee
     BOOL grabbingThreadRunning;		//For active wait for finishing grabbing
 }
 
-+ (unsigned short) cameraUsbProductID;
-+ (unsigned short) cameraUsbVendorID;
-+ (NSString*) cameraName;
++ (NSArray *) cameraUsbDescriptions;
 
 //start/stop
 - (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId;
@@ -291,8 +287,35 @@ typedef struct OV511GrabContext {	//Everything the grabbing thread internals nee
 
 @end
 
+
 @interface MyOV511PlusDriver : MyOV511Driver 
-+ (unsigned short) cameraUsbProductID;
-+ (unsigned short) cameraUsbVendorID;
-+ (NSString*) cameraName;
+
++ (NSArray *) cameraUsbDescriptions;
+
 @end
+
+
+@interface OV518Driver : MyOV511Driver 
+
++ (NSArray *) cameraUsbDescriptions;
+
+@end
+
+
+@interface OV518PlusDriver : OV518Driver 
+
++ (NSArray *) cameraUsbDescriptions;
+
+@end
+
+
+@interface OV519Driver : OV518Driver 
+
++ (NSArray *) cameraUsbDescriptions;
+
+@end
+
+
+
+
+

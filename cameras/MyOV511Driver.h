@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyOV511Driver.h,v 1.9 2006/01/11 21:00:40 hxr Exp $
+ $Id: MyOV511Driver.h,v 1.10 2006/01/12 22:52:40 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -91,12 +91,13 @@ Doing these amounts of defines is often called bad style. We should find a bette
 #define OV511_REG_PIO		0x38
 #define OV511_REG_PDATA		0x39
 #define OV511_REG_ENTP		0x3E
-#define OV511_REG_I2C_CONTROL	0x40
+#define OV511_REG_I2C_CONTROL	0x40 // OV511(+) only
+#define OV518_REG_I2C_CONTROL	0x47 // OV518(+) only
 #define OV511_REG_SID		0x41
-#define OV511_REG_SWA		0x42
-#define OV511_REG_SMA		0x43
+#define OV511_REG_SWA		0x42 // OV51x
+#define OV511_REG_SMA		0x43 // OV51x
 #define OV511_REG_SRA		0x44
-#define OV511_REG_SDA		0x45
+#define OV511_REG_SDA		0x45 // OV51x
 #define OV511_REG_PSC		0x46
 #define OV511_REG_TMO		0x47
 #define OV511_REG_SPA		0x48
@@ -298,6 +299,12 @@ typedef struct OV511GrabContext {	//Everything the grabbing thread internals nee
 @interface OV518Driver : MyOV511Driver 
 
 + (NSArray *) cameraUsbDescriptions;
+
+// I2C
+- (int) i2cWrite:(UInt8) reg val:(UInt8) val;
+- (int) i2cRead:(UInt8) reg;
+- (int) i2cRead2;
+- (void) seti2cid;
 
 @end
 

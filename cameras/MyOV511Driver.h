@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyOV511Driver.h,v 1.10 2006/01/12 22:52:40 hxr Exp $
+ $Id: MyOV511Driver.h,v 1.11 2006/01/13 16:06:36 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -275,6 +275,12 @@ typedef struct OV511GrabContext {	//Everything the grabbing thread internals nee
 
 - (CameraError) decodingThread;				//Entry method for the chunk to image decoding thread
 
+
+
+// Register access
+- (int) regWrite:(UInt8) reg val:(UInt8) val;
+- (int) regRead:(UInt8) reg;
+
 //I2C
 - (int) i2cWrite:(UInt8) reg val:(UInt8) val;
 - (int) i2cRead:(UInt8) reg;
@@ -300,11 +306,14 @@ typedef struct OV511GrabContext {	//Everything the grabbing thread internals nee
 
 + (NSArray *) cameraUsbDescriptions;
 
+// Register access
+- (int) regWrite:(UInt8) reg val:(UInt8) val;
+- (int) regRead:(UInt8) reg;
+
 // I2C
 - (int) i2cWrite:(UInt8) reg val:(UInt8) val;
 - (int) i2cRead:(UInt8) reg;
 - (int) i2cRead2;
-- (void) seti2cid;
 
 @end
 
@@ -321,8 +330,3 @@ typedef struct OV511GrabContext {	//Everything the grabbing thread internals nee
 + (NSArray *) cameraUsbDescriptions;
 
 @end
-
-
-
-
-

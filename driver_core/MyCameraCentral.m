@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.30 2006/01/11 21:00:34 hxr Exp $
+ $Id: MyCameraCentral.m,v 1.31 2006/01/15 06:26:23 hxr Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -47,7 +47,9 @@
 #import "MySPCA500Driver.h"
 #import "MyQCOrbitDriver.h"
 #import "SQ905.h"
+#import "SQ930C.h"
 #import "MyPixartDriver.h"
+#import "PAC7311.h"
 #include "unistd.h"
     
 
@@ -211,7 +213,9 @@ MyCameraCentral* sharedCameraCentral=NULL;
     [self registerCameraDriver:[MyQCVCDriver class]];
     [self registerCameraDriver:[MyQCOrbitDriver class]];
     [self registerCameraDriver:[SQ905 class]];
+    [self registerCameraDriver:[SQ930C class]];
     [self registerCameraDriver:[MyPixartDriver class]];
+    [self registerCameraDriver:[PAC7311 class]];
     [self registerCameraDriver:[OV518Driver class]];
     [self registerCameraDriver:[OV518PlusDriver class]];
     [self registerCameraDriver:[OV519Driver class]];

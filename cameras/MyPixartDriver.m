@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyPixartDriver.m,v 1.2 2006/01/11 20:57:36 hxr Exp $
+ $Id: MyPixartDriver.m,v 1.3 2006/01/17 19:38:12 hxr Exp $
  */
 
 #import "MyPixartDriver.h"
@@ -139,7 +139,7 @@ static int pac_decompress_row(struct code_table_t *table, unsigned char *inp, un
     return [NSArray arrayWithObjects:
         
         [NSDictionary dictionaryWithObjectsAndKeys:
-            [NSNumber numberWithUnsignedShort:PRODUCT_CIF_SINGLE_CHIP], @"idProduct",
+            [NSNumber numberWithUnsignedShort:PRODUCT_PIXART_CIF_SINGLE_CHIP], @"idProduct",
             [NSNumber numberWithUnsignedShort:VENDOR_PIXART], @"idVendor",
             @"Pixart CIF Single Chip", @"name", NULL], 
         

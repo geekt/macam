@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyOV511Driver.h,v 1.11 2006/01/13 16:06:36 hxr Exp $
+ $Id: MyOV511Driver.h,v 1.12 2006/01/19 17:34:42 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -328,5 +328,14 @@ typedef struct OV511GrabContext {	//Everything the grabbing thread internals nee
 @interface OV519Driver : OV518Driver 
 
 + (NSArray *) cameraUsbDescriptions;
+
+@end
+
+
+@interface OV530Driver : OV519Driver 
+
++ (NSArray *) cameraUsbDescriptions;
+
+// add DSC stuff
 
 @end

@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyKiaraFamilyDriver.m,v 1.9 2005/08/17 06:36:11 hxr Exp $
+ $Id: MyKiaraFamilyDriver.m,v 1.10 2006/02/08 02:45:17 hxr Exp $
  */
 
 #import "MyKiaraFamilyDriver.h"
@@ -369,7 +369,12 @@ Here is a table of sniffed data. I have no idea what this means
         [NSNumber numberWithUnsignedShort:PRODUCT_QUICKCAM_ZOOM_NEW],@"idProduct",
         @"Logitech QuickCam Zoom (new)",@"name",NULL];
     
-    return [NSArray arrayWithObjects:dict1,dict2,dict3,dict4,dict5,dict6,dict7,dict8,dict9,NULL];
+    NSDictionary* dict10=[NSDictionary dictionaryWithObjectsAndKeys:
+        [NSNumber numberWithUnsignedShort:VENDOR_LOGITECH],@"idVendor",
+        [NSNumber numberWithUnsignedShort:PRODUCT_CISCO_VT_ADVANTAGE],@"idProduct",
+        @"Cisco VT Advantage",@"name",NULL];
+    
+    return [NSArray arrayWithObjects:dict1,dict2,dict3,dict4,dict5,dict6,dict7,dict8,dict9,dict10,NULL];
 }
 
 

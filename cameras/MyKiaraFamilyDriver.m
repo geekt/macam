@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyKiaraFamilyDriver.m,v 1.10 2006/02/08 02:45:17 hxr Exp $
+ $Id: MyKiaraFamilyDriver.m,v 1.11 2006/03/03 18:01:54 hxr Exp $
  */
 
 #import "MyKiaraFamilyDriver.h"
@@ -435,6 +435,7 @@ Here is a table of sniffed data. I have no idea what this means
     *b_16 = TO_LEDON(v);
     c =TO_LEDON(LEDon);
     if (*b_16 != c) {
+        *b_16 = CFSwapInt16BigToHost(*b_16); // Data format was developed in BigEndian format, whether correct or not, make sure it is swapped if necessary
         [self usbWriteCmdWithBRequest:GRP_SET_STATUS wValue:SEL_LED wIndex:INTF_CONTROL buf:b len:2];
     }
     [super setLed:v];

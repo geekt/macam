@@ -15,11 +15,12 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: yuv2rgb.c,v 1.2 2002/10/25 10:00:37 mattik Exp $
+ $Id: yuv2rgb.c,v 1.3 2006/03/03 15:33:21 hxr Exp $
 */
 
 #include "yuv2rgb.h"
 #include <stdio.h>
+#include <CoreFoundation/CFByteOrder.h>
 
 //Lazy preprocessor generation of blitter code. For documentation, see "yuv2rgbPhilips.c".
 

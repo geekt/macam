@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: QTComponent.r,v 1.1 2002/05/22 04:57:15 dirkx Exp $
+ $Id: QTComponent.r,v 1.2 2006/03/03 17:52:37 hxr Exp $
 */
 
 #define thng_RezTemplateVersion 1
@@ -98,6 +98,7 @@ resource 'thng' (258) {
     +componentAutoVersionIncludeFlags,
     0,
     {
+#if defined(__ppc__)
         componentHasMultiplePlatforms
         +cmpWantsRegisterMessage
         +componentDoAutoVersion
@@ -105,6 +106,17 @@ resource 'thng' (258) {
         'dlle',
         258,
         platformPowerPCNativeEntryPoint,
+#endif
+        
+#if defined(__i386__)
+        componentHasMultiplePlatforms
+        +cmpWantsRegisterMessage
+        +componentDoAutoVersion
+        +componentAutoVersionIncludeFlags,
+        'dlle',
+        258,
+        platformIA32NativeEntryPoint,
+#endif
     };
 };
     

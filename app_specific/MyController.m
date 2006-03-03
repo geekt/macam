@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.m,v 1.20 2005/11/16 18:25:00 hxr Exp $
+ $Id: MyController.m,v 1.21 2006/03/03 17:56:02 hxr Exp $
 */
 
 #import "MyController.h"
@@ -774,7 +774,7 @@ OSStatus PathToFSSpec (NSString *path, FSSpec *outSpec)
 {
     BOOL problem = NO;
     NSData * mediaData = NULL;
-    NSString * fileExtension;
+    NSString * fileExtension = NULL;
     NSString * clipType = NULL;
     
     // If the camera stores images in jpeg format, then this wil be used for the file;

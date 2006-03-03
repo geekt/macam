@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.m,v 1.14 2005/10/18 17:50:24 hxr Exp $
+ $Id: MyCameraDriver.m,v 1.15 2006/03/03 17:54:25 hxr Exp $
 */
 
 #import "MyCameraDriver.h"
@@ -700,9 +700,9 @@
     IOUSBDevRequest req;
     req.bmRequestType=bReqType;
     req.bRequest=bReq;
-    req.wValue=wVal;
-    req.wIndex=wIdx;
-    req.wLength=len;
+    req.wValue=wVal; // no need to swap, in host endianness
+    req.wIndex=wIdx; // no need to swap, in host endianness
+    req.wLength=len; // no need to swap, in host endianness
     req.pData=buf;
     if ((!isUSBOK)||(!intf)) return NO;
     err=(*intf)->ControlRequest(intf,0,&req);

@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyPixartDriver.m,v 1.3 2006/01/17 19:38:12 hxr Exp $
+ $Id: MyPixartDriver.m,v 1.4 2006/03/07 05:10:45 hxr Exp $
  */
 
 #import "MyPixartDriver.h"
@@ -93,7 +93,7 @@ static inline unsigned char getByte(unsigned char *inp, unsigned int bitpos)
 
 static inline unsigned short getShort(unsigned char *pt)
 {
-	return ((pt[0] << 8) | pt[1]);
+	return ((((unsigned short) pt[0]) << 8) | pt[1]);
 }
 
 #define CLIP(color) (unsigned char)(((color)>0xFF)?0xff:(((color)<0)?0:(color)))
@@ -125,6 +125,7 @@ static int pac_decompress_row(struct code_table_t *table, unsigned char *inp, un
 			*outp++ = CLIP(val);
 		}
 	}
+//	return 1 * ((bitpos + 7) / 8); // next whole byte
 	// return line length, rounded up to next 16-bit word
 	return 2 * ((bitpos + 15) / 16);
 }
@@ -738,31 +739,48 @@ static void transferComplete(void *refcon, IOReturn result, void *arg0)
 
 	unsigned short word;
 	int row;
+    int bad = 0;
 
 	inp += 16;		// skip header
 
 //	int cnt = 0;
 
 	// iterate over all rows
-	for(row=0; row<height; row++){
+	for (row = 0; row < height; row++)
+    {
 		word = getShort(inp);
-		switch (word){
+		switch (word)
+        {
 		case 0x0FF0:
+            bad = 0;
 #ifdef VERBOSE
 			NSLog(@"0x0FF0");
 #endif
 			memcpy(outp, inp + 2, width);
 			inp += (2 + width);
 			break;
+            
 		case 0x1EE1:
-//			cnt++;
+            bad = 0;
+#ifdef VERBOSE
+//			NSLog(@"0x1EE1");
+#endif
+            //			cnt++;
 			inp += pac_decompress_row(table, inp, outp, width);
 			break;
+            
 		default:
 #ifdef VERBOSE
-			NSLog(@"other EOL 0x%x", word);
+            if (bad == 0) 
+                NSLog(@"other EOL 0x%04x", word);
+            else 
+                NSLog(@"-- EOL 0x%04x", word);
 #endif
-			return YES;
+            bad++;
+            row--; // try again!
+            inp += 1;
+            if (bad > 1) 
+                return YES;
 		}
 		outp += width;
 	}

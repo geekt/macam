@@ -17,7 +17,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySPCA500Driver.h,v 1.6 2005/08/15 05:31:10 hxr Exp $
+ $Id: MySPCA500Driver.h,v 1.7 2006/03/07 05:12:04 hxr Exp $
  */
 
 #import <Cocoa/Cocoa.h>
@@ -67,6 +67,8 @@ typedef struct SPCA500GrabContext {
     ImageDescriptionHandle pccamImgDesc;		//Image Description for JFIF decompress (PC Cam video)
 
     NSMutableArray* storedFileInfo;
+    
+    BOOL horizontallyFlipped;
 }
 
 //Get info about the camera specifics

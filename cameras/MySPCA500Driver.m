@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySPCA500Driver.m,v 1.9 2006/01/09 19:01:41 hxr Exp $
+ $Id: MySPCA500Driver.m,v 1.10 2006/03/07 05:16:16 hxr Exp $
  */
 
 
@@ -141,6 +141,7 @@ extern UInt8 QTables[];
         [self setGain:0.5f];
         [self setCompression:0];
         [self setHFlip:NO];
+        horizontallyFlipped = YES;
         pccamImgDesc=(ImageDescriptionHandle)NewHandle(sizeof(ImageDescription));
         if (pccamImgDesc==NULL) err=CameraErrorNoMem;
     }
@@ -712,7 +713,8 @@ static bool StartNextIsochRead(SPCA500GrabContext* gCtx, int transferIdx) {
                         [self decode420Uncompressed:currBuffer.buffer];
                     }
                 }
-                if (!hFlip) [self flipImage:nextImageBuffer
+                BOOL flip = (hFlip) ? !horizontallyFlipped : horizontallyFlipped;
+                if (flip) [self flipImage:nextImageBuffer
                                       width:[self width]
                                      height:[self height]
                                         bpp:nextImageBufferBPP
@@ -1315,6 +1317,16 @@ static inline void decode420Block(SInt8* srcy,SInt8* srcu,SInt8* srcv,UInt8* dst
         @"AIPTEK Pocket DV",@"name",NULL];
 		
 	return [NSArray arrayWithObjects:dict1,NULL];
+}
+
+
+- (CameraError) startupWithUsbLocationId: (UInt32) usbLocationId 
+{
+    CameraError error = [super startupWithUsbLocationId:usbLocationId];
+    
+    horizontallyFlipped = NO;
+    
+    return error;
 }
 
 @end

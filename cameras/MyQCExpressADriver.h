@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCExpressADriver.h,v 1.7 2003/02/24 13:05:08 mattik Exp $
+ $Id: MyQCExpressADriver.h,v 1.8 2006/03/23 15:53:27 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -65,6 +65,12 @@ typedef struct STV600GrabContext {
     CameraError err;			//Return value for common errors during grab
     long framesSinceLastChunk;		//Number of frames since the last chunk was completed
 } STV600GrabContext;
+
+
+void DiscardFillingChunk(STV600GrabContext * gCtx);
+void GetFillingChunk(STV600GrabContext * gCtx);
+void FinishFillingChunk(STV600GrabContext * gCtx);
+
 
 @interface MyQCExpressADriver : MyCameraDriver {
 //The context for grabbingThread

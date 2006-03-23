@@ -1,6 +1,6 @@
 /*
  macam - webcam app and QuickTime driver component
- Copyright (C) 2002 Matthias Krauss (macam@matthias-krauss.de)
+ Copyright (C) 2005 Hidekazu UCHIDA.
 
  This program is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyPixartDriver.m,v 1.5 2006/03/22 17:23:36 hxr Exp $
+ $Id: MyPixartDriver.m,v 1.6 2006/03/23 16:06:14 hxr Exp $
  */
 
 #import "MyPixartDriver.h"

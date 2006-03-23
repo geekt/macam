@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.h,v 1.10 2005/10/18 17:50:24 hxr Exp $
+ $Id: MyCameraDriver.h,v 1.11 2006/03/23 16:03:28 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -37,6 +37,16 @@ typedef enum CameraEvent {
 typedef enum CameraFeature {
     CameraFeatureInspectorClassName	//A NSString containing the name of a MyCameraInspector subclass. Read-only.
 } CameraFeature;
+
+
+
+struct code_table_t 
+{
+	int is_abs;
+	int len;
+	int val;
+};
+
 
 
 @interface MyCameraDriver : NSObject {

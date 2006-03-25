@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.34 2006/03/23 20:19:55 hxr Exp $
+ $Id: MyCameraCentral.m,v 1.35 2006/03/25 15:30:05 hxr Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -38,6 +38,7 @@
 #import "MyQCExpressADriver.h"
 #import "MyQCExpressBDriver.h"
 #import "MyQCWebDriver.h"
+#import "QCMessengerDriver.h"
 #import "MyVicamDriver.h"
 #import "MySPCA504Driver.h"
 #import "MyOV511Driver.h"
@@ -203,6 +204,7 @@ MyCameraCentral* sharedCameraCentral=NULL;
     [self registerCameraDriver:[MyQCExpressADriver class]];
     [self registerCameraDriver:[MyQCExpressBDriver class]];
     [self registerCameraDriver:[MyQCWebDriver class]];
+    [self registerCameraDriver:[QCMessengerDriver class]];
     [self registerCameraDriver:[MyVicamDriver class]];
     [self registerCameraDriver:[MySPCA504Driver class]];
     [self registerCameraDriver:[MyOV511Driver class]];

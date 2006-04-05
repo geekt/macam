@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyPixartDriver.h,v 1.3 2006/03/23 16:06:14 hxr Exp $
+ $Id: MyPixartDriver.h,v 1.4 2006/04/05 21:05:42 hxr Exp $
  */
 
 #import <Cocoa/Cocoa.h>
@@ -46,7 +46,7 @@ struct code_table_t {
 	UInt8*			transferBuffer;	// This is the place the transfer goes to
 	UInt8*			tmpBuffer;
 
-	struct code_table_t codeTable[256];
+	struct code_table codeTable[256];
 
 //	Transfer* transfers;
 	short	fillingTransfer;

@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.h,v 1.11 2006/03/23 16:03:28 hxr Exp $
+ $Id: MyCameraDriver.h,v 1.12 2006/04/05 20:35:57 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -40,7 +40,7 @@ typedef enum CameraFeature {
 
 
 
-struct code_table_t 
+struct code_table
 {
 	int is_abs;
 	int len;
@@ -57,6 +57,7 @@ struct code_table_t
 //usb connection camera interfaces
     IOUSBDeviceInterface** dev;		//An interface to the device
     IOUSBInterfaceInterface** intf;     //An interface to the interface
+    int interfaceID;                    //Store the interface version so we know what functions are available
     
 //Camera settings. 
     float brightness;
@@ -300,6 +301,7 @@ Image buffers. There are two sets: lastIamgeBuffer and nextImageBuffer. The clie
     //Standard open dev, reset device, set config (if>=0), open intf 
 - (void) usbCloseConnection;				//Close and release intf and dev
 - (BOOL) usbGetSoon:(UInt64*)to;			//Get a bus frame number in the near future
+- (int) usbGetIsocFrameSize;                //Get the isoc frame size
 
 //Other tool functions - may also be used from outside
 - (BOOL) makeErrorImage:(CameraError) err;		//Draws and sends an error image. Returns if the image was actually sent

@@ -20,7 +20,29 @@
 #endif /* LINUX_VERSION_CODE >= KERNEL_VERSION(2,4,20) */
 #endif /* __KERNEL__ */
 
-//static const char SPCA50X_H_CVS_VERSION[]="$Id: spca5xx.h,v 1.1 2006/01/17 19:46:41 hxr Exp $";
+#if defined(MACAM)
+
+typedef unsigned char u8;
+typedef unsigned char __u8;
+typedef unsigned short __u16;
+
+typedef struct semaphore {} spinlock_t;
+        struct tasklet_struct {};
+typedef struct wait_queue_head_t {} wait_queue_head_t;	
+
+void udelay(int delay_time_probably_micro_seconds);
+
+enum 
+{
+    VIDEO_PALETTE_RGB565, 
+    VIDEO_PALETTE_RGB32, 
+    VIDEO_PALETTE_RGB24, 
+    VIDEO_PALETTE_YUV420P, 
+};
+
+#endif
+
+//static const char SPCA50X_H_CVS_VERSION[]="$Id: spca5xx.h,v 1.2 2006/04/05 23:42:35 hxr Exp $";
 
 #if 1
 //#if defined(__KERNEL__) || defined(MACAM)

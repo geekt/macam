@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySPCA504Driver.m,v 1.10 2005/08/15 05:19:28 hxr Exp $
+ $Id: MySPCA504Driver.m,v 1.11 2006/04/06 14:52:36 hxr Exp $
  */
 
 #import "MySPCA504Driver.h"
@@ -778,6 +778,7 @@ static bool StartNextIsochRead(SPCA504GrabContext* gCtx, int transferIdx) {
     CGrafPtr oldPort;
     GDHandle oldGDev;
     OSErr err;
+    // Fix deprecated calls, is all this really necessary??
     SetRect(&srcBounds,0,0,624,480);
     SetRect(&dstBounds,0,0,[self width],[self height]);
     jfifBuf[jfifLength++]=0xff;	//Add end tag
@@ -792,7 +793,7 @@ static bool StartNextIsochRead(SPCA504GrabContext* gCtx, int transferIdx) {
                              nextImageBuffer,
                              nextImageBufferRowBytes);
     if (err) return;
-    //*** FIXME: Not caching the GWorld is probably a performance killer...
+    //*** FIXME: Not caching the GWorld is probably a performance killer...TODO
     pm=GetGWorldPixMap(gw);
     LockPixels(pm);
     GetGWorld(&oldPort,&oldGDev);

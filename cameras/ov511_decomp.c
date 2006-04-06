@@ -1,6 +1,6 @@
 /* OV511 Decompression Support
  *
- * Copyright (c) 1999-2002 Mark W. McClelland. All rights reserved.
+ * Copyright (c) 1999-2002 Mark W. McClelland. GPL applies.
  * http://alpha.dyndns.org/ov511/
  *
  * Original decompression code Copyright 1998-2000 OmniVision Technologies
@@ -8,7 +8,7 @@
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
  * Free Software Foundation; version 2 of the License.
- * $Id: ov511_decomp.c,v 1.2 2005/05/20 14:58:37 hxr Exp $
+ * $Id: ov511_decomp.c,v 1.3 2006/04/06 14:55:29 hxr Exp $
  */
 
 #define __NO_VERSION__

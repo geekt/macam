@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.37 2006/04/06 15:43:45 hxr Exp $
+ $Id: MyCameraCentral.m,v 1.38 2006/04/14 05:43:31 hxr Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -57,6 +57,8 @@
 #import "PAC207Driver.h"
 #import "SPCA561ADriver.h"
 #import "SPCA508Driver.h"
+#import "TV8532Driver.h"
+#import "ZC030xDriver.h"
 #import "CTDC1100Driver.h"
 #import "KworldTV300UDriver.h"
 
@@ -231,16 +233,18 @@ MyCameraCentral* sharedCameraCentral=NULL;
     [self registerCameraDriver:[OV518Driver class]];
     [self registerCameraDriver:[OV518PlusDriver class]];
     [self registerCameraDriver:[OV519Driver class]];
-    [self registerCameraDriver:[PAC207Driver class]]; // Based on SPCA5XX - seems to work pretty well
-    [self registerCameraDriver:[SPCA561ADriver class]];
-//    [self registerCameraDriver:[SPCA508Driver class]];  // Need decompression for these...
+    [self registerCameraDriver:[PAC207Driver class]];     // Based on SPCA5XX - seems to work pretty well
+    [self registerCameraDriver:[SPCA561ADriver class]];   // Based on SPCA5XX - needs work
+    [self registerCameraDriver:[TV8532Driver class]];     // Based on SPCA5XX - testing!
+    [self registerCameraDriver:[ZC030xDriver class]];     // Based on SPCA5XX - testing!
+//    [self registerCameraDriver:[SPCA508Driver class]];  // Based on SPCA5XX - Need decompression for these...
 //    [self registerCameraDriver:[SPCA508CS110Driver class]];
 //    [self registerCameraDriver:[SPCA508SightcamDriver class]];
 //    [self registerCameraDriver:[SPCA508Sightcam2Driver class]];
 //    [self registerCameraDriver:[SPCA508CreativeVistaDriver class]];
     
-    [self registerCameraDriver:[CTDC1100Driver class]]; // This is incomplete st this time
-    [self registerCameraDriver:[KworldTV300UDriver class]]; // This is very incomplete st this time
+    [self registerCameraDriver:[CTDC1100Driver class]];      // This is incomplete st this time
+    [self registerCameraDriver:[KworldTV300UDriver class]];  // This is very incomplete at this time
     
 //    [self registerCameraDriver:[MyIntelPCCameraPro class]];
 //    [self registerCameraDriver:[MyIntelPCCamera class]];

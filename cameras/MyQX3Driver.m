@@ -17,7 +17,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQX3Driver.m,v 1.3 2005/08/15 05:34:53 hxr Exp $
+ $Id: MyQX3Driver.m,v 1.4 2006/05/17 14:31:26 hxr Exp $
  */
 
 #import "MyQX3Driver.h"
@@ -51,7 +51,7 @@ o Intel Play QX3 Microscope@2100000  <class IOUSBDevice>
   }
 */
 
-#define VENDOR_MATTEL (2067)
+#define VENDOR_MATTEL (2067)  // 0x0813
 #define PRODUCT_QX3_INTEL (1)
 
 @implementation MyQX3Driver

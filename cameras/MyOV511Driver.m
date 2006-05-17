@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyOV511Driver.m,v 1.20 2006/01/19 17:36:48 hxr Exp $
+ $Id: MyOV511Driver.m,v 1.21 2006/05/17 14:33:52 hxr Exp $
 */
 
 #include <IOKit/IOKitLib.h>
@@ -108,6 +108,8 @@ int Decompress420(unsigned char *pIn, unsigned char *pOut, unsigned char *pTmp, 
             [NSNumber numberWithUnsignedShort:PRODUCT_OV511], @"idProduct",
             [NSNumber numberWithUnsignedShort:VENDOR_OVT], @"idVendor",
             @"OV511-based camera", @"name", NULL], 
+        
+        // Intel Play Me2Cam 0813:0002
         
         NULL];
 }

@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.m,v 1.16 2006/04/05 20:37:59 hxr Exp $
+ $Id: MyCameraDriver.m,v 1.17 2006/05/20 04:54:56 hxr Exp $
 */
 
 #import "MyCameraDriver.h"
@@ -771,8 +771,8 @@
         if (err) ok=NO;
     }
 #ifdef LOG_USB_CALLS
-    if (ok) NSLog(@"alt interface switch to %i ok");
-    else NSLog(@"alt interface switch to %i failed");
+    if (ok) NSLog(@"alt interface switch to %i ok (pipe = %i)", alt, pipe);
+    else NSLog(@"alt interface switch to %i failed (pipe = %i)", alt, pipe);
 #endif
     return ok;
 }

@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.38 2006/04/14 05:43:31 hxr Exp $
+ $Id: MyCameraCentral.m,v 1.39 2006/05/20 04:56:14 hxr Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -61,6 +61,7 @@
 #import "ZC030xDriver.h"
 #import "CTDC1100Driver.h"
 #import "KworldTV300UDriver.h"
+#import "QuickCamVCDriver.h"
 
 #include "unistd.h"
 
@@ -223,7 +224,8 @@ MyCameraCentral* sharedCameraCentral=NULL;
 	[self registerCameraDriver:[MySwedaSSP09BDriver class]];
     [self registerCameraDriver:[MySE401Driver class]];
     [self registerCameraDriver:[MyQCProBeigeDriver class]];
-    [self registerCameraDriver:[MyQCVCDriver class]];
+//    [self registerCameraDriver:[MyQCVCDriver class]]; // Trying a different route
+    [self registerCameraDriver:[QuickCamVCDriver class]];
     [self registerCameraDriver:[MyQCOrbitDriver class]];
     [self registerCameraDriver:[SQ905 class]];
     [self registerCameraDriver:[SQ930C class]];

@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyPixartDriver.m,v 1.7 2006/04/05 21:05:42 hxr Exp $
+ $Id: MyPixartDriver.m,v 1.8 2006/05/24 17:55:02 hxr Exp $
  */
 
 #import "MyPixartDriver.h"
@@ -23,7 +23,7 @@
 #include "Resolvers.h"
 #include "MiscTools.h"
 #include "unistd.h"
-#include "JFIFHeaderTemplate.h"
+//#include "JFIFHeaderTemplate.h"
 
 #include "USB_VendorProductIDs.h"
 

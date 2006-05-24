@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.39 2006/05/20 04:56:14 hxr Exp $
+ $Id: MyCameraCentral.m,v 1.40 2006/05/24 17:58:26 hxr Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -62,6 +62,7 @@
 #import "CTDC1100Driver.h"
 #import "KworldTV300UDriver.h"
 #import "QuickCamVCDriver.h"
+#import "OV519Driver.h"
 
 #include "unistd.h"
 

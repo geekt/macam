@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.m,v 1.17 2006/05/20 04:54:56 hxr Exp $
+ $Id: MyCameraDriver.m,v 1.18 2006/05/26 20:20:07 hxr Exp $
 */
 
 #import "MyCameraDriver.h"
@@ -706,7 +706,7 @@
     req.pData=buf;
     if ((!isUSBOK)||(!intf)) return NO;
     err=(*intf)->ControlRequest(intf,0,&req);
-#ifdef LOG_USB_CALLS
+#if LOG_USB_CALLS
     NSLog(@"usb command reqType:%i req:%i val:%i idx:%i len:%i ret:%i",bReqType,bReq,wVal,wIdx,len,err);
     if (len>0) DumpMem(buf,len);
 #endif
@@ -770,7 +770,7 @@
         CheckError(err,"getPipeStatus");
         if (err) ok=NO;
     }
-#ifdef LOG_USB_CALLS
+#if LOG_USB_CALLS
     if (ok) NSLog(@"alt interface switch to %i ok (pipe = %i)", alt, pipe);
     else NSLog(@"alt interface switch to %i failed (pipe = %i)", alt, pipe);
 #endif

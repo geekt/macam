@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.41 2006/05/28 05:34:21 hxr Exp $
+ $Id: MyCameraCentral.m,v 1.42 2006/06/02 05:33:31 hxr Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -247,11 +247,12 @@ MyCameraCentral* sharedCameraCentral=NULL;
     [self registerCameraDriver:[SPCA561ADriver class]];   // Based on SPCA5XX - seems to work now
     [self registerCameraDriver:[TV8532Driver class]];     // Based on SPCA5XX - testing!
     [self registerCameraDriver:[ZC030xDriver class]];     // Based on SPCA5XX - testing!
-//    [self registerCameraDriver:[SPCA508Driver class]];  // Based on SPCA5XX - Need decompression for these...
-//    [self registerCameraDriver:[SPCA508CS110Driver class]];
-//    [self registerCameraDriver:[SPCA508SightcamDriver class]];
-//    [self registerCameraDriver:[SPCA508Sightcam2Driver class]];
-//    [self registerCameraDriver:[SPCA508CreativeVistaDriver class]];
+    
+    [self registerCameraDriver:[SPCA508Driver class]];  // Based on SPCA5XX - Works, but not too pretty
+    [self registerCameraDriver:[SPCA508CS110Driver class]];
+    [self registerCameraDriver:[SPCA508SightcamDriver class]];
+    [self registerCameraDriver:[SPCA508Sightcam2Driver class]];
+    [self registerCameraDriver:[SPCA508CreativeVistaDriver class]];
     
 #if EXPERIMENTAL
     [self registerCameraDriver:[CTDC1100Driver class]];      // This is incomplete st this time

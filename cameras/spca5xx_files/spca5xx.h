@@ -48,9 +48,15 @@ enum
     VIDEO_PALETTE_YUYV, 
 };
 
+#if DEBUG
+#define SPCA50X_ENABLE_DEBUG
+#define info(args...) printf(args); printf("\n");
+extern int debug;
 #endif
 
-//static const char SPCA50X_H_CVS_VERSION[]="$Id: spca5xx.h,v 1.4 2006/06/02 20:57:25 hxr Exp $";
+#endif // defined(MACAM)
+
+//static const char SPCA50X_H_CVS_VERSION[]="$Id: spca5xx.h,v 1.5 2006/06/08 21:38:07 hxr Exp $";
 
 #if defined(__KERNEL__) || defined(MACAM)
 

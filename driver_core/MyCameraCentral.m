@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.44 2006/06/09 14:21:51 hxr Exp $
+ $Id: MyCameraCentral.m,v 1.45 2006/06/10 05:00:29 hxr Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -64,6 +64,7 @@
 #import "QuickCamVCDriver.h"
 #import "OV519Driver.h"
 #import "SonixDriver.h"
+#import "SPCA501ADriver.h"
 
 #include "unistd.h"
 
@@ -249,7 +250,13 @@ MyCameraCentral* sharedCameraCentral=NULL;
     [self registerCameraDriver:[TV8532Driver class]];     // Based on SPCA5XX - testing!
     [self registerCameraDriver:[ZC030xDriver class]];     // Based on SPCA5XX - testing!
     
-    [self registerCameraDriver:[SPCA508Driver class]];  // Based on SPCA5XX - Works, but not too pretty
+    [self registerCameraDriver:[SPCA501ADriver class]];   // Based on SPCA5XX - testing
+    [self registerCameraDriver:[SPCA501ADriverVariant1 class]];
+    [self registerCameraDriver:[SPCA501ADriverVariant2 class]];
+    [self registerCameraDriver:[SPCA501ADriverVariant3 class]];
+    [self registerCameraDriver:[SPCA501ADriverVariant4 class]];
+    
+    [self registerCameraDriver:[SPCA508Driver class]];    // Based on SPCA5XX - Works, but not too pretty
     [self registerCameraDriver:[SPCA508CS110Driver class]];
     [self registerCameraDriver:[SPCA508SightcamDriver class]];
     [self registerCameraDriver:[SPCA508Sightcam2Driver class]];

@@ -50,13 +50,13 @@ enum
 
 #if DEBUG
 #define SPCA50X_ENABLE_DEBUG
-#define info(args...) printf(args); printf("\n");
+#define info(args...) { printf(args); printf("\n"); }
 extern int debug;
 #endif
 
 #endif // defined(MACAM)
 
-//static const char SPCA50X_H_CVS_VERSION[]="$Id: spca5xx.h,v 1.5 2006/06/08 21:38:07 hxr Exp $";
+//static const char SPCA50X_H_CVS_VERSION[]="$Id: spca5xx.h,v 1.6 2006/06/21 19:47:44 hxr Exp $";
 
 #if defined(__KERNEL__) || defined(MACAM)
 

@@ -16,7 +16,7 @@
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
- $Id: BayerConverter.h,v 1.7 2005/11/14 20:38:31 hxr Exp $
+ $Id: BayerConverter.h,v 1.8 2006/06/23 03:22:18 hxr Exp $
  */
 #import <Cocoa/Cocoa.h>
 #include "GlobalDefs.h"
@@ -30,6 +30,9 @@ sourceFormat specifies serialization type. Examples show first two lines of a 6-
 4 = BGGR Bayer, sent interleaved, correct matrix order.         BGBGBG GRGRGR (OV7630-style)
 5 = RGGB Bayer, sent interleaved, correct matrix order.         RGRGRG GBGBGB (rotated BGGR)
 */
+
+#define MAX_BAYER_TYPE 7
+
 
 @interface BayerConverter : NSObject {
     float contrast;
@@ -102,7 +105,28 @@ sourceFormat specifies serialization type. Examples show first two lines of a 6-
 			srcRowBytes:(long)srcRB dstRowBytes:(long)dstRB dstBPP:(short)dstBPP 
 				   flip:(BOOL)flip rotate180:(BOOL)rotate180;
 
+@end
 
 
+//
+//  CyYeGMgConverter - subclass instead of trying to change
+//
+//  Format 8 - CMYG??
+//
+//  Cy  Ye  Cy  Ye  Cy  Ye ...
+//  G   Mg  G   Mg  G   Mg ...
+//  Cy  Ye  Cy  Ye  Cy  Ye ...
+//  Mg  G   Mg  G   Mg  G  ... [notice how the Green alternates position
+//  Cy  Ye  Cy  Ye  Cy  Ye ...
+//  G   Mg  G   Mg  G   Mg ...
+//  Cy  Ye  Cy  Ye  Cy  Ye ...
+//  Mg  G   Mg  G   Mg  G  ...
+//  
+
+@interface CyYeGMgConverter : BayerConverter
+{
+}
+
+- (void) setSourceFormat:(short)fmt;
 
 @end

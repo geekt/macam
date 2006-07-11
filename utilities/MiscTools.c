@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MiscTools.c,v 1.2 2002/12/30 17:50:58 mattik Exp $
+ $Id: MiscTools.c,v 1.3 2006/07/11 19:30:33 hxr Exp $
  */
 
 #include "MiscTools.h"
@@ -153,3 +153,13 @@ short HeightOfResolution(CameraResolution r) {
     }
     return ret;
 }
+
+void SetQDRect(Rect  * rect, short left, short top, short right, short bottom)
+{
+    rect->left = left;
+    rect->top = top;
+    rect->right = right;
+    rect->bottom = bottom;
+}
+
+

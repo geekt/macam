@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.m,v 1.21 2006/03/03 17:56:02 hxr Exp $
+ $Id: MyController.m,v 1.22 2006/07/17 19:01:19 hxr Exp $
 */
 
 #import "MyController.h"
@@ -379,6 +379,20 @@ extern NSString* SnapshotQualityPrefsKey;
             [compressionSlider setEnabled:NO];
             [driver setImageBuffer:[imageRep bitmapData] bpp:3 rowBytes:[driver width]*3];
         }
+    }
+}
+
+
+- (IBAction) copy:(id) sender
+{
+    if (imageRep != NULL) 
+    {
+        NSData * clipData = [imageRep TIFFRepresentation];
+//      NSData * clipData = [imageRep TIFFRepresentationUsingCompression:NSTIFFCompressionLZW factor:0.0];
+        NSPasteboard * cb = [NSPasteboard generalPasteboard];
+        
+        [cb declareTypes:[NSArray arrayWithObjects:NSTIFFPboardType, nil] owner:nil];
+        [cb setData:clipData forType:NSTIFFPboardType];
     }
 }
 

@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.m,v 1.22 2006/07/17 19:01:19 hxr Exp $
+ $Id: MyController.m,v 1.23 2006/07/20 15:37:08 hxr Exp $
 */
 
 #import "MyController.h"
@@ -128,6 +128,15 @@ extern NSString* SnapshotQualityPrefsKey;
     [[NSApplication sharedApplication] terminate:self];
 }
 
+
+- (BOOL) windowShouldClose: (id) sender
+
+{
+    [self doQuit:self];
+    return YES;
+}
+
+
 - (void) startup {
     terminating=NO;
     imageGrabbed=NO;
@@ -136,6 +145,7 @@ extern NSString* SnapshotQualityPrefsKey;
     [self setupToolbar];
     [window setLevel:NSNormalWindowLevel];
     [window makeKeyAndOrderFront:self];
+    [window setDelegate:self]; // for the -windowShouldClose: message
     image=[[NSImage alloc] init];
     [image setCacheDepthMatchesImageDepth:YES];			//We have to set this to work with thousands of colors
     imageRep=[[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL	//Set up just to avoid a NIL imageRep

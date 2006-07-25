@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.47 2006/06/23 04:25:33 hxr Exp $
+ $Id: MyCameraCentral.m,v 1.48 2006/07/25 05:08:55 hxr Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -65,6 +65,7 @@
 #import "OV519Driver.h"
 #import "SonixDriver.h"
 #import "SPCA501ADriver.h"
+#import "SPCA525Driver.h"
 
 #include "unistd.h"
 
@@ -240,6 +241,7 @@ MyCameraCentral* sharedCameraCentral=NULL;
 //  [self registerCameraDriver:[MyPixartDriver class]]; // Deprecated in favor of PixartDriver - has problems
 //  [self registerCameraDriver:[PixartDriver class]];   // Disabled because working on SPCA5XX-based version instead
 #if EXPERIMENTAL
+    [self registerCameraDriver:[SPCA525Driver class]];
     [self registerCameraDriver:[PAC7311Driver class]];
 //  [self registerCameraDriver:[OV518Driver class]];
 //  [self registerCameraDriver:[OV518PlusDriver class]];
@@ -249,8 +251,9 @@ MyCameraCentral* sharedCameraCentral=NULL;
     [self registerCameraDriver:[SPCA561ADriver class]];   // Based on SPCA5XX - seems to work now
     [self registerCameraDriver:[TV8532Driver class]];     // Based on SPCA5XX - seems to work now
     [self registerCameraDriver:[TV8532RotatedDriver class]];
-    [self registerCameraDriver:[ZC030xDriver class]];     // Based on SPCA5XX - testing!
+    [self registerCameraDriver:[ZC030xDriver class]];     // Based on SPCA5XX - seems to work
     [self registerCameraDriver:[ZC030xDriverBGR class]];
+    [self registerCameraDriver:[ZC030xDriverInverted class]];
     
     [self registerCameraDriver:[SPCA501ADriver class]];   // Based on SPCA5XX - testing
     [self registerCameraDriver:[SPCA501ADriverVariant1 class]];

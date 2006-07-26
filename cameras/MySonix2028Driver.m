@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySonix2028Driver.m,v 1.22 2006/05/17 14:32:56 hxr Exp $
+ $Id: MySonix2028Driver.m,v 1.23 2006/07/26 04:21:09 hxr Exp $
 */
 
 /* Here's what I know (or guess) about the chipset so far:
@@ -177,6 +177,7 @@ typedef enum SonixSensorType {
     [super setGain:0.5f];
     [self setCompression:0];
 	writeSkipBytes = 12;
+    rotate = NO;
     return [super startupWithUsbLocationId:usbLocationId];
 }
 
@@ -710,7 +711,7 @@ static bool StartNextIsochRead(SONIXGrabContext* grabContext, int transferIdx) {
                        dstRowBytes:rb
                             dstBPP:bpp
                               flip:hFlip
-						 rotate180:NO];
+						 rotate180:rotate];
 }
 
 - (CameraError) decodingThread {
@@ -1332,6 +1333,7 @@ static bool StartNextIsochRead(SONIXGrabContext* grabContext, int transferIdx) {
 	[bayerConverter setSourceFormat:4];  //  This is in BGGR format!
 	
 	writeSkipBytes = 4;
+    rotate = YES;
 	
 	return CameraErrorOK;
 }
@@ -1512,7 +1514,33 @@ static bool StartNextIsochRead(SONIXGrabContext* grabContext, int transferIdx) {
                        dstRowBytes:rb
                             dstBPP:bpp
                               flip:hFlip
-						 rotate180:YES];
+						 rotate180:rotate];
+}
+
+@end
+
+
+@implementation MyFunCamDriver
+
++ (NSArray*) cameraUsbDescriptions 
+{
+    NSDictionary* dict1=[NSDictionary dictionaryWithObjectsAndKeys:
+        [NSNumber numberWithUnsignedShort:0x0471],@"idVendor",
+        [NSNumber numberWithUnsignedShort:0x0321],@"idProduct",
+        @"Philips Fun Camera (DMVC 300K)",@"name",NULL];
+    
+    return [NSArray arrayWithObjects:dict1,NULL];
+}
+
+- (CameraError) startupWithUsbLocationId:(UInt32) usbLocationId 
+{
+	CameraError err = [super startupWithUsbLocationId:usbLocationId];
+    if (err != CameraErrorOK) 
+		return err;
+	
+	rotate = NO;
+	
+	return CameraErrorOK;
 }
 
 @end

@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.48 2006/07/25 05:08:55 hxr Exp $
+ $Id: MyCameraCentral.m,v 1.49 2006/07/26 04:22:04 hxr Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -225,6 +225,7 @@ MyCameraCentral* sharedCameraCentral=NULL;
     [self registerCameraDriver:[MyOV511PlusDriver class]];
     [self registerCameraDriver:[MySonix2028Driver class]];
 	[self registerCameraDriver:[MyViviCam3350BDriver class]];
+	[self registerCameraDriver:[MyFunCamDriver class]];
 	[self registerCameraDriver:[MySwedaSSP09BDriver class]];
     [self registerCameraDriver:[MySE401Driver class]];
     [self registerCameraDriver:[MyQCProBeigeDriver class]];

@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: QTPanel.m,v 1.5 2006/06/23 03:15:24 hxr Exp $
+ $Id: QTPanel.m,v 1.6 2006/08/10 05:26:06 hxr Exp $
 */
 
 #include "QTPanel.h"
@@ -247,9 +247,9 @@ pascal ComponentResult sgpnGetDITL(sgpnGlobals storage, Handle* ditl) {
     UseResFile((**storage).resRef);
     if (!ditl) return qtParamErr;
     *ditl=Get1Resource('DITL',258);
+    if (!(*ditl)) return mFulErr;
     DetachResource(*ditl);
     UseResFile(saveRef);
-    if (!(*ditl)) return mFulErr;
     return 0;
 }
 

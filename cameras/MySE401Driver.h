@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySE401Driver.h,v 1.4 2003/02/24 13:05:09 mattik Exp $
+ $Id: MySE401Driver.h,v 1.5 2006/08/10 05:33:20 hxr Exp $
  */
 
 #import <Cocoa/Cocoa.h>
@@ -62,6 +62,8 @@
     BOOL streamIsCompressed;		//If the stream is JangGu-compressed or raw Bayer
     NSMutableData* jangGuBuffer;	//Buffer to hold the JangGu-decompressed data
     float lastMeanBrightness;		//Our average brightness (for JangGu - where no BayerConverter is used)
+
+    int cameraID;
 }
 
 #define SE401_NUM_CHUNKS 3
@@ -106,5 +108,23 @@
 - (void) grabbingThread:(id)data;
 - (CameraError) decodingThread;
 
+@end
+
+
+@interface SE402Driver : MySE401Driver 
+{
+}
+
++ (NSArray*) cameraUsbDescriptions;
 
 @end
+
+
+@interface EP800Driver : SE402Driver 
+{
+}
+
++ (NSArray*) cameraUsbDescriptions;
+
+@end
+

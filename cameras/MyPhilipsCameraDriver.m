@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyPhilipsCameraDriver.m,v 1.5 2003/07/27 04:55:56 tmolteno Exp $
+ $Id: MyPhilipsCameraDriver.m,v 1.6 2006/09/11 20:26:24 hxr Exp $
 */
 
 #include <IOKit/IOKitLib.h>
@@ -45,10 +45,30 @@
 + (unsigned short) cameraUsbVendorID { return VENDOR_PHILIPS; }
 + (NSString*) cameraName { return [MyCameraCentral localizedStringFor:@"abstract Philips generic camera"]; }
 
+
+- (id) initWithCentral: (id) c 
+{
+	self = [super initWithCentral:c];
+	if (self == NULL) 
+        return NULL;
+    
+    power_save = NO;
+    
+	return self;
+}
+
+
 - (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId {
     CameraError err=[self usbConnectToCam:usbLocationId configIdx:0];
 //setup connection to camera
      if (err!=CameraErrorOK) return err;
+// if camera uses power save, it needs to be activated
+     if (power_save) 
+     {
+         UInt8 buf[16];
+         buf[0] = 0x00;
+         [self usbWriteCmdWithBRequest:GRP_SET_STATUS wValue:SEL_POWER wIndex:INTF_CONTROL buf:buf len:1];
+     }
 //set internals
     camHFlip=NO;			//Some defaults that can be changed during startup
     chunkHeader=0;

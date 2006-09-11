@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyPhilipsCameraDriver.h,v 1.5 2005/05/20 16:29:53 hxr Exp $
+ $Id: MyPhilipsCameraDriver.h,v 1.6 2006/09/11 20:26:24 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -140,11 +140,15 @@ typedef struct PhilipsGrabContext {	//Everything the grabbing thread internals n
     short chunkHeader;			//chunk header size (commonly known as frame header size)
     short chunkFooter;			//chunk footer size (commonly known as frame footer size)
     BOOL grabbingThreadRunning;		//For active wait for finishing grabbing
+    
+    BOOL power_save;
 }
 
 + (unsigned short) cameraUsbProductID;
 + (unsigned short) cameraUsbVendorID;
 + (NSString*) cameraName;
+
+- (id) initWithCentral: (id) c;
 
 //start/stop
 - (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId;

@@ -15,14 +15,15 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyKiaraFamilyDriver.h,v 1.4 2003/07/27 04:55:56 tmolteno Exp $
+ $Id: MyKiaraFamilyDriver.h,v 1.5 2006/09/11 20:30:48 hxr Exp $
  */
 
-#import <Cocoa/Cocoa.h>
+
 #import "MyPhilipsCameraDriver.h"
 
-@interface MyKiaraFamilyDriver : MyPhilipsCameraDriver {
 
+@interface MyKiaraFamilyDriver : MyPhilipsCameraDriver 
+{
 }
 
 + (NSArray*) cameraUsbDescriptions;
@@ -34,6 +35,15 @@
 - (CameraResolution) defaultResolutionAndRate:(short*)fps;
 - (void) setLed:(BOOL)v;		// switch LED on/off
 
+@end
 
+
+@interface MyKiaraFamilyPowerSaveDriver : MyKiaraFamilyDriver 
+{
+}
+
++ (NSArray*) cameraUsbDescriptions;
+
+- (id) initWithCentral: (id) c;
 
 @end

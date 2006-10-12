@@ -15,14 +15,14 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySPCA504Driver.h,v 1.6 2003/02/24 13:01:42 mattik Exp $
+ $Id: MySPCA504Driver.h,v 1.7 2006/10/12 13:46:33 hxr Exp $
  */
 
 #import <Cocoa/Cocoa.h>
 #import "MyCameraDriver.h"
 #import "JFIFHeaderTemplate.h"
 
-#define SPCA504_NUM_TRANSFERS 10
+#define SPCA504_NUM_TRANSFERS 2
 #define SPCA504_FRAMES_PER_TRANSFER 50
 #define SPCA504_NUM_CHUNK_BUFFERS 5
 

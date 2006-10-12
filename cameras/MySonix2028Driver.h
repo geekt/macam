@@ -17,7 +17,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySonix2028Driver.h,v 1.13 2006/07/26 04:19:41 hxr Exp $
+ $Id: MySonix2028Driver.h,v 1.14 2006/10/12 13:45:45 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -26,7 +26,7 @@
 #include "GlobalDefs.h"
 
 #define SONIX_NUM_CHUNK_BUFFERS 5
-#define SONIX_NUM_TRANSFERS 10
+#define SONIX_NUM_TRANSFERS 2
 #define SONIX_FRAMES_PER_TRANSFER 50
 
 #define SONIX_AE_WANTED_BRIGHTNESS 5000

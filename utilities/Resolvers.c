@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: Resolvers.c,v 1.2 2002/10/24 18:19:19 mattik Exp $
+ $Id: Resolvers.c,v 1.3 2006/10/12 14:15:39 hxr Exp $
 */
 
 #include "Resolvers.h"
@@ -227,6 +227,14 @@ bool ResolveVDSelector(short sel, char* str) {
         case kVDGetInputNameSelect: sprintf(str,"kVDGetInputNameSelect"); break; //                      = 0x005C,
         case kVDSetDestinationPortSelect: sprintf(str,"kVDSetDestinationPortSelect"); break; //                = 0x005D,
 
+#if 1
+        case kVDGetDeviceNameAndFlagsSelect: sprintf(str,"kVDGetDeviceNameAndFlagsSelect"); break;             // = 0x005E,
+        case kVDCaptureStateChangingSelect: sprintf(str,"kVDCaptureStateChangingSelect"); break;               // = 0x005F,
+        case kVDGetUniqueIDsSelect: sprintf(str,"kVDGetUniqueIDsSelect"); break;                               // = 0x0060,
+        case kVDSelectUniqueIDsSelect: sprintf(str,"kVDSelectUniqueIDsSelect"); break;                         // = 0x0061,
+        case kVDCopyPreferredAudioDeviceSelect: sprintf(str,"kVDCopyPreferredAudioDeviceSelect"); break;       // = 0x0063,
+#endif
+        
         case kSGPanelGetDitlSelect: sprintf(str,"kSGPanelGetDitlSelect"); break; //                      = 0x0200,
         case kSGPanelGetTitleSelect: sprintf(str,"kSGPanelGetTitleSelect"); break; //                     = 0x0201,
         case kSGPanelCanRunSelect: sprintf(str,"kSGPanelCanRunSelect"); break; //                       = 0x0202,

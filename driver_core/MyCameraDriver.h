@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.h,v 1.13 2006/10/15 04:26:02 hxr Exp $
+ $Id: MyCameraDriver.h,v 1.14 2006/10/18 04:33:48 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -59,6 +59,10 @@ struct code_table
     IOUSBInterfaceInterface** intf;     //An interface to the interface
     int interfaceID;                    //Store the interface version so we know what functions are available
     
+    char * descriptor;
+    int altInterfacesAvailable;
+    int currentMaxPacketSize;
+    
 //Camera settings. 
     float brightness;
     float contrast;
@@ -76,7 +80,7 @@ struct code_table
     short fps;
     short compression;			//0 = uncompressed, higher means more compressed
 
-    //Driver states. Sorry, this has changed - the old version was too sensible to racing conditions. Everything except atomic read access has to be mutexed with stateLock (there is an exception: drivers may unset shouldBeGrabbing from within their internal grabbing and decoding since it's for sure that isGrabbing is set in that situation)
+    //Driver states. Sorry, this has changed - the old version was too sensitive to racing conditions. Everything except atomic read access has to be mutexed with stateLock (there is an exception: drivers may unset shouldBeGrabbing from within their internal grabbing and decoding since it's for sure that isGrabbing is set in that situation)
         
     BOOL isStarted;		//If the driver has been started up
     BOOL isGrabbing;		//If the driver is in grabbing state

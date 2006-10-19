@@ -39,6 +39,8 @@ void spin_unlock(spinlock_t * lock);
 void spin_lock_irqsave(spinlock_t * lock, long flags);
 void spin_unlock_irqrestore(spinlock_t * lock, long flags);
 
+// This is a kludge since code from other Linux drivers is also used in some places... Hopefully OK
+#if !defined(VIDEO_PALETTE_RGB565)
 enum 
 {
     VIDEO_PALETTE_RGB565, 
@@ -47,6 +49,7 @@ enum
     VIDEO_PALETTE_YUV420P, 
     VIDEO_PALETTE_YUYV, 
 };
+#endif
 
 #if DEBUG
 #define SPCA50X_ENABLE_DEBUG
@@ -56,7 +59,7 @@ extern int debug;
 
 #endif // defined(MACAM)
 
-//static const char SPCA50X_H_CVS_VERSION[]="$Id: spca5xx.h,v 1.6 2006/06/21 19:47:44 hxr Exp $";
+//static const char SPCA50X_H_CVS_VERSION[]="$Id: spca5xx.h,v 1.7 2006/10/19 22:33:00 hxr Exp $";
 
 #if defined(__KERNEL__) || defined(MACAM)
 

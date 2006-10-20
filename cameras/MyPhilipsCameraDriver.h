@@ -15,19 +15,15 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyPhilipsCameraDriver.h,v 1.6 2006/09/11 20:26:24 hxr Exp $
+ $Id: MyPhilipsCameraDriver.h,v 1.7 2006/10/20 04:51:31 hxr Exp $
 */
 
-#import <Cocoa/Cocoa.h>
 #import "MyCameraDriver.h"
-#include <Carbon/Carbon.h>
-#include <QuickTime/QuickTime.h>
-#include <IOKit/IOKitLib.h>
-#include <IOKit/IOCFPlugIn.h>
-#include <IOKit/usb/IOUSBLib.h>
 #include "GlobalDefs.h"
-/*
 
+#include "pwc_files/pwc.h"
+
+/*
  Maybe this is a good place to introduce the internal model:
 
  There are two additional threads: grabbingThread and decodingThread.
@@ -131,6 +127,10 @@ typedef struct PhilipsGrabContext {	//Everything the grabbing thread internals n
 //Camera Status
     short usbFrameBytes;
     short usbAltInterface;
+    
+// Use for decoding (code from pwc linux driver)
+	struct pwc_device * videoDevice;
+	struct pwc_frame_buf read_frame;
     
 //Video grabbing stuff
     PhilipsGrabContext grabContext;		//the grab context (everything the async usb read callbacks need)

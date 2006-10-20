@@ -15,11 +15,14 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyKiaraFamilyDriver.h,v 1.5 2006/09/11 20:30:48 hxr Exp $
+ $Id: MyKiaraFamilyDriver.h,v 1.6 2006/10/20 04:51:31 hxr Exp $
  */
 
 
 #import "MyPhilipsCameraDriver.h"
+
+
+#define WB_MODE_FORMATTER			0x1000
 
 
 @interface MyKiaraFamilyDriver : MyPhilipsCameraDriver 
@@ -28,12 +31,21 @@
 
 + (NSArray*) cameraUsbDescriptions;
 
+- (void) dealloc;
+
 - (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId;
 
 - (BOOL) supportsResolution:(CameraResolution)r fps:(short)fr;	//Returns if this combination is supported
 - (void) setResolution:(CameraResolution)r fps:(short)fr;	//Set a resolution and frame rate.
 - (CameraResolution) defaultResolutionAndRate:(short*)fps;
 - (void) setLed:(BOOL)v;		// switch LED on/off
+
+- (short) maxCompression;
+
+// White Balance
+- (BOOL) canSetWhiteBalanceMode;
+- (BOOL) canSetWhiteBalanceModeTo: (WhiteBalanceMode) newMode;
+- (void) setWhiteBalanceMode: (WhiteBalanceMode) newMode;
 
 @end
 

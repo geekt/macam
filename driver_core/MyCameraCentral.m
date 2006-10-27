@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.51 2006/10/19 22:29:37 hxr Exp $
+ $Id: MyCameraCentral.m,v 1.52 2006/10/27 01:54:35 hxr Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -209,6 +209,7 @@ MyCameraCentral* sharedCameraCentral=NULL;
     [self registerCameraDriver:[MySPCA500Driver class]];
     [self registerCameraDriver:[MyAiptekPocketDV class]];
     [self registerCameraDriver:[MyKiaraFamilyDriver class]];
+    [self registerCameraDriver:[MyKiaraFamilyPowerSaveDriver class]];
     [self registerCameraDriver:[MyKiaraFlippedDriver class]];
     [self registerCameraDriver:[MyTimonFamilyDriver class]];
     [self registerCameraDriver:[MyCPIACameraDriver class]];

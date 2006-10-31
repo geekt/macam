@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: QTVideoDigitizer.m,v 1.5 2006/10/15 04:43:05 hxr Exp $
+ $Id: QTVideoDigitizer.m,v 1.6 2006/10/31 06:20:21 hxr Exp $
 */
 
 #include "QTVideoDigitizer.h"
@@ -615,8 +615,9 @@ pascal VideoDigitizerError vdigGetDataRate(vdigGlobals storage, long* mspf, Fixe
 pascal VideoDigitizerError vdigGetInputName(vdigGlobals storage, long videoInput, Str255 name) {
     char cstr[256];
     if (!name) return qtParamErr;
-    [MyCameraCentral localizedCStrFor:"Camera" into:cstr];
-    CStr2PStr(cstr,name);
+    MyBridge * bridge = (**storage).bridge;
+    [bridge->central getName:cstr forID:bridge->cid];
+    CStr2PStr(cstr, name);
     return 0;
 }
 
@@ -732,28 +733,32 @@ pascal VideoDigitizerError vdigSelectUniqueIDs(vdigGlobals storage, UInt64 * dev
 	unsigned long * p, * t = (unsigned long *) &temp;
 	
 	*(t+0) = MACAM_ARBITRARY_VALUE;
-	*(t+1) = [(**storage).bridge cid]; // usbDeviceRef (long)
+	*(t+1) = [(**storage).bridge cid];  // usbDeviceRef (long)
     
     p = (unsigned long *) deviceID;
     
+    if (p != NULL) 
+    {
 #if LOG_QT_CALLS
     printf("vdigSelectUniqueIDs: device ID: argument = %8lX %8lX   actual = %8lX %8lX\n", *(p+0), *(p+1), *(t+0), *(t+1));
 #endif
-
-    if (p[0] != t[0] || p[1] != t[1]) 
-        return vdDontHaveThatUniqueIDErr;
-
+        if (p[0] != t[0] || p[1] != t[1]) 
+            return vdDontHaveThatUniqueIDErr;
+    }
+    
 	*(t+0) = 0;
 	*(t+1) = 0;
 
     p = (unsigned long *) inputID;
 
-    if (p[0] != t[0] || p[1] != t[1]) 
-        return vdDontHaveThatUniqueIDErr;
-    
+    if (p != NULL) 
+    {
 #if LOG_QT_CALLS
-    printf("vdigSelectUniqueIDs: input ID: argument = %8lX %8lX   actual = %8lX %8lX\n", *(p+0), *(p+1), *(t+0), *(t+1));
+        printf("vdigSelectUniqueIDs: input ID: argument = %8lX %8lX   actual = %8lX %8lX\n", *(p+0), *(p+1), *(t+0), *(t+1));
 #endif
+        if (p[0] != t[0] || p[1] != t[1]) 
+            return vdDontHaveThatUniqueIDErr;
+    }
     
 	return noErr;
 }

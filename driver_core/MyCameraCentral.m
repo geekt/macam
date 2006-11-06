@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.53 2006/11/06 16:39:25 hxr Exp $
+ $Id: MyCameraCentral.m,v 1.54 2006/11/06 21:57:59 hxr Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -288,6 +288,7 @@ MyCameraCentral* sharedCameraCentral=NULL;
     [self registerCameraDriver:[SN9CxxxDriverVariant5 class]];
     [self registerCameraDriver:[SN9CxxxDriverVariant6 class]];
     [self registerCameraDriver:[SN9CxxxDriverVariant7 class]];
+    [self registerCameraDriver:[SN9CxxxDriverVariant8 class]];
     
 #if EXPERIMENTAL
     [self registerCameraDriver:[CTDC1100Driver class]];      // This is incomplete st this time

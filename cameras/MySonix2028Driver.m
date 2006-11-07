@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySonix2028Driver.m,v 1.23 2006/07/26 04:21:09 hxr Exp $
+ $Id: MySonix2028Driver.m,v 1.24 2006/11/07 16:04:14 hxr Exp $
 */
 
 /* Here's what I know (or guess) about the chipset so far:
@@ -1316,7 +1316,12 @@ static bool StartNextIsochRead(SONIXGrabContext* grabContext, int transferIdx) {
         [NSNumber numberWithUnsignedShort:PRODUCT_VIVICAM3350B],@"idProduct",
         @"Vivitar ViviCam 3350B",@"name",NULL];
     
-    return [NSArray arrayWithObjects:dict1,NULL];
+    NSDictionary* dict2=[NSDictionary dictionaryWithObjectsAndKeys:
+        [NSNumber numberWithUnsignedShort:VENDOR_SONIX],@"idVendor",
+        [NSNumber numberWithUnsignedShort:0x8001],@"idProduct",
+        @"Digital Spy Camera",@"name",NULL];
+    
+    return [NSArray arrayWithObjects:dict1,dict2,NULL];
 }
 
 //  Class methods needed

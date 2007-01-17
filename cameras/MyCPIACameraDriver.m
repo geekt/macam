@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCPIACameraDriver.m,v 1.4 2003/02/24 13:05:08 mattik Exp $
+ $Id: MyCPIACameraDriver.m,v 1.5 2007/01/17 23:56:16 hxr Exp $
 */
 
 #include <IOKit/IOKitLib.h>
@@ -367,7 +367,7 @@ Third is the SkipFrames count in intStreamCap to send only the n-th image, so we
     grabContext.numFullBuffers=0;
     grabContext.fillingChunk=false;
     grabContext.finishedTransfers=0;
-    grabContext.intf=intf;
+    grabContext.intf=streamIntf;
     grabContext.shouldBeGrabbing=&shouldBeGrabbing;
     grabContext.err=CameraErrorOK;
     grabContext.framesSinceLastChunk=0;
@@ -622,7 +622,7 @@ static bool StartNextIsochRead(CPIAGrabContext* grabContext, int transferIdx) {
     }
 
     if (ok) {
-        err = (*intf)->CreateInterfaceAsyncEventSource(intf, &cfSource);	//Create an event source
+        err = (*streamIntf)->CreateInterfaceAsyncEventSource(streamIntf, &cfSource);	//Create an event source
         CheckError(err,"CreateInterfaceAsyncEventSource");
         CFRunLoopAddSource(CFRunLoopGetCurrent(), cfSource, kCFRunLoopDefaultMode);	//Add it to our run loop
         for (i=0;(i<CPIA_NUM_TRANSFERS)&&ok;i++) {	//Initiate transfers

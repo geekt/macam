@@ -17,7 +17,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySE401Driver.m,v 1.11 2006/09/11 18:32:41 hxr Exp $
+ $Id: MySE401Driver.m,v 1.12 2007/01/19 05:12:57 hxr Exp $
  */
 
 #import "MySE401Driver.h"
@@ -464,7 +464,7 @@ static void handleFullChunk(void *refcon, IOReturn result, void *arg0) {
     }
 //start the bulk read
     if (shouldBeGrabbing) {
-        err=((IOUSBInterfaceInterface182*)(*intf))->ReadPipeAsyncTO(intf,1,
+        err=((IOUSBInterfaceInterface182*)(*streamIntf))->ReadPipeAsyncTO(streamIntf,1,
                                      [fillingChunk mutableBytes],
                                      grabBufferSize,1000,2000,
                                      (IOAsyncCallback1)(handleFullChunk),self);	//Read one chunk
@@ -486,7 +486,7 @@ static void handleFullChunk(void *refcon, IOReturn result, void *arg0) {
 
 //Run the grabbing loob
     if (shouldBeGrabbing) {
-        err = (*intf)->CreateInterfaceAsyncEventSource(intf, &cfSource);	//Create an event source
+        err = (*streamIntf)->CreateInterfaceAsyncEventSource(streamIntf, &cfSource);	//Create an event source
         CheckError(err,"CreateInterfaceAsyncEventSource");
         if (err) {
             if (!grabbingError) grabbingError=CameraErrorNoMem;

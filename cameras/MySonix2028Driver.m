@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySonix2028Driver.m,v 1.24 2006/11/07 16:04:14 hxr Exp $
+ $Id: MySonix2028Driver.m,v 1.25 2007/01/19 05:11:55 hxr Exp $
 */
 
 /* Here's what I know (or guess) about the chipset so far:
@@ -322,7 +322,7 @@ typedef enum SonixSensorType {
     grabContext.numFullBuffers=0;
     grabContext.fillingChunk=false;
     grabContext.finishedTransfers=0;
-    grabContext.intf=intf;
+    grabContext.intf=streamIntf;
     grabContext.shouldBeGrabbing=&shouldBeGrabbing;
     grabContext.err=CameraErrorOK;
     grabContext.framesSinceLastChunk=0;
@@ -610,7 +610,7 @@ static bool StartNextIsochRead(SONIXGrabContext* grabContext, int transferIdx) {
     }
 
     if (ok) {
-        err = (*intf)->CreateInterfaceAsyncEventSource(intf, &cfSource);	//Create an event source
+        err = (*streamIntf)->CreateInterfaceAsyncEventSource(streamIntf, &cfSource);	//Create an event source
         CheckError(err,"CreateInterfaceAsyncEventSource");
         CFRunLoopAddSource(CFRunLoopGetCurrent(), cfSource, kCFRunLoopDefaultMode);	//Add it to our run loop
         for (i=0;(i<SONIX_NUM_TRANSFERS)&&ok;i++) {	//Initiate transfers
@@ -1011,7 +1011,7 @@ static bool StartNextIsochRead(SONIXGrabContext* grabContext, int transferIdx) {
         //Read raw image data
         rawLength=((rawLength+63)/64)*64;	//Round up to n*64
         readLength=rawLength;
-        ioErr=(*intf)->ReadPipe(intf,2, [rawBuffer mutableBytes]+writeSkipBytes, &readLength);	//Read image data
+        ioErr=(*streamIntf)->ReadPipe(streamIntf,2, [rawBuffer mutableBytes]+writeSkipBytes, &readLength);	//Read image data
         CheckError(ioErr,"getStoredMediaObject-ReadBulkPipe");
         if (rawLength!=readLength) {
             NSLog(@"getStoredMediaObject: problem: wanted %i bytes, got %i, trying to continue...",rawLength,readLength);

@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCExpressBDriver.m,v 1.5 2003/02/24 13:05:09 mattik Exp $
+ $Id: MyQCExpressBDriver.m,v 1.6 2007/01/19 05:16:51 hxr Exp $
 */
 
 #import "MyQCExpressBDriver.h"
@@ -62,7 +62,7 @@
 
 - (void) shutdown {
     buttonThreadShouldBeRunning=NO;
-    if ((intf)&&(isUSBOK)) (*intf)->AbortPipe(intf,2);
+    if ((streamIntf)&&(isUSBOK)) (*streamIntf)->AbortPipe(streamIntf,2);
     while (buttonThreadRunning) { usleep(10000); }
     if (buttonToMainThreadConnection) [buttonToMainThreadConnection release];
     if (mainToButtonThreadConnection) [mainToButtonThreadConnection release];
@@ -81,7 +81,7 @@
     }
     while ((buttonThreadShouldBeRunning)&&(isUSBOK)) {
         length=1;
-        (*intf)->ReadPipe(intf,2,&camData,&length);
+        (*streamIntf)->ReadPipe(streamIntf,2,&camData,&length);
         if (length==1) {
             switch (camData) {
                 case 16:	//Button down

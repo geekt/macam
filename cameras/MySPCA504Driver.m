@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySPCA504Driver.m,v 1.12 2006/07/16 06:05:32 hxr Exp $
+ $Id: MySPCA504Driver.m,v 1.13 2007/01/19 05:04:57 hxr Exp $
  */
 
 #import "MySPCA504Driver.h"
@@ -452,7 +452,7 @@ extern UInt8 ZigZagLookup[];
     //Setup simple things    
     grabContext.bytesPerFrame=1023;
     grabContext.finishedTransfers=0;
-    grabContext.intf=intf;
+    grabContext.intf=streamIntf;
     grabContext.initiatedUntil=0;	//Will be set later (directly before start)
     grabContext.shouldBeGrabbing=&shouldBeGrabbing;
     grabContext.err=CameraErrorOK;
@@ -735,7 +735,7 @@ static bool StartNextIsochRead(SPCA504GrabContext* gCtx, int transferIdx) {
     }
 
     if (ok) {
-        err = (*intf)->CreateInterfaceAsyncEventSource(intf, &cfSource);	//Create an event source
+        err = (*streamIntf)->CreateInterfaceAsyncEventSource(streamIntf, &cfSource);	//Create an event source
         CheckError(err,"CreateInterfaceAsyncEventSource");
         CFRunLoopAddSource(CFRunLoopGetCurrent(), cfSource, kCFRunLoopDefaultMode);	//Add it to our run loop
     

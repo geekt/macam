@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCExpressADriver.m,v 1.12 2005/03/17 20:47:46 hxr Exp $
+ $Id: MyQCExpressADriver.m,v 1.13 2007/01/19 05:31:10 hxr Exp $
 */
 
 #include <IOKit/IOKitLib.h>
@@ -209,7 +209,7 @@
     grabContext.numFullBuffers=0;
     grabContext.fillingChunk=false;
     grabContext.finishedTransfers=0;
-    grabContext.intf=intf;
+    grabContext.intf=streamIntf;
     grabContext.shouldBeGrabbing=&shouldBeGrabbing;
     grabContext.err=CameraErrorOK;
     grabContext.framesSinceLastChunk=0;
@@ -248,7 +248,7 @@
     }
     //Get usb timing info
     if (ok) {
-        err=(*intf)->GetBusFrameNumber(intf, &(grabContext.initiatedUntil), &at);
+        err=(*streamIntf)->GetBusFrameNumber(streamIntf, &(grabContext.initiatedUntil), &at);
         CheckError(err,"GetBusFrameNumber");
         if (err) ok=NO;
         grabContext.initiatedUntil+=50;	//give it a little time to start
@@ -551,7 +551,7 @@ static bool StartNextIsochRead(STV600GrabContext* grabContext, int transferIdx) 
     }
 
     if (ok) {
-        err = (*intf)->CreateInterfaceAsyncEventSource(intf, &cfSource);	//Create an event source
+        err = (*streamIntf)->CreateInterfaceAsyncEventSource(streamIntf, &cfSource);	//Create an event source
         CheckError(err,"CreateInterfaceAsyncEventSource");
         CFRunLoopAddSource(CFRunLoopGetCurrent(), cfSource, kCFRunLoopDefaultMode);	//Add it to our run loop
         for (i=0;(i<STV600_NUM_TRANSFERS)&&ok;i++) {	//Initiate transfers
@@ -758,8 +758,8 @@ static bool StartNextIsochRead(STV600GrabContext* grabContext, int transferIdx) 
     if (ok) ok=[sensor resetSensor];
 
     if (ok) {
-        if (intf&&isUSBOK) {
-            err=(*intf)->GetPipeProperties(intf,1,&direction,&number,&transferType,&maxPacketSize,&interval);
+        if (streamIntf&&isUSBOK) {
+            err=(*streamIntf)->GetPipeProperties(streamIntf,1,&direction,&number,&transferType,&maxPacketSize,&interval);
             if (err) ok=NO;
         } else ok=NO;
     }

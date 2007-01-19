@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyPixartDriver.m,v 1.8 2006/05/24 17:55:02 hxr Exp $
+ $Id: MyPixartDriver.m,v 1.9 2007/01/19 05:32:26 hxr Exp $
  */
 
 #import "MyPixartDriver.h"
@@ -661,8 +661,8 @@ static void transferComplete(void *refcon, IOReturn result, void *arg0)
 
 - (BOOL) startTransfer
 {
-	IOReturn result = (*intf)->ReadIsochPipeAsync(
-		intf,										// self			Pointer to the IOUSBInterfaceInterface
+	IOReturn result = (*streamIntf)->ReadIsochPipeAsync(
+		streamIntf,									// self			Pointer to the IOUSBInterfaceInterface
 		5,											// pipeRef		Index for the desired pipe (1 - GetNumEndpoints)
 		transferBuffer,								// buf			Buffer to hold the data
 	//	transfers[fillingTransfer].buffer,			// buf			Buffer to hold the data
@@ -708,7 +708,7 @@ static void transferComplete(void *refcon, IOReturn result, void *arg0)
 
 	// Run the grabbing loop
     if(shouldBeGrabbing){
-        err = (*intf)->CreateInterfaceAsyncEventSource(intf, &cfSource);	// Create an event source
+        err = (*streamIntf)->CreateInterfaceAsyncEventSource(streamIntf, &cfSource);	// Create an event source
         CheckError(err, "CreateInterfaceAsyncEventSource");
         if(err){
             if(!grabbingError) grabbingError = CameraErrorNoMem;

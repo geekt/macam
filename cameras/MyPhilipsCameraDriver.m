@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyPhilipsCameraDriver.m,v 1.7 2006/10/20 04:51:31 hxr Exp $
+ $Id: MyPhilipsCameraDriver.m,v 1.8 2007/01/19 05:33:29 hxr Exp $
 */
 
 #import "MyPhilipsCameraDriver.h"
@@ -224,7 +224,7 @@
     grabContext.bytesInChunkSoFar=0;
     grabContext.maxCompleteChunks=3;
     grabContext.currCompleteChunks=0;
-    grabContext.intf=intf;
+    grabContext.intf=streamIntf;
     grabContext.shouldBeGrabbing=&shouldBeGrabbing;
     grabContext.err=CameraErrorOK;
 //preliminary set more complicated parameters to NULL, so there are no stale pointers if setup fails
@@ -280,7 +280,7 @@
     }
 //Get usb timing info
     if (ok) {
-        err=(*intf)->GetBusFrameNumber(intf, &(grabContext.initiatedUntil), &at);
+        err=(*streamIntf)->GetBusFrameNumber(streamIntf, &(grabContext.initiatedUntil), &at);
         CheckError(err,"GetBusFrameNumber");
         if (err) ok=NO;
         grabContext.initiatedUntil+=50;	//give it a little time to start
@@ -459,7 +459,7 @@ static bool StartNextIsochRead(PhilipsGrabContext* grabContext, int transferIdx)
 
     if (!isUSBOK) { grabContext.err=CameraErrorNoCam; ok=NO; }
 
-    err = (*intf)->CreateInterfaceAsyncEventSource(intf, &cfSource);	//Create an event source
+    err = (*streamIntf)->CreateInterfaceAsyncEventSource(streamIntf, &cfSource);	//Create an event source
     CheckError(err,"CreateInterfaceAsyncEventSource");
     CFRunLoopAddSource(CFRunLoopGetCurrent(), cfSource, kCFRunLoopDefaultMode);	//Add it to our run loop
     

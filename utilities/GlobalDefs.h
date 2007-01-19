@@ -16,7 +16,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  
-    $Id: GlobalDefs.h,v 1.9 2007/01/17 05:04:10 hxr Exp $
+    $Id: GlobalDefs.h,v 1.10 2007/01/19 21:48:12 hxr Exp $
 */
 
 /*
@@ -63,6 +63,7 @@ typedef enum CameraError
     CameraErrorUnimplemented = 8,	// A feature that is not (yet) implemented
     CameraErrorInternal		 = 9,	// Some other, probably serious, error
     CameraErrorDecoding		 = 10,	// An error related to the decoding of image data
+    CameraErrorUSBNeedsUSB2  = 11,  // This camera *needs* USB2
 } CameraError;
 
 typedef enum ColorMode 

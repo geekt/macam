@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyKiaraFamilyDriver.m,v 1.14 2006/10/20 04:51:31 hxr Exp $
+ $Id: MyKiaraFamilyDriver.m,v 1.15 2007/01/19 05:36:15 hxr Exp $
  */
 
 #import "MyKiaraFamilyDriver.h"
@@ -423,6 +423,8 @@ Here is a table of sniffed data. I have no idea what this means
             res=PSZ_VGA;
             break;
         case ResolutionSVGA: 	//svga  = 800 x 600
+        case ResolutionXGA:
+        case ResolutionUXGA:
             break;
         case ResolutionInvalid:
             break;
@@ -574,7 +576,7 @@ Here is a table of sniffed data. I have no idea what this means
 */        
         UInt16 id;
 //      long err=
-            (*intf)->GetDeviceProduct(intf, &id);
+            (*streamIntf)->GetDeviceProduct(streamIntf, &id);
         
         // [self usbWriteCmdWithBRequest:GRP_SET_STREAM wValue:SEL_FORMAT wIndex:INTF_VIDEO buf:Kiara_table[res][frameRate][i].mode len:12];
         usbFrameBytes=Kiara_table[res][frameRate][i].packetsize;

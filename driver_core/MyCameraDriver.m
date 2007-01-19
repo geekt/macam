@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.m,v 1.22 2007/01/19 05:45:20 hxr Exp $
+ $Id: MyCameraDriver.m,v 1.23 2007/01/19 22:02:08 hxr Exp $
 */
 
 #import "MyCameraDriver.h"
@@ -1309,6 +1309,26 @@
                 dev=NULL;
                 return CameraErrorNoPower;
             }
+            if (err == kIOReturnNoResources)  // USB2 camera on USB1-only bus
+            {
+                IOUSBDevRequest req;
+                req.bmRequestType = 0x40;
+                req.bRequest = 0x52;
+                req.wValue = 0x0101;
+                req.wIndex = 1;  // Flip to the other speed
+                req.wLength = 0;
+                req.pData = NULL;
+                err = (*dev)->DeviceRequest(dev, &req);
+                CheckError(err,"usbConnectToCam-DeviceRequest");
+                
+                (*dev)->Release(dev);
+                dev = NULL;
+                
+                if (err) 
+                    return CameraErrorUSBNeedsUSB2;
+                else 
+                    return CameraErrorUSBProblem;
+            }
         } while((err)&&((--retries)>0));
         if (err) {					//error opening interface?
             err = (*dev)->Release(dev);
@@ -1317,7 +1337,9 @@
             return CameraErrorUSBProblem;
         }
     }
-
+//    kIOReturnNoResources
+//  GetFullConfigurationDescriptor
+    
     interfaceRequest.bInterfaceClass = kIOUSBFindInterfaceDontCare;		// requested class
     interfaceRequest.bInterfaceSubClass = kIOUSBFindInterfaceDontCare;		// requested subclass
     interfaceRequest.bInterfaceProtocol = kIOUSBFindInterfaceDontCare;		// requested protocol

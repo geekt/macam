@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.h,v 1.6 2005/06/03 04:49:10 hxr Exp $
+ $Id: MyController.h,v 1.7 2007/01/24 21:18:20 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -35,6 +35,7 @@
     IBOutlet NSSlider* gammaSlider;
     IBOutlet NSSlider* sharpnessSlider;
     IBOutlet NSSlider* saturationSlider;
+    IBOutlet NSSlider* hueSlider;
     IBOutlet NSButton* manGainCheckbox;
     IBOutlet NSSlider* gainSlider;
     IBOutlet NSSlider* shutterSlider;
@@ -46,6 +47,7 @@
     IBOutlet NSPopUpButton* colorModePopup;
     IBOutlet NSPopUpButton* sizePopup;
     IBOutlet NSPopUpButton* fpsPopup;
+    IBOutlet NSPopUpButton* flickerPopup;
     IBOutlet MyCameraCentral* central;
     IBOutlet NSWindow* disclaimerWindow;
     IBOutlet NSDrawer* settingsDrawer;
@@ -84,10 +86,12 @@
 - (IBAction)gammaChanged:(id)sender;
 - (IBAction)sharpnessChanged:(id)sender;
 - (IBAction)saturationChanged:(id)sender;
+- (IBAction)hueChanged:(id)sender;
 - (IBAction)manGainChanged:(id)sender;
 - (IBAction)gainChanged:(id)sender;
 - (IBAction)shutterChanged:(id)sender;
 - (IBAction)formatChanged:(id)sender;		//Handles both size and fps popups
+- (IBAction)flickerChanged:(id)sender;
 - (IBAction)compressionChanged:(id)sender;
 - (IBAction)whiteBalanceChanged:(id)sender;
 - (IBAction)horizontalFlipChanged:(id)sender;

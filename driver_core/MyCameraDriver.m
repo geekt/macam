@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.m,v 1.23 2007/01/19 22:02:08 hxr Exp $
+ $Id: MyCameraDriver.m,v 1.24 2007/01/24 21:20:14 hxr Exp $
 */
 
 #import "MyCameraDriver.h"
@@ -223,6 +223,18 @@
     saturation=v;
 }
 
+- (BOOL) canSetHue {
+    return NO;
+}
+
+- (float) hue {
+    return hue;
+}
+
+- (void) setHue:(float)v {
+    hue=v;
+}
+
 - (BOOL) canSetGamma {
     return NO;
 }
@@ -293,6 +305,18 @@
 
 - (void) setHFlip:(BOOL)v {
     hFlip=v;
+}
+
+- (BOOL) canSetFlicker {
+    return NO;
+}
+
+- (FlickerType) flicker {
+    return flicker;
+}
+
+- (void) setFlicker:(FlickerType)v {
+    flicker=v;
 }
 
 - (short) maxCompression {

@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.m,v 1.23 2006/07/20 15:37:08 hxr Exp $
+ $Id: MyController.m,v 1.24 2007/01/24 19:44:51 hxr Exp $
 */
 
 #import "MyController.h"
@@ -946,15 +946,36 @@ OSStatus PathToFSSpec (NSString *path, FSSpec *outSpec)
     }
 }
 
-- (void) toggleSettingsDrawer:(id) sender {
-    NSDrawerState state=[settingsDrawer state];
-    if ((state==NSDrawerOpeningState)||(state==NSDrawerOpenState)) {
+- (void) toggleSettingsDrawer:(id) sender 
+{
+    NSDrawerState state = [settingsDrawer state];
+    
+    if ((state == NSDrawerOpeningState) || (state == NSDrawerOpenState)) 
+    {
         [settingsDrawer close];
         [inspectorDrawer close];
-    } else {
-        [settingsDrawer openOnEdge:NSMaxXEdge];
-        if (inspector) {
+    } 
+    else 
+    {
+        if (inspector) 
+        {
             [inspectorDrawer openOnEdge:NSMinXEdge];
+            [settingsDrawer openOnEdge:NSMaxXEdge];
+        }
+        else 
+        {
+            // need window position, screen size
+            
+            NSRect visibleFrame = [[NSScreen mainScreen] visibleFrame];
+            NSRect windowFrame = [window frame];
+            
+            int leftMargin = windowFrame.origin.x - visibleFrame.origin.x;
+            int rightMargin = visibleFrame.origin.x + visibleFrame.size.width - windowFrame.origin.x - windowFrame.size.width;
+            
+            if (rightMargin >= leftMargin)
+                [settingsDrawer openOnEdge:NSMaxXEdge];
+            else 
+                [settingsDrawer openOnEdge:NSMinXEdge];
         }
     }
 }

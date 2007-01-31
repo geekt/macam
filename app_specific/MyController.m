@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.m,v 1.25 2007/01/24 21:18:20 hxr Exp $
+ $Id: MyController.m,v 1.26 2007/01/31 18:27:40 hxr Exp $
 */
 
 #import "MyController.h"
@@ -304,6 +304,12 @@ extern NSString* SnapshotQualityPrefsKey;
 - (IBAction)horizontalFlipChanged:(id)sender {
     BOOL flip=[horizontalFlipCheckbox intValue];
     [driver setHFlip:flip];
+}
+
+- (IBAction)cameraDisableChanged:(id)sender
+{
+    BOOL disable = [cameraDisableCheckbox intValue];
+    [driver setDisabled:disable];
 }
 
 - (void) setImageOfToolbarItem:(NSString*)ident to:(NSString*)img {
@@ -1154,6 +1160,7 @@ OSStatus PathToFSSpec (NSString *path, FSSpec *outSpec)
             [horizontalFlipCheckbox setEnabled:[driver canSetHFlip]];
             [blackwhiteCheckbox setEnabled:[driver canBlackWhiteMode]];
             [ledCheckbox setEnabled:[driver canSetLed]];
+            [cameraDisableCheckbox setEnabled:[driver canSetDisabled]];
 
             [whiteBalancePopup selectItemAtIndex:[driver whiteBalanceMode]-1];
             [gainSlider setEnabled:([driver canSetGain])&&(![driver isAutoGain])];
@@ -1180,6 +1187,7 @@ OSStatus PathToFSSpec (NSString *path, FSSpec *outSpec)
             [compressionSlider setFloatValue:((float)[driver compression])
                 /((float)(([driver maxCompression]>0)?[driver maxCompression]:1))];
             [horizontalFlipCheckbox setIntValue:([driver hFlip]==YES)?1:0];
+            [cameraDisableCheckbox setIntValue:([driver disabled] == YES) ? 1 : 0];
             [self formatChanged:self];
             cameraGrabbing=NO;
             if ([driver supportsCameraFeature:CameraFeatureInspectorClassName]) {
@@ -1295,6 +1303,7 @@ LStr(@"The camera you just plugged in contains %i stored images. Do you want to 
     [whiteBalancePopup setEnabled:NO];
     [compressionSlider setEnabled:NO];
     [horizontalFlipCheckbox setEnabled:NO];
+    [cameraDisableCheckbox setEnabled:NO];
     [self updateCameraMediaCount];
     [inspectorDrawer close];
     if (inspector) {

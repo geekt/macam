@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyDummyCameraDriver.h,v 1.2 2003/02/24 13:05:18 mattik Exp $
+ $Id: MyDummyCameraDriver.h,v 1.3 2007/01/31 18:08:34 hxr Exp $
 */
 
 #include "GlobalDefs.h"
@@ -37,6 +37,7 @@
 - (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId;
 
 //Camera introspection
+- (BOOL) canSetDisabled;
 - (BOOL) realCamera;
 
 - (BOOL) supportsResolution:(CameraResolution)r fps:(short)fr;

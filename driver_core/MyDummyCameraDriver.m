@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyDummyCameraDriver.m,v 1.3 2005/08/16 04:48:07 hxr Exp $
+ $Id: MyDummyCameraDriver.m,v 1.4 2007/01/31 18:08:34 hxr Exp $
 */
 
 #import "MyDummyCameraDriver.h"
@@ -45,6 +45,11 @@
 
 - (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId {
     return [super startupWithUsbLocationId:usbLocationId];
+}
+
+- (BOOL) canSetDisabled
+{
+    return NO;  // Dummy cameras can not be disabled
 }
 
 - (BOOL) realCamera {	//Returns if the camera is a real image grabber or a dummy

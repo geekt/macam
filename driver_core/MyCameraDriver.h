@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.h,v 1.16 2007/01/24 21:20:14 hxr Exp $
+ $Id: MyCameraDriver.h,v 1.17 2007/01/31 18:22:48 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -132,6 +132,7 @@ Image buffers. There are two sets: lastIamgeBuffer and nextImageBuffer. The clie
 + (unsigned short) cameraUsbProductID;
 + (unsigned short) cameraUsbVendorID;
 + (NSString*) cameraName;
++ (BOOL) isUVC;  // Do the cameras supported by this driver implement the USB Video Class?
 
 //Get info - new mechanism. Overload this one if you have more than one idVendor/idProduct pair
 
@@ -155,6 +156,10 @@ Image buffers. There are two sets: lastIamgeBuffer and nextImageBuffer. The clie
 - (void) enableNotifyOnMainThread;	//Has to be enabled before [startupWithUsbLocationId]! Cannot be unset - anymore!
 - (void) setCentral:(id)c;		//Don't use unless you know what you're doing!
 - (id) central;				//Don't use unless you know what you're doing!
+
+- (BOOL) canSetDisabled;
+- (void) setDisabled:(BOOL)disable;
+- (BOOL) disabled;
 
 //Camera introspection
 - (BOOL) realCamera;	//Returns if the camera is a real image grabber or a dummy

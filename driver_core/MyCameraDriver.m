@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.m,v 1.24 2007/01/24 21:20:14 hxr Exp $
+ $Id: MyCameraDriver.m,v 1.25 2007/01/31 18:22:48 hxr Exp $
 */
 
 #import "MyCameraDriver.h"
@@ -48,6 +48,11 @@
         [NSNumber numberWithUnsignedShort:[self cameraUsbVendorID]],@"idVendor",
         [self cameraName],@"name",NULL];
     return [NSArray arrayWithObject:dict];
+}
+
++ (BOOL) isUVC
+{
+    return NO;
 }
 
 - (id) initWithCentral:(id)c {
@@ -172,6 +177,30 @@
 
 - (id) central {
     return central;
+}
+
+- (BOOL) canSetDisabled
+{
+    if (!central) 
+        return NO;
+    
+    return YES;  // This is true for almost all cameras (not dummy cameras though)
+}
+
+- (void) setDisabled:(BOOL)disable
+{
+    if (!central) 
+        return;
+    
+    [central setDisableCamera:self yesNo:disable];
+}
+
+- (BOOL) disabled
+{
+    if (!central) 
+        return NO;
+    
+    return [central isCameraDisabled:self];
 }
 
 - (BOOL) realCamera {	//Returns if the camera is a real image grabber or a dummy

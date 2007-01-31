@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: QTPanel.m,v 1.7 2006/10/31 06:17:40 hxr Exp $
+ $Id: QTPanel.m,v 1.8 2007/01/31 18:29:41 hxr Exp $
 */
 
 #include "QTPanel.h"
@@ -142,6 +142,7 @@ pascal ComponentResult sgpnRegister(sgpnGlobals storage) {
     Str255 pname;
     central=[MyCameraCentral sharedCameraCentral];
     if (!central) return 0;
+    [central setVDIG:YES];
     if (![central startupWithNotificationsOnMainThread:NO recognizeLaterPlugins:NO]) return 0;
     num=[central numCameras];
     cd.componentType='vdig';

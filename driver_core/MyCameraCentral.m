@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.57 2007/01/31 18:20:25 hxr Exp $
+ $Id: MyCameraCentral.m,v 1.58 2007/02/08 20:29:22 hxr Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -581,6 +581,8 @@ MyCameraCentral* sharedCameraCentral=NULL;
             [cam setContrast:[[camDict objectForKey:@"contrast"] floatValue]];
         if ([camDict objectForKey:@"saturation"])
             [cam setSaturation:[[camDict objectForKey:@"saturation"] floatValue]];
+        if ([camDict objectForKey:@"hue"])
+            [cam setHue:[[camDict objectForKey:@"hue"] floatValue]];
         if ([camDict objectForKey:@"gamma"])
             [cam setGamma:[[camDict objectForKey:@"gamma"] floatValue]];
         if ([camDict objectForKey:@"sharpness"])
@@ -599,6 +601,8 @@ MyCameraCentral* sharedCameraCentral=NULL;
             [cam setResolution:[[camDict objectForKey:@"resolution"] shortValue] fps:[[camDict objectForKey:@"fps"] shortValue]];
        	if ([camDict objectForKey:@"white balance"])
             [cam setWhiteBalanceMode:(WhiteBalanceMode)[[camDict objectForKey:@"white balance"] shortValue]];
+       	if ([camDict objectForKey:@"flicker control"])
+            [cam setFlicker:(FlickerType)[[camDict objectForKey:@"flicker control"] shortValue]];
     }
     [pool release];
     return ok;
@@ -632,6 +636,8 @@ MyCameraCentral* sharedCameraCentral=NULL;
             [camDict setObject:[NSNumber numberWithFloat:[cam contrast]] forKey:@"contrast"];
         if ([cam canSetSaturation])
             [camDict setObject:[NSNumber numberWithFloat:[cam saturation]] forKey:@"saturation"];
+        if ([cam canSetHue])
+            [camDict setObject:[NSNumber numberWithFloat:[cam hue]] forKey:@"hue"];
         if ([cam canSetGamma])
             [camDict setObject:[NSNumber numberWithFloat:[cam gamma]] forKey:@"gamma"];
         if ([cam canSetSharpness])
@@ -648,6 +654,8 @@ MyCameraCentral* sharedCameraCentral=NULL;
             [camDict setObject:[NSNumber numberWithShort:[cam compression]] forKey:@"compression"];
         if ([cam canSetWhiteBalanceMode])
             [camDict setObject:[NSNumber numberWithShort:(short)[cam whiteBalanceMode]] forKey:@"white balance"];
+        if ([cam canSetFlicker])
+            [camDict setObject:[NSNumber numberWithShort:(short)[cam flicker]] forKey:@"flicker control"];
         
         [camDict setObject:[NSNumber numberWithShort:[cam resolution]] forKey:@"resolution"];
         [camDict setObject:[NSNumber numberWithShort:[cam fps]] forKey:@"fps"];

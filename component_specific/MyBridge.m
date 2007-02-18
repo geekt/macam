@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyBridge.m,v 1.4 2005/08/15 05:28:25 hxr Exp $
+ $Id: MyBridge.m,v 1.5 2007/02/18 17:39:59 hxr Exp $
 */
 
 
@@ -27,7 +27,7 @@
 
 @interface MyBridge (Private)
 
-- (BOOL) privUpdateFormat;		//check format and update it (including grab world) if neeeded 
+- (BOOL) privUpdateFormat;		//check format and update it (including grab world) if needed 
 - (BOOL) privSetImageBuffer;		//update all if neccessary, ensure grab running, set image buffer to our temp buffer
 
 @end
@@ -266,6 +266,12 @@
 - (BOOL) getName:(char*)name {
     if (!driverStarted) return NO;
     return [central getName:name forID:cid];
+}
+
+- (short) getIndexOfCamera 
+{
+    return [central indexOfCamera:driver];
+	// FIXME: do I need to check for validity of central here?
 }
 
 - (BOOL)canSetContrast {

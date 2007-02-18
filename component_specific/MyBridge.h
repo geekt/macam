@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyBridge.h,v 1.5 2005/08/15 05:27:30 hxr Exp $
+ $Id: MyBridge.h,v 1.6 2007/02/18 17:39:59 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -96,9 +96,10 @@ typedef enum BridgeClientState {
 //   Status requests
 //---------------------
 
-- (BOOL) isStarted;			//Returns if the bridge is currently started (in use) 
-- (BOOL) isCameraValid;			//Returns if there currently is a real, valid camera that can deliver real video
-- (BOOL) getName:(char*)name;		//Try to get the camera name
+- (BOOL) isStarted;                 // Returns if the bridge is currently started (in use) 
+- (BOOL) isCameraValid;             // Returns if there currently is a real, valid camera that can deliver real video
+- (BOOL) getName:(char*)name;		// Try to get the camera name
+- (short) getIndexOfCamera;         // Return the index of the camera
 
 //-----------------------
 //   Camera parameters

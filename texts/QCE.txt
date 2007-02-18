@@ -86,7 +86,7 @@ Init sequence:
 set first config, reset, get interface, set alt 0
 disable isochronous transfer
 detect sensor type, set register 0x0423 appropriately
-(for sensor specific stuff, see their docs. It's publically available on the web.)
+(for sensor specific stuff, see their docs. It's publicly available on the web.)
 
 
 Start grabbing sequence:
@@ -124,7 +124,7 @@ This part differs a bit from the Linux docs, but I guess I'm right here:)
 
 The data sent via isochronous pipe is packetized. Each packet contains a two-byte type (Big-Endian) followed by a two-byte content length in bytes (also Big-Endian, excluding the header) followed by the content itself. The packets don't spread over multiple usb frames. The type seems to be a combination of enumeration and flags. I haven't figured out all of them, but here are some (enough to get some images):
 
-0x0200 - Image data - content data are sequential bayer samples
+0x0200 - Image data - content data are sequential Bayer samples
 0x8001 - Start of a new image - content is empty
 0x8002 - End of the current image - content is empty
 0x8005 - Same as 0x8001, but settings changes are pending (?)
@@ -136,4 +136,4 @@ Resolutions
 -----------
 The camera supports CIF (352 x 288) and QCIF (176 x 144) - QCIF is done by subsampling the image data. It's done by the STV600, not by the image sensor (although some of them also have this feature). Theoretically, horizontal and vertical subsampling can be separately set, but who wants a distorted image? Remember to keep your ROI window of the image sensor at 352 x 288 (this may be wrong - horizontally, this is correct, but vertically?)
 
-$Id: QCE.txt,v 1.2 2002/05/27 05:43:38 dirkx Exp $
+$Id: QCE.txt,v 1.3 2007/02/18 06:06:43 hxr Exp $

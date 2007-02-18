@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: QTVideoDigitizer.m,v 1.7 2006/11/02 18:26:13 hxr Exp $
+ $Id: QTVideoDigitizer.m,v 1.8 2007/02/18 17:42:07 hxr Exp $
 */
 
 #import "MyCameraCentral.h"
@@ -656,10 +656,10 @@ pascal VideoDigitizerError vdigGetInputName(vdigGlobals storage, long videoInput
         return qtParamErr;
     
     // Get the name
-    [bridge->central getName:cstr forID:bridge->cid];
+    [bridge getName:cstr];
     
     // Append #1, or #2 etc to the camera name to make it unique
-    index = [bridge->central indexOfCamera:bridge->driver];
+    index = [bridge getIndexOfCamera];
     sprintf(nstr, " #%d", index);
     if (strlen(cstr) + strlen(nstr) < 256) 
         strcpy(cstr + strlen(cstr), nstr);
@@ -869,10 +869,10 @@ pascal VideoDigitizerError vdigGetDeviceNameAndFlags(vdigGlobals storage, Str255
         return qtParamErr;
     
     // Get the name
-    [bridge->central getName:cstr forID:bridge->cid];
+    [bridge getName:cstr];
     
     // Append #1, or #2 etc to the camera name to make it unique
-    index = [bridge->central indexOfCamera:bridge->driver];
+    index = [bridge getIndexOfCamera];
     sprintf(nstr, " #%d", index);
     if (strlen(cstr) + strlen(nstr) < 256) 
         strcpy(cstr + strlen(cstr), nstr);

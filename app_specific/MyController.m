@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.m,v 1.26 2007/01/31 18:27:40 hxr Exp $
+ $Id: MyController.m,v 1.27 2007/02/18 05:34:51 hxr Exp $
 */
 
 #import "MyController.h"
@@ -310,6 +310,12 @@ extern NSString* SnapshotQualityPrefsKey;
 {
     BOOL disable = [cameraDisableCheckbox intValue];
     [driver setDisabled:disable];
+}
+
+- (IBAction)reduceBandwidthChanged:(id)sender
+{
+    BOOL reduce = [reduceBandwidthCheckbox intValue];
+    [driver setUSBReducedBandwidth:reduce];
 }
 
 - (void) setImageOfToolbarItem:(NSString*)ident to:(NSString*)img {
@@ -1161,6 +1167,7 @@ OSStatus PathToFSSpec (NSString *path, FSSpec *outSpec)
             [blackwhiteCheckbox setEnabled:[driver canBlackWhiteMode]];
             [ledCheckbox setEnabled:[driver canSetLed]];
             [cameraDisableCheckbox setEnabled:[driver canSetDisabled]];
+            [reduceBandwidthCheckbox setEnabled:[driver canSetUSBReducedBandwidth]];
 
             [whiteBalancePopup selectItemAtIndex:[driver whiteBalanceMode]-1];
             [gainSlider setEnabled:([driver canSetGain])&&(![driver isAutoGain])];
@@ -1188,6 +1195,7 @@ OSStatus PathToFSSpec (NSString *path, FSSpec *outSpec)
                 /((float)(([driver maxCompression]>0)?[driver maxCompression]:1))];
             [horizontalFlipCheckbox setIntValue:([driver hFlip]==YES)?1:0];
             [cameraDisableCheckbox setIntValue:([driver disabled] == YES) ? 1 : 0];
+            [reduceBandwidthCheckbox setIntValue:([driver usbReducedBandwidth] == YES) ? 1 : 0];
             [self formatChanged:self];
             cameraGrabbing=NO;
             if ([driver supportsCameraFeature:CameraFeatureInspectorClassName]) {
@@ -1304,6 +1312,8 @@ LStr(@"The camera you just plugged in contains %i stored images. Do you want to 
     [compressionSlider setEnabled:NO];
     [horizontalFlipCheckbox setEnabled:NO];
     [cameraDisableCheckbox setEnabled:NO];
+    [reduceBandwidthCheckbox setEnabled:NO];
+    
     [self updateCameraMediaCount];
     [inspectorDrawer close];
     if (inspector) {

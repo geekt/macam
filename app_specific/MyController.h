@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.h,v 1.8 2007/01/31 18:27:40 hxr Exp $
+ $Id: MyController.h,v 1.9 2007/02/18 05:34:51 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -55,6 +55,7 @@
     IBOutlet id blackwhiteCheckbox;
 	IBOutlet id ledCheckbox;
 	IBOutlet id cameraDisableCheckbox;
+	IBOutlet id reduceBandwidthCheckbox;
 	
     MyCameraInspector* inspector;
     MyCameraDriver* driver;
@@ -99,6 +100,7 @@
 - (IBAction)blackwhiteCheckboxChanged:(id)sender;
 - (IBAction)ledCheckboxChanged:(id)sender;
 - (IBAction)cameraDisableChanged:(id)sender;
+- (IBAction)reduceBandwidthChanged:(id)sender;
 
 //UI: Actions to do
 - (IBAction)doGrab:(id)sender;

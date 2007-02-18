@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.h,v 1.17 2007/01/31 18:22:48 hxr Exp $
+ $Id: MyCameraDriver.h,v 1.18 2007/02/18 05:06:57 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -232,6 +232,11 @@ Image buffers. There are two sets: lastIamgeBuffer and nextImageBuffer. The clie
 - (short) maxCompression;	//0 = no compression available
 - (short) compression;
 - (void) setCompression:(short)v;
+
+// Reduced USB bandwidth
+- (BOOL) canSetUSBReducedBandwidth;
+- (BOOL) usbReducedBandwidth;
+- (void) setUSBReducedBandwidth:(BOOL)v;
 
 // White Balance
 - (BOOL) canSetWhiteBalanceMode;

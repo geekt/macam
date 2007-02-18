@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.h,v 1.18 2007/02/18 05:06:57 hxr Exp $
+ $Id: MyCameraDriver.h,v 1.19 2007/02/18 20:11:59 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -319,6 +319,7 @@ Image buffers. There are two sets: lastIamgeBuffer and nextImageBuffer. The clie
 - (void) mergeGrabFinishedWithError:(CameraError)err;
 - (void) mergeCameraHasShutDown;
 //There's no mergeCameraEventHappened because most likely you won't call it from decodingThread. Merge yourself.
+- (void) mergeCameraEventHappened:(CameraEvent)evt;  // Well. it seems useful now!
 
 //Notification forwarders - should not be called from outside but may be overridden by subclasses
 - (void) imageReady:(id)sender;				//sends "notification" to "delegate"

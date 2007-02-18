@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.m,v 1.26 2007/02/07 05:38:26 hxr Exp $
+ $Id: MyCameraDriver.m,v 1.27 2007/02/18 20:11:59 hxr Exp $
 */
 
 #import "MyCameraDriver.h"
@@ -763,6 +763,19 @@
             [delegate cameraEventHappened:sender event:evt];
         }
     }
+}
+
+- (void) mergeCameraEventHappened:(CameraEvent)evt 
+{
+    if (doNotificationsOnMainThread) 
+        if ([NSRunLoop currentRunLoop] != mainThreadRunLoop) 
+            if (decodingThreadConnection) 
+            {
+                [(id)[decodingThreadConnection rootProxy] mergeCameraEventHappened:evt];
+                return;
+            }
+    
+    [self cameraEventHappened:self event:evt];
 }
 
 - (MyCameraInfo*) getCameraInfo {

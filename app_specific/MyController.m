@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.m,v 1.27 2007/02/18 05:34:51 hxr Exp $
+ $Id: MyController.m,v 1.28 2007/02/19 19:29:28 hxr Exp $
 */
 
 #import "MyController.h"
@@ -408,6 +408,7 @@ extern NSString* SnapshotQualityPrefsKey;
             [fpsPopup setEnabled:NO];
             [sizePopup setEnabled:NO];
             [compressionSlider setEnabled:NO];
+            [reduceBandwidthCheckbox setEnabled:NO];
             [driver setImageBuffer:[imageRep bitmapData] bpp:3 rowBytes:[driver width]*3];
         }
     }
@@ -1286,6 +1287,7 @@ LStr(@"The camera you just plugged in contains %i stored images. Do you want to 
     [fpsPopup setEnabled:YES];
     [sizePopup setEnabled:YES];
     [compressionSlider setEnabled:[driver maxCompression]>0];
+    [reduceBandwidthCheckbox setEnabled:[driver canSetUSBReducedBandwidth]];
     [self updateCameraMediaCount];
 }
 

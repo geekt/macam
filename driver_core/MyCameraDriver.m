@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.m,v 1.27 2007/02/18 20:11:59 hxr Exp $
+ $Id: MyCameraDriver.m,v 1.28 2007/02/19 19:19:25 hxr Exp $
 */
 
 #import "MyCameraDriver.h"
@@ -1096,7 +1096,34 @@
     if ((altRequested >= 0) && (maxPacketSizeList[altRequested] > 0)) 
         alt = altRequested;
     else // none requested
+    {
         alt = maxBandWidthAlt;
+
+        // if usb bandwidth is reduced, then try a lower setting
+        
+        if ([self usbReducedBandwidth]) 
+        {
+            int reducedAlt = -1;
+            
+            // find the next highest one
+            
+            for (a = 0; a <= numAltInterfaces; a++) 
+            {
+                if (maxPacketSizeList[a] < maxPacketSizeList[maxBandWidthAlt]) 
+                {
+                    if (reducedAlt < 0)
+                        reducedAlt = a;
+                    else if (maxPacketSizeList[a] > maxPacketSizeList[reducedAlt]) 
+                        reducedAlt = a;
+                }
+#if VERBOSE
+                printf("a = %d, reducedAlt = %d, PS[a] = %d\n", a, reducedAlt, maxPacketSizeList[a]);
+#endif
+            }
+            
+            alt = reducedAlt;
+        }
+    }
     
     while (ok && !done) 
     {

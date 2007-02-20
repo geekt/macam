@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyPixartDriver.m,v 1.9 2007/01/19 05:32:26 hxr Exp $
+ $Id: MyPixartDriver.m,v 1.10 2007/02/20 06:02:47 hxr Exp $
  */
 
 #import "MyPixartDriver.h"
@@ -322,6 +322,9 @@ static int pac_decompress_row(struct code_table *table, unsigned char *inp, unsi
             break;
         case WhiteBalanceAutomatic:
             [bayerConverter setGainsDynamic:YES];
+            break;
+        case WhiteBalanceManual:
+            // not handled yet
             break;
     }
 }

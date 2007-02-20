@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCExpressADriver.m,v 1.13 2007/01/19 05:31:10 hxr Exp $
+ $Id: MyQCExpressADriver.m,v 1.14 2007/02/20 06:02:48 hxr Exp $
 */
 
 #include <IOKit/IOKitLib.h>
@@ -190,6 +190,9 @@
             break;
         case WhiteBalanceAutomatic:
             [bayerConverter setGainsDynamic:YES];
+            break;
+        case WhiteBalanceManual:
+            // not handled yet
             break;
     }
 }

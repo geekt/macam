@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyKiaraFamilyDriver.m,v 1.15 2007/01/19 05:36:15 hxr Exp $
+ $Id: MyKiaraFamilyDriver.m,v 1.16 2007/02/20 06:02:47 hxr Exp $
  */
 
 #import "MyKiaraFamilyDriver.h"
@@ -521,6 +521,8 @@ Here is a table of sniffed data. I have no idea what this means
             width=800;
             height=600;
             break;
+        case ResolutionXGA:
+        case ResolutionUXGA:
         case ResolutionInvalid:
             break;
 	}

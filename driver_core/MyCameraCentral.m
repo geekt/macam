@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.58 2007/02/08 20:29:22 hxr Exp $
+ $Id: MyCameraCentral.m,v 1.59 2007/02/23 21:05:52 hxr Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -603,6 +603,8 @@ MyCameraCentral* sharedCameraCentral=NULL;
             [cam setWhiteBalanceMode:(WhiteBalanceMode)[[camDict objectForKey:@"white balance"] shortValue]];
        	if ([camDict objectForKey:@"flicker control"])
             [cam setFlicker:(FlickerType)[[camDict objectForKey:@"flicker control"] shortValue]];
+       	if ([camDict objectForKey:@"bandwidth reduction"])
+            [cam setUSBReducedBandwidth:[[camDict objectForKey:@"bandwidth reduction"] boolValue]];
     }
     [pool release];
     return ok;
@@ -656,6 +658,8 @@ MyCameraCentral* sharedCameraCentral=NULL;
             [camDict setObject:[NSNumber numberWithShort:(short)[cam whiteBalanceMode]] forKey:@"white balance"];
         if ([cam canSetFlicker])
             [camDict setObject:[NSNumber numberWithShort:(short)[cam flicker]] forKey:@"flicker control"];
+        if ([cam canSetUSBReducedBandwidth])
+            [camDict setObject:[NSNumber numberWithBool:[cam usbReducedBandwidth]] forKey:@"bandwidth reduction"];
         
         [camDict setObject:[NSNumber numberWithShort:[cam resolution]] forKey:@"resolution"];
         [camDict setObject:[NSNumber numberWithShort:[cam fps]] forKey:@"fps"];

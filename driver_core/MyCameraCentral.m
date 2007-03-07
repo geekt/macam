@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.60 2007/03/02 21:07:46 hxr Exp $
+ $Id: MyCameraCentral.m,v 1.61 2007/03/07 02:17:32 hxr Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -67,6 +67,8 @@
 #import "SPCA501ADriver.h"
 #import "SPCA525Driver.h"
 #import "PicoDriver.h"
+#import "M560xDriver.h"
+#import "VC032xDriver.h"
 
 #include "unistd.h"
 
@@ -273,6 +275,9 @@ MyCameraCentral* sharedCameraCentral=NULL;
     [self registerCameraDriver:[ZC030xDriverBGR class]];
     [self registerCameraDriver:[ZC030xDriverInverted class]];
     [self registerCameraDriver:[ZC030xDriverMic class]];
+//    [self registerCameraDriver:[ZC030xDriverVF250 class]];
+    
+    [self registerCameraDriver:[VC032xDriver class]];
     
     [self registerCameraDriver:[SPCA501ADriver class]];   // Based on SPCA5XX - testing
     [self registerCameraDriver:[SPCA501ADriverVariant1 class]];
@@ -294,6 +299,7 @@ MyCameraCentral* sharedCameraCentral=NULL;
     [self registerCameraDriver:[SonixDriverVariant5 class]];
     [self registerCameraDriver:[SonixDriverVariant6 class]];
     [self registerCameraDriver:[SonixDriverVariant7 class]];
+    
     [self registerCameraDriver:[SN9CxxxDriver class]];
     [self registerCameraDriver:[SN9CxxxDriverVariant1 class]];
     [self registerCameraDriver:[SN9CxxxDriverVariant2 class]];
@@ -305,6 +311,8 @@ MyCameraCentral* sharedCameraCentral=NULL;
     [self registerCameraDriver:[SN9CxxxDriverVariant8 class]];
     
     [self registerCameraDriver:[PicoDriver class]];
+    
+    [self registerCameraDriver:[M560xDriver class]];
     
 #if EXPERIMENTAL
     [self registerCameraDriver:[CTDC1100Driver class]];      // This is incomplete st this time

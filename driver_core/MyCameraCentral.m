@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.61 2007/03/07 02:17:32 hxr Exp $
+ $Id: MyCameraCentral.m,v 1.62 2007/03/19 22:18:25 hxr Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -275,7 +275,7 @@ MyCameraCentral* sharedCameraCentral=NULL;
     [self registerCameraDriver:[ZC030xDriverBGR class]];
     [self registerCameraDriver:[ZC030xDriverInverted class]];
     [self registerCameraDriver:[ZC030xDriverMic class]];
-//    [self registerCameraDriver:[ZC030xDriverVF250 class]];
+    [self registerCameraDriver:[ZC030xDriverVF0250 class]];
     
     [self registerCameraDriver:[VC032xDriver class]];
     
@@ -299,6 +299,7 @@ MyCameraCentral* sharedCameraCentral=NULL;
     [self registerCameraDriver:[SonixDriverVariant5 class]];
     [self registerCameraDriver:[SonixDriverVariant6 class]];
     [self registerCameraDriver:[SonixDriverVariant7 class]];
+    [self registerCameraDriver:[SonixDriverVariant8 class]];
     
     [self registerCameraDriver:[SN9CxxxDriver class]];
     [self registerCameraDriver:[SN9CxxxDriverVariant1 class]];
@@ -309,6 +310,7 @@ MyCameraCentral* sharedCameraCentral=NULL;
     [self registerCameraDriver:[SN9CxxxDriverVariant6 class]];
     [self registerCameraDriver:[SN9CxxxDriverVariant7 class]];
     [self registerCameraDriver:[SN9CxxxDriverVariant8 class]];
+    [self registerCameraDriver:[SN9CxxxDriverVariant9 class]];
     
     [self registerCameraDriver:[PicoDriver class]];
     

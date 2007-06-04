@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.62 2007/03/19 22:18:25 hxr Exp $
+ $Id: MyCameraCentral.m,v 1.63 2007/06/04 16:42:19 hxr Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -50,8 +50,8 @@
 #import "MyQCOrbitDriver.h"
 #import "SQ905.h"
 #import "SQ930C.h"
-#import "MyPixartDriver.h"
-#import "PixartDriver.h"
+//#import "MyPixartDriver.h"
+//#import "PixartDriver.h"
 #import "PAC7311Driver.h"
 #import "SPCA5XXDriver.h"
 #import "PAC207Driver.h"

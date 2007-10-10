@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.63 2007/06/04 16:42:19 hxr Exp $
+ $Id: MyCameraCentral.m,v 1.64 2007/10/10 19:38:42 hxr Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -69,6 +69,7 @@
 #import "PicoDriver.h"
 #import "M560xDriver.h"
 #import "VC032xDriver.h"
+#import "MR97311Driver.h"
 
 #include "unistd.h"
 
@@ -313,6 +314,8 @@ MyCameraCentral* sharedCameraCentral=NULL;
     [self registerCameraDriver:[SN9CxxxDriverVariant9 class]];
     
     [self registerCameraDriver:[PicoDriver class]];
+    
+    [self registerCameraDriver:[MR97311Driver class]];
     
     [self registerCameraDriver:[M560xDriver class]];
     

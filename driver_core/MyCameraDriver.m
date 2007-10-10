@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.m,v 1.29 2007/06/04 16:42:19 hxr Exp $
+ $Id: MyCameraDriver.m,v 1.30 2007/10/10 19:30:23 hxr Exp $
 */
 
 #import "MyCameraDriver.h"
@@ -875,6 +875,16 @@
                                  wIndex:wIdx
                                     buf:buf
                                     len:len];
+}
+
+// returns OK?
+- (BOOL) usbClearPipeStall: (UInt8) pipe
+{
+    IOReturn ret;
+    
+    ret = (*controlIntf)->ClearPipeStall(controlIntf, pipe);
+    
+    return (ret == kIOReturnSuccess) ? YES : NO;
 }
 
 - (BOOL) usbSetAltInterfaceTo:(short)alt testPipe:(short)pipe {

@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.h,v 1.19 2007/02/18 20:11:59 hxr Exp $
+ $Id: MyCameraDriver.h,v 1.20 2007/10/10 19:31:01 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -338,6 +338,7 @@ Image buffers. There are two sets: lastIamgeBuffer and nextImageBuffer. The clie
 - (BOOL) usbWriteCmdWithBRequest:(short)bReq wValue:(short)wVal wIndex:(short)wIdx buf:(void*)buf len:(short)len;//Sends a OUT|VENDOR|DEVICE command
 - (BOOL) usbWriteVICmdWithBRequest:(short)bReq wValue:(short)wVal wIndex:(short)wIdx buf:(void*)buf len:(short)len;//Sends a OUT|VENDOR|INTERFACE command 
 
+- (BOOL) usbClearPipeStall: (UInt8) pipe;
 - (BOOL) usbSetAltInterfaceTo:(short)alt testPipe:(short)pipe;	//Sets the alt interface and optionally tests if a pipe exists
 - (BOOL) usbMaximizeBandwidth: (short) pipe  suggestedAltInterface: (short) suggested  numAltInterfaces: (short) max;
 

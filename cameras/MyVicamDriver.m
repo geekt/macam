@@ -18,7 +18,7 @@
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  
- $Id: MyVicamDriver.m,v 1.6 2007/02/11 20:38:51 hxr Exp $
+ $Id: MyVicamDriver.m,v 1.7 2007/10/10 19:32:48 hxr Exp $
 
  */
 
@@ -254,6 +254,7 @@ no data
 
 #import "MyVicamDriver.h"
 #import "Resolvers.h"
+#import "MiscTools.h"
 #import "vicamurbs.h"
 #import "RGBScaler.h"
 #include "unistd.h"

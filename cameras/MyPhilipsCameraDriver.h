@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyPhilipsCameraDriver.h,v 1.7 2006/10/20 04:51:31 hxr Exp $
+ $Id: MyPhilipsCameraDriver.h,v 1.8 2007/10/11 19:21:48 hxr Exp $
 */
 
 #import "MyCameraDriver.h"
@@ -116,7 +116,6 @@ typedef struct PhilipsGrabContext {	//Everything the grabbing thread internals n
     long currCompleteChunks;	//current length of complete chunk list
     PhilipsCompleteChunk* chunkList;	//the complete chunk list itself
     NSLock* chunkListLock;	//lock for access to complete chunk list data (mutex between grabbingThread and decodingThread)
-    NSLock* chunkReadyLock;	//remote wake up for decodingThread from grabbingThread
     IOUSBInterfaceInterface** intf;	//Just a copy from our interface interface so the callback can issue usb commands
     BOOL* shouldBeGrabbing;	//Reference to the object's shouldBeGrabbing property
     CameraError err;		//Collector f errors occurred during grab. [cleanupGrabContext] will leave this as it is

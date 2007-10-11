@@ -17,7 +17,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySE401Driver.m,v 1.12 2007/01/19 05:12:57 hxr Exp $
+ $Id: MySE401Driver.m,v 1.13 2007/10/11 19:19:44 hxr Exp $
  */
 
 #import "MySE401Driver.h"
@@ -775,7 +775,8 @@ static void handleFullChunk(void *refcon, IOReturn result, void *arg0) {
 - (void) doAutoExposure {
 //Auto exposure currently only changes the exposure time, not the gain. This could improve frame rates with low light conditions, for example... ***
     float tolerance=0.05f;
-    float scale=0.2f;
+    //float scale=0.2f;
+    float scale=0.1f; // PRL 2007-07-10: Converge to wanted level more slowly.
     float wanted=0.5f;
 
     float avg=streamIsCompressed?lastMeanBrightness:[bayerConverter lastMeanBrightness];

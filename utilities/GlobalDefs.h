@@ -16,7 +16,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  
-    $Id: GlobalDefs.h,v 1.11 2007/01/31 18:04:16 hxr Exp $
+    $Id: GlobalDefs.h,v 1.12 2007/10/16 20:40:41 hxr Exp $
 */
 
 /*
@@ -72,6 +72,14 @@ typedef enum ColorMode
     ColorModeColor		= 1,
     ColorModeGray		= 2
 } ColorMode;
+
+typedef enum OrientationMode 
+{
+    NormalOrientation = 1,
+    FlipHorizontal = 2, 
+    InvertVertical = 3, 
+    Rotate180 = 4,
+} OrientationMode;
 
 
 //Global build settings. Comment unwanted stuff out

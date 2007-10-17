@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.65 2007/10/17 00:12:18 hxr Exp $
+ $Id: MyCameraCentral.m,v 1.66 2007/10/17 16:52:21 hxr Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -317,6 +317,7 @@ MyCameraCentral* sharedCameraCentral=NULL;
     [self registerCameraDriver:[PAC7311Driver class]];
     
     [self registerCameraDriver:[MR97311Driver class]];
+    [self registerCameraDriver:[MR97310Driver class]];
     
     [self registerCameraDriver:[M560xDriver class]];
     

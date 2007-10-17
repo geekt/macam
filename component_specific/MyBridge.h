@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyBridge.h,v 1.6 2007/02/18 17:39:59 hxr Exp $
+ $Id: MyBridge.h,v 1.7 2007/10/17 22:43:03 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -26,9 +26,11 @@
 #define NUM_BRIDGE_GRAB_BUFFERS 2
 
 
-typedef struct BridgeGrabBuffer {
+typedef struct BridgeGrabBuffer 
+{
     CameraResolution resolution;
-    unsigned char* data;
+    unsigned char * data;
+    struct timeval tv;
 } BridgeGrabBuffer;
 
 typedef enum BridgeClientState {
@@ -87,7 +89,8 @@ typedef enum BridgeClientState {
 - (BOOL) grabOneFrameCompressedAsync;		//Starts grabbing one frame to compressed target
 - (BOOL) compressionDoneTo:(unsigned char **)data		//Returns if grabOneFrameCompressedAsync has finished
                       size:(long*)size
-                similarity:(UInt8*)similarity;
+                similarity:(UInt8*)similarity
+                      time:(struct timeval *)time;
 - (void) takeBackCompressionBuffer:(Ptr)buf;	//returns a buffer (they are taken out when starting a compressed grab)
 - (BOOL) setDestinationWidth:(long)width height:(long)height;		//Set destination image size (we'll scale if necessary)
 - (BOOL) getAnImageDescriptionCopy:(ImageDescriptionHandle)outHandle;	//Returns a copy of the image description in the given handle

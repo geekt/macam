@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.m,v 1.31 2007/10/17 04:06:35 hxr Exp $
+ $Id: MyCameraDriver.m,v 1.32 2007/10/17 23:04:30 hxr Exp $
 */
 
 #import "MyCameraDriver.h"
@@ -93,6 +93,7 @@
     lastImageBuffer=NULL;
     lastImageBufferBPP=0;
     lastImageBufferRowBytes=0;
+    timerclear(&lastImageBufferTimeVal);
     nextImageBuffer=NULL;
     nextImageBufferBPP=0;
     nextImageBufferRowBytes=0;
@@ -613,6 +614,11 @@
 
 - (long) imageBufferRowBytes {
     return lastImageBufferRowBytes;
+}
+
+- (struct timeval) imageBufferTimeVal 
+{
+    return lastImageBufferTimeVal;
 }
 
 - (BOOL) canStoreMedia {

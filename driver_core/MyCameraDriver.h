@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.h,v 1.21 2007/10/17 04:06:34 hxr Exp $
+ $Id: MyCameraDriver.h,v 1.22 2007/10/17 23:04:30 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -283,6 +283,7 @@ Image buffers. There are two sets: lastIamgeBuffer and nextImageBuffer. The clie
 - (unsigned char*) imageBuffer;				//last filled image buffer
 - (short) imageBufferBPP;				//last BYTES per pixel
 - (long) imageBufferRowBytes;				//last bytes per image row
+- (struct timeval) imageBufferTimeVal;
 
 //DSC (Digital Still Camera) management - for cameras that can store media / also operate USB-unplugged
 - (BOOL) canStoreMedia;					//If the device supports DSC or similar functions

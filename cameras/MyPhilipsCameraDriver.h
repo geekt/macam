@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyPhilipsCameraDriver.h,v 1.8 2007/10/11 19:21:48 hxr Exp $
+ $Id: MyPhilipsCameraDriver.h,v 1.9 2007/10/18 03:17:38 hxr Exp $
 */
 
 #import "MyCameraDriver.h"
@@ -90,6 +90,7 @@ Doing these amounts of defines is often called bad style. We should find a bette
 typedef struct PhilipsCompleteChunk {	//The description of a ready-to-decode chunk
     long start;			//start offset in grabBuffer
     long end;			//end offset in grabBuffer
+    struct timeval tv;
 } PhilipsCompleteChunk;
 
 typedef struct PhilipsTransferContext {//Everything a usb completion callback need to know

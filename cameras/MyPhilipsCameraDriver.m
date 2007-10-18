@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyPhilipsCameraDriver.m,v 1.9 2007/10/11 19:21:48 hxr Exp $
+ $Id: MyPhilipsCameraDriver.m,v 1.10 2007/10/18 03:17:38 hxr Exp $
 */
 
 #import "MyPhilipsCameraDriver.h"
@@ -361,6 +361,7 @@ static void isocComplete(void *refcon, IOReturn result, void *arg0) {
                         grabContext->chunkList[grabContext->currCompleteChunks].start=grabContext->currentChunkStart;	//insert new chunk
                         grabContext->chunkList[grabContext->currCompleteChunks].end=
                             grabContext->transferContexts[transferIdx].bufferOffset+i*grabContext->bytesPerFrame+currFrameLength;
+                        gettimeofday(&(grabContext->chunkList[grabContext->currCompleteChunks].tv), NULL);
                         grabContext->currCompleteChunks++;
                         [grabContext->chunkListLock unlock];		//exit critical section
                     } else {						//broken frame -> drop
@@ -535,6 +536,7 @@ static bool StartNextIsochRead(PhilipsGrabContext* grabContext, int transferIdx)
                 lastImageBuffer=nextImageBuffer;			//Copy nextBuffer info into lastBuffer
                 lastImageBufferBPP=nextImageBufferBPP;
                 lastImageBufferRowBytes=nextImageBufferRowBytes;
+                lastImageBufferTimeVal=currChunk.tv;
                 nextImageBufferSet=NO;				//nextBuffer has been eaten up
                 [imageBufferLock unlock];				//release lock
                 [self mergeImageReady];				//notify delegate about the image. perhaps get a new buffer

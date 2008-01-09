@@ -62,7 +62,7 @@ extern int debug;
 
 #endif // defined(MACAM)
 
-//static const char SPCA50X_H_CVS_VERSION[]="$Id: gspca.h,v 1.3 2008/01/09 16:33:43 hxr Exp $";
+//static const char SPCA50X_H_CVS_VERSION[]="$Id: gspca.h,v 1.4 2008/01/09 22:00:35 hxr Exp $";
 
 #if defined(__KERNEL__) || defined(MACAM)
 
@@ -220,17 +220,17 @@ enum {
 	JPGC,			//jpeg 4.2.2 Conexant
 	JPGS,			//jpeg 4.2.2 Sonix
 	JPGM,			//jpeg 4.2.2 Mars-Semi
-	YUVY,// Sunplus packed lines
-	YYUV,// Sunplus packed lines
-	YUYV,// Sunplus packed lines
+	YUVY,           // Sunplus packed lines
+	YYUV,           // Sunplus packed lines
+	YUYV,           // Sunplus packed lines
 	GREY,
 	GBRG,
 	SN9C,			// Sonix compressed stream
 	GBGR,
 	S561,			// Sunplus Compressed stream
 	PGBRG,			// Pixart RGGB bayer
-	YUY2, // YUYV packed
-    PJPG, // Pixart jpeg used with PAC7311
+	YUY2,           // YUYV packed
+    PJPG,           // Pixart jpeg used with PAC7311
 	JPGV, 			// Vimicro VC0323
 };
 enum { QCIF = 1,

@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: BayerConverter.m,v 1.15 2006/07/25 05:17:07 hxr Exp $
+ $Id: BayerConverter.m,v 1.16 2008/01/16 19:49:37 hxr Exp $
  */
 #import "BayerConverter.h"
 
@@ -250,7 +250,7 @@
             green2Run =src+srcRowBytes;
             break;
         case 2:	//Interleaved data (STV600-style) // GRBG
-        case 6: // works like 4 then switch R and B at the end // GBRG
+        case 6: // works like 2 then switch R and B at the end // GBRG
             componentStep=2;
             green1Run =src;
             red1Run   =src+1;

@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.72 2008/01/23 21:47:24 hxr Exp $
+ $Id: MyCameraCentral.m,v 1.73 2008/02/05 05:27:22 hxr Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -79,6 +79,7 @@
 #import "SPCA536Driver.h"
 #import "SPCA551Driver.h"
 #import "OV534Driver.h"
+#import "DivioDriver.h"
 
 #include "unistd.h"
 
@@ -359,7 +360,9 @@ MyCameraCentral* sharedCameraCentral=NULL;
     [self registerCameraDriver:[SPCA536ADriver class]];
     
     [self registerCameraDriver:[SPCA551ADriver class]];
-    
+
+    [self registerCameraDriver:[DivioDriver class]];
+
 #if EXPERIMENTAL
     [self registerCameraDriver:[CTDC1100Driver class]];      // This is incomplete st this time
     [self registerCameraDriver:[KworldTV300UDriver class]];  // This is very incomplete at this time

@@ -62,7 +62,7 @@ extern int debug;
 
 #endif // defined(MACAM)
 
-//static const char SPCA50X_H_CVS_VERSION[]="$Id: gspca.h,v 1.6 2008/01/24 21:22:59 hxr Exp $";
+//static const char SPCA50X_H_CVS_VERSION[]="$Id: gspca.h,v 1.7 2008/03/18 19:16:32 hxr Exp $";
 
 #if defined(__KERNEL__) || defined(MACAM)
 
@@ -190,6 +190,8 @@ if (debug >= level) info("[%s:%d] " fmt, __PRETTY_FUNCTION__, __LINE__ , ## args
 #define SENSOR_ICM107 37
 #define SENSOR_SOI968 38
 #define SENSOR_OV9650 39
+#define SENSOR_OV6650 40
+
 
 /* Alternate interface transfer sizes */
 #define SPCA50X_ALT_SIZE_0       0

@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.h,v 1.22 2007/10/17 23:04:30 hxr Exp $
+ $Id: MyCameraDriver.h,v 1.23 2008/03/18 16:10:11 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -331,6 +331,12 @@ Image buffers. There are two sets: lastIamgeBuffer and nextImageBuffer. The clie
 - (void) grabFinished:(id)sender withError:(CameraError)err;	//sends "notification" to "delegate"
 - (void) cameraHasShutDown:(id)sender;			//sends "notification" to "delegate"
 - (void) cameraEventHappened:(id)sender event:(CameraEvent)evt;	//sends "notification" to "delegate"	
+
+// Camera register functions, need to be defined for each controller
+- (int) dumpRegisters;
+- (int) getRegister:(UInt16)reg;
+- (int) setRegister:(UInt16)reg toValue:(UInt16)val;
+- (int) setRegister:(UInt16)reg toValue:(UInt16)val withMask:(UInt16)mask;
 
 //USB tool functions - should be used internally only
 - (BOOL) usbCmdWithBRequestType:(UInt8)bReqType bRequest:(UInt8)bReq wValue:(UInt16)wVal wIndex:(UInt16)wIdx buf:(void*)buf len:(short)len;//Sends a generic command

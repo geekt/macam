@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.m,v 1.32 2007/10/17 23:04:30 hxr Exp $
+ $Id: MyCameraDriver.m,v 1.33 2008/03/18 16:10:11 hxr Exp $
 */
 
 #import "MyCameraDriver.h"
@@ -791,6 +791,44 @@
 - (void) setCameraInfo:(MyCameraInfo *)info {
        cameraInfo = info;
 }
+
+
+// Camera register functions
+// they all return -1 if there is a problem
+
+- (int) dumpRegisters
+{
+    NSLog(@"MyCameraDriver:dumpRegisters: not implemented");
+    return -1;
+}
+
+- (int) getRegister:(UInt16)reg
+{
+    NSLog(@"MyCameraDriver:getRegister: not implemented");
+    return -1;
+}
+
+- (int) setRegister:(UInt16)reg toValue:(UInt16)val
+{
+    NSLog(@"MyCameraDriver:setRegister:toValue: not implemented");
+    return -1;
+}
+
+- (int) setRegister:(UInt16)reg toValue:(UInt16)val withMask:(UInt16)mask
+{
+    int result = [self getRegister:reg];
+    UInt8 actualVal = result;
+    
+    if (result < 0) 
+        return result;
+    
+    actualVal &= ~mask;  // clear out bits
+    val &= mask;         // only set bits allowed by mask
+    actualVal |= val;    // combine them
+    
+    return [self setRegister:reg toValue:actualVal];
+}
+
 
 // USB Tool functions for subclasses
 

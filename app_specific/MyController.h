@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.h,v 1.9 2007/02/18 05:34:51 hxr Exp $
+ $Id: MyController.h,v 1.10 2008/03/18 15:08:06 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -52,6 +52,15 @@
     IBOutlet NSWindow* disclaimerWindow;
     IBOutlet NSDrawer* settingsDrawer;
     IBOutlet NSDrawer* inspectorDrawer;
+    IBOutlet NSDrawer* debugDrawer;
+    IBOutlet NSTextField* registerAddress;
+    IBOutlet NSTextField* registerMask;
+    IBOutlet NSTextField* registerValueOld;
+    IBOutlet NSTextField* registerValueNew;
+    IBOutlet NSButton* registerSensorCheckbox;
+    IBOutlet NSImageView* histogramView;
+    IBOutlet NSTextField* debugMessage;
+    
     IBOutlet id blackwhiteCheckbox;
 	IBOutlet id ledCheckbox;
 	IBOutlet id cameraDisableCheckbox;
@@ -102,6 +111,11 @@
 - (IBAction)cameraDisableChanged:(id)sender;
 - (IBAction)reduceBandwidthChanged:(id)sender;
 
+- (IBAction)toggleDebugDrawer:(id)sender;
+- (IBAction)readRegister:(id)sender;
+- (IBAction)writeRegister:(id)sender;
+- (IBAction)dumpRegisters:(id)sender;
+
 //UI: Actions to do
 - (IBAction)doGrab:(id)sender;
 - (IBAction)doNextCam:(id)sender;
@@ -137,5 +151,8 @@
 - (BOOL) validateToolbarItem:(NSToolbarItem*)toolbarItem;
 //Delegates from the application
 - (BOOL) applicationOpenUntitledFile:(NSApplication*)theApplication;
+
+- (NSImageView *) getHistogramView;
+- (NSTextField *) getDebugMessageField;
 
 @end

@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.77 2008/03/20 19:10:59 hxr Exp $
+ $Id: MyCameraCentral.m,v 1.78 2008/04/08 19:54:13 hxr Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -284,8 +284,8 @@ MyCameraCentral* sharedCameraCentral=NULL;
     [self registerCameraDriver:[OV534Driver class]];
     [self registerCameraDriver:[OV538Driver class]];
     
-    [self registerCameraDriver:[PAC207DriverExperimental class]];
-    [self registerCameraDriver:[PAC207Driver class]];     // Based on SPCA5XX - seems to work pretty well
+    [self registerCameraDriver:[PAC207Driver class]];
+    
     [self registerCameraDriver:[SPCA561ADriver class]];   // Based on SPCA5XX - seems to work now
     [self registerCameraDriver:[TV8532Driver class]];     // Based on SPCA5XX - seems to work now
     [self registerCameraDriver:[TV8532RotatedDriver class]];

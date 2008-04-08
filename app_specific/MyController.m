@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.m,v 1.29 2008/03/18 15:12:24 hxr Exp $
+ $Id: MyController.m,v 1.30 2008/04/08 19:49:57 hxr Exp $
 */
 
 #import "MyController.h"
@@ -199,22 +199,25 @@ extern NSString* SnapshotQualityPrefsKey;
     [driver setHue:[hueSlider floatValue]];
 }
 
-- (IBAction)manGainChanged:(id)sender {
-    float gain=[gainSlider floatValue];
-    float shutter=[shutterSlider floatValue];
-    BOOL man=[manGainCheckbox intValue];
-    [driver setGain:gain];
-    [driver setShutter:shutter];
-    [driver setAutoGain:!man];
-    [gainSlider setEnabled:man&[driver canSetGain]];
-    [shutterSlider setEnabled:man&[driver canSetShutter]];
+- (IBAction) manGainChanged:(id) sender 
+{
+    BOOL manualGain = [manGainCheckbox intValue];
+    [driver setAutoGain:!manualGain];
+    
+    [driver setGain:[gainSlider floatValue]];
+    [gainSlider setEnabled:[driver canSetGain] && (![driver isAutoGain] || ![driver agcDisablesGain])];
+    
+    [driver setShutter:[shutterSlider floatValue]];
+    [shutterSlider setEnabled:[driver canSetShutter] && (![driver isAutoGain] || ![driver agcDisablesShutter])];
 }
 
-- (IBAction)gainChanged:(id)sender {
+- (IBAction) gainChanged:(id) sender 
+{
     [self manGainChanged:self];
 }
 
-- (IBAction)shutterChanged:(id)sender {
+- (IBAction) shutterChanged:(id) sender 
+{
     [self manGainChanged:self];
 }
 
@@ -1258,8 +1261,8 @@ OSStatus PathToFSSpec (NSString *path, FSSpec *outSpec)
             [reduceBandwidthCheckbox setEnabled:[driver canSetUSBReducedBandwidth]];
 
             [whiteBalancePopup selectItemAtIndex:[driver whiteBalanceMode]-1];
-            [gainSlider setEnabled:([driver canSetGain])&&(![driver isAutoGain])];
-            [shutterSlider setEnabled:([driver canSetShutter])&&(![driver isAutoGain])];
+            [gainSlider setEnabled:[driver canSetGain] && (![driver isAutoGain] || ![driver agcDisablesGain])];
+            [shutterSlider setEnabled:[driver canSetShutter] && (![driver isAutoGain] || ![driver agcDisablesShutter])];
             if ([driver maxCompression]>0) {
                 [compressionSlider setNumberOfTickMarks:[driver maxCompression]+1];
                 [compressionSlider setEnabled:YES];

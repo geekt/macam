@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.m,v 1.33 2008/03/18 16:10:11 hxr Exp $
+ $Id: MyCameraDriver.m,v 1.34 2008/04/08 19:39:50 hxr Exp $
 */
 
 #import "MyCameraDriver.h"
@@ -229,6 +229,32 @@
     brightness=v;
 }
 
+- (float) brightnessStep
+{
+    return 1 / 255.0;
+}
+
+// offset is a hardware-only setting
+
+- (BOOL) canSetOffset
+{
+    return NO;
+}
+
+- (float) offset
+{
+    return 0;
+}
+
+- (void) setOffset:(float) v
+{
+}
+
+- (float) offsetStep
+{
+    return 1 / 255.0;
+}
+
 - (BOOL) canSetContrast {
     return NO;
 }
@@ -301,6 +327,16 @@
     gain=v;
 }
 
+- (float) gainStep
+{
+    return 1 / 255.0;
+}
+
+- (BOOL) agcDisablesGain
+{
+    return YES;
+}
+
 - (BOOL) canSetShutter {
     return NO;
 }
@@ -311,6 +347,16 @@
 
 - (void) setShutter:(float)v {
     shutter=v;
+}
+
+- (float) shutterStep
+{
+    return 1 / 255.0;
+}
+
+- (BOOL) agcDisablesShutter
+{
+    return YES;
 }
 
 - (BOOL) canSetAutoGain {	//Gain and shutter combined (so far - let's see what other cams can do...)

@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.h,v 1.23 2008/03/18 16:10:11 hxr Exp $
+ $Id: MyCameraDriver.h,v 1.24 2008/04/08 19:38:29 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -176,8 +176,15 @@ Image buffers. There are two sets: lastIamgeBuffer and nextImageBuffer. The clie
 - (BOOL) canSetBrightness;
 - (float) brightness;
 - (void) setBrightness:(float)v;
+- (float) brightnessStep;
 
-// Contrast
+// Offset -  a hardware-pnly setting
+- (BOOL) canSetOffset;
+- (float) offset;
+- (void) setOffset:(float)v;
+- (float) offsetStep;
+
+    // Contrast
 - (BOOL) canSetContrast;
 - (float) contrast;
 - (void) setContrast:(float)v;
@@ -206,11 +213,15 @@ Image buffers. There are two sets: lastIamgeBuffer and nextImageBuffer. The clie
 - (BOOL) canSetGain;
 - (float) gain;
 - (void) setGain:(float)v;
+- (float) gainStep;
+- (BOOL) agcDisablesGain;
 
 // Shutter speed
 - (BOOL) canSetShutter;
 - (float) shutter;
 - (void) setShutter:(float)v;
+- (float) shutterStep;
+- (BOOL) agcDisablesShutter;
 
 // Automatic exposure - will affect shutter and gain
 - (BOOL) canSetAutoGain;

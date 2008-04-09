@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCExpressADriver.h,v 1.8 2006/03/23 15:53:27 hxr Exp $
+ $Id: MyQCExpressADriver.h,v 1.9 2008/04/09 19:33:10 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -59,7 +59,6 @@ typedef struct STV600GrabContext {
     STV600TransferContext transferContexts[STV600_NUM_TRANSFERS];	//The transfer contexts
     IOUSBInterfaceInterface** intf;	//Just a copy from our interface interface so the callback can issue usb
     UInt64 initiatedUntil;		//next usb frame number to initiate a transfer for
-    NSLock* chunkReadyLock;		//Our "traffic light" for decodingThread
     NSLock* chunkListLock;		//Mutex for chunkBuffer manipulation
     BOOL* shouldBeGrabbing;		//Ref to the global indicator if the grab should go on
     CameraError err;			//Return value for common errors during grab

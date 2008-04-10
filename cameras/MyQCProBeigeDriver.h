@@ -18,7 +18,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyQCProBeigeDriver.h,v 1.4 2006/06/23 03:29:03 hxr Exp $
+ $Id: MyQCProBeigeDriver.h,v 1.5 2008/04/10 05:40:58 hxr Exp $
  */
 
 #import <Cocoa/Cocoa.h>
@@ -31,7 +31,6 @@
     NSMutableArray* fullChunks;		//Array of filled raw chunks (NSMutableData objects) - fifo queue: idx 0 = oldest
     NSLock* emptyChunkLock;		//Lock to access the empty chunk array
     NSLock* fullChunkLock;		//Lock to access the full chunk array
-    NSLock* chunkReadyLock;		//Lock to message a new chunk from grabbingThread to decodingThread
     long grabWidth;			//The real width the camera is sending (usually there's a border for interpolation)
     long grabHeight;			//The real height the camera is sending (usually there's a border for interpolation)
     unsigned long grabBufferSize;	//The number of bytes the cam will send in the bulk pipe for each chunk

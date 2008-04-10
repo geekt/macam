@@ -17,7 +17,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySPCA500Driver.h,v 1.7 2006/03/07 05:12:04 hxr Exp $
+ $Id: MySPCA500Driver.h,v 1.8 2008/04/10 05:40:58 hxr Exp $
  */
 
 #import <Cocoa/Cocoa.h>
@@ -46,7 +46,6 @@ typedef struct SPCA500GrabContext {
     IOUSBInterfaceInterface** intf;	//Just a copy from our interface interface so the callback can issue usb
     BOOL* shouldBeGrabbing;		//Ref to the global indicator if the grab should go on
     CameraError err;			//Return value for common errors during grab
-    NSLock* chunkReadyLock;		//Unlocked to signal decodingThread that there's an image
     long framesSinceLastChunk;		//Watchdog counter to detect invalid isoc data stream
     long chunkBufferLength;		//The size of the chunk buffers
     short numEmptyBuffers;		//The number of empty (ready-to-fill) buffers in the array below

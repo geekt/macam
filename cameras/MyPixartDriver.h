@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyPixartDriver.h,v 1.4 2006/04/05 21:05:42 hxr Exp $
+ $Id: MyPixartDriver.h,v 1.5 2008/04/10 05:40:58 hxr Exp $
  */
 
 #import <Cocoa/Cocoa.h>
@@ -58,7 +58,6 @@ struct code_table_t {
 
     NSLock* emptyChunkLock;			// Lock to access the empty chunk array
     NSLock* fullChunkLock;			// Lock to access the full chunk array
-    NSLock* chunkReadyLock;			// Lock to message a new chunk from grabbingThread to decodingThread
 
 	long framesSinceLastChunk;		// Watchdog counter to detect invalid isoc data stream
 

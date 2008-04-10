@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.m,v 1.30 2008/04/08 19:49:57 hxr Exp $
+ $Id: MyController.m,v 1.31 2008/04/10 05:20:53 hxr Exp $
 */
 
 #import "MyController.h"
@@ -261,8 +261,8 @@ extern NSString* SnapshotQualityPrefsKey;
             [previewView setImage:image];
             winFrame=[window frame];
             screenFrame=[[window screen] frame];
-            minWinSize.width=[driver width]+40;
-            minWinSize.height=[driver height]+48;
+            minWinSize.width=[driver width] + 40;
+            minWinSize.height=[driver height] + 116;  // Must account for the toolbar
 //If the window is to small to show the whole preview, resize it to fit
             if ((minWinSize.width>winFrame.size.width)||(minWinSize.height>winFrame.size.height)) {
                 if (minWinSize.width>winFrame.size.width) {

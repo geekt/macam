@@ -18,7 +18,7 @@
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  
- $Id: MyVicamDriver.m,v 1.7 2007/10/10 19:32:48 hxr Exp $
+ $Id: MyVicamDriver.m,v 1.8 2008/04/11 04:40:03 hxr Exp $
 
  */
 
@@ -651,7 +651,6 @@ Why CFRunLoops? Somehow, I didn't manage to get the NSRunLoop stopped after inva
     fullChunks=NULL;
     emptyChunkLock=NULL;
     fullChunkLock=NULL;
-    chunkReadyLock=NULL;
     decodeRGBBuffer=NULL;
     decodeRGBBufferSize=4*gVicamInfo[requestIndex].cameraWidth*gVicamInfo[requestIndex].cameraHeight;
     MALLOC(decodeRGBBuffer,UInt8*,decodeRGBBufferSize,decodeRGBBuffer);
@@ -664,9 +663,6 @@ Why CFRunLoops? Somehow, I didn't manage to get the NSRunLoop stopped after inva
     if (!emptyChunkLock) return CameraErrorNoMem;
     fullChunkLock=[[NSLock alloc] init];
     if (!fullChunkLock) return CameraErrorNoMem;
-    chunkReadyLock=[[NSLock alloc] init];
-    if (!chunkReadyLock) return CameraErrorNoMem;
-    [chunkReadyLock tryLock];					//Should be locked by default
     controlChange=YES;						//We should set the camera settings before we start
     return CameraErrorOK;
     
@@ -692,10 +688,6 @@ Why CFRunLoops? Somehow, I didn't manage to get the NSRunLoop stopped after inva
     if (fullChunkLock) {
         [fullChunkLock release];
         fullChunkLock=NULL;
-    }
-    if (chunkReadyLock) {
-        [chunkReadyLock release];
-        chunkReadyLock=NULL;
     }
     if (decodeRGBBuffer) {
         FREE(decodeRGBBuffer,"decodeRGBBuffer");
@@ -731,7 +723,6 @@ Why CFRunLoops? Somehow, I didn't manage to get the NSRunLoop stopped after inva
     }
 
     shouldBeGrabbing=NO;			//error in grabbingThread or abort? initiate shutdown of everything else
-    [chunkReadyLock unlock];			//give the decodingThread a chance to abort
     [pool release];
     grabbingThreadRunning=NO;
     [NSThread exit];
@@ -783,8 +774,6 @@ static void handleFullChunk(void *refcon, IOReturn result, void *arg0) {
         [fillingChunk release];
         fillingChunk=NULL;		//to be sure...
         [fullChunkLock unlock];
-        [chunkReadyLock tryLock];	//New chunk is there. Try to wake up the decoder
-        [chunkReadyLock unlock];
     } else {				//Incorrect chunk -> ignore (but back to empty chunks)
         [emptyChunkLock lock];
         [emptyChunks addObject:fillingChunk];
@@ -908,7 +897,9 @@ static void handleFullChunk(void *refcon, IOReturn result, void *arg0) {
     }
     //Do our decoding loop
     while (shouldBeGrabbing) {
-        [chunkReadyLock lock];					//wait for new chunks to arrive
+        if ([fullChunks count] == 0) 
+            usleep(1000); // 1 ms (1000 micro-seconds)
+
         while ((shouldBeGrabbing)&&([fullChunks count]>0)) {	//decode all full chunks we have until we lock again
             BOOL bufferSet;
             [fullChunkLock lock];				//Take the oldest chunk to decode

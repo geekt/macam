@@ -18,7 +18,7 @@
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
- $Id: MyVicamDriver.h,v 1.2 2003/02/24 13:05:09 mattik Exp $
+ $Id: MyVicamDriver.h,v 1.3 2008/04/11 04:40:03 hxr Exp $
  
  */
 
@@ -51,7 +51,6 @@
     
 //Grabbing Thread state and variables
     BOOL			grabbingThreadRunning;	//State of grabbingThread (set by decodingThread, reset by grabbingThread)
-    NSLock*			chunkReadyLock;		//Notification lock about freshly filled chunks
     NSLock*			fullChunkLock;		//Access lock to fullChunks array
     NSLock*			emptyChunkLock;		//Access lock to ep
     NSMutableArray*		fullChunks;		//An Array of NSMutableData objects for raw image data ("chunks") - filled, for decoding

@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCPIACameraDriver.m,v 1.5 2007/01/17 23:56:16 hxr Exp $
+ $Id: MyCPIACameraDriver.m,v 1.6 2008/04/11 04:40:03 hxr Exp $
 */
 
 #include <IOKit/IOKitLib.h>
@@ -378,13 +378,6 @@ Third is the SkipFrames count in intStreamCap to send only the n-th image, so we
         grabContext.chunkListLock=[[NSLock alloc] init];
         if ((grabContext.chunkListLock)==NULL) ok=NO;
     }
-    if (ok) {
-        grabContext.chunkReadyLock=[[NSLock alloc] init];
-        if ((grabContext.chunkReadyLock)==NULL) ok=NO;
-        else {					//locked by standard, will be unlocked by isocComplete
-            [grabContext.chunkReadyLock tryLock];
-        }
-    }
 //get the chunk buffers
     for (i=0;(i<CPIA_NUM_CHUNK_BUFFERS)&&(ok);i++) {
         MALLOC(grabContext.emptyChunkBuffers[i].buffer,unsigned char*,grabContext.chunkBufferLength,"CPIA chunk buffers");
@@ -415,8 +408,6 @@ Third is the SkipFrames count in intStreamCap to send only the n-th image, so we
     long i;
     if (grabContext.chunkListLock)  [grabContext.chunkListLock release];	//release lock
     grabContext.chunkListLock=NULL;
-    if (grabContext.chunkReadyLock) [grabContext.chunkReadyLock release];	//release lock
-    grabContext.chunkReadyLock=NULL;
     for (i=0;i<grabContext.numEmptyBuffers;i++) {
         if (grabContext.emptyChunkBuffers[i].buffer) FREE(grabContext.emptyChunkBuffers[i].buffer,"empty chunk buffers");
         grabContext.emptyChunkBuffers[i].buffer=NULL;
@@ -544,8 +535,6 @@ static void isocComplete(void *refcon, IOReturn result, void *arg0) {
                         gCtx->fillingChunk=false;
                         gCtx->fillingChunkBuffer.buffer=NULL;	//it's redundant but to be safe...
                         [gCtx->chunkListLock unlock];		//exit critical section
-                        [gCtx->chunkReadyLock tryLock];		//try to wake up the decoder
-                        [gCtx->chunkReadyLock unlock];
                     }
                 }
             }
@@ -639,7 +628,6 @@ static bool StartNextIsochRead(CPIAGrabContext* grabContext, int transferIdx) {
     [self shutdownGrabStream];
     [self usbSetAltInterfaceTo:0 testPipe:0];
     shouldBeGrabbing=NO;			//error in grabbingThread or abort? initiate shutdown of everything else
-    [grabContext.chunkReadyLock unlock];	//give the decodingThread a chance to abort
     [pool release];
     grabbingThreadRunning=NO;
     [NSThread exit];
@@ -676,7 +664,9 @@ static bool StartNextIsochRead(CPIAGrabContext* grabContext, int transferIdx) {
 
 //Following: The decoding loop
     while (shouldBeGrabbing) {
-        [grabContext.chunkReadyLock lock];				//wait for ready-to-decode chunks
+        if (grabContext.numFullBuffers == 0) 
+            usleep(1000); // 1 ms (1000 micro-seconds)
+
         err = [self doChunkReadyThings ];
         while ((grabContext.numFullBuffers>0)&&(shouldBeGrabbing)&&(err==CameraErrorOK)) {	//decode all chunks or skip if we have stopped grabbing
             [grabContext.chunkListLock lock];				//lock for access to chunk list

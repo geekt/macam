@@ -17,7 +17,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySonix2028Driver.h,v 1.14 2006/10/12 13:45:45 hxr Exp $
+ $Id: MySonix2028Driver.h,v 1.15 2008/04/11 04:40:03 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -58,7 +58,6 @@ typedef struct SONIXGrabContext {
     SONIXTransferContext transferContexts[SONIX_NUM_TRANSFERS];	//The transfer contexts
     IOUSBInterfaceInterface** intf;	//Just a copy from our interface interface so the callback can issue usb
     UInt64 initiatedUntil;		//next usb frame number to initiate a transfer for
-    NSLock* chunkReadyLock;		//Our "traffic light" for decodingThread
     NSLock* chunkListLock;		//Mutex for chunkBuffer manipulation
     BOOL* shouldBeGrabbing;		//Ref to the global indicator if the grab should go on
     CameraError err;			//Return value for common errors during grab

@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.m,v 1.31 2008/04/10 05:20:53 hxr Exp $
+ $Id: MyController.m,v 1.32 2008/04/16 19:10:47 hxr Exp $
 */
 
 #import "MyController.h"
@@ -174,6 +174,27 @@ extern NSString* SnapshotQualityPrefsKey;
     [image release];
     [super dealloc];
 }
+
+
+- (BOOL) acceptsFirstResponder
+{
+    return YES;
+}
+
+
+- (void) keyDown:(NSEvent *) theEvent 
+{
+    NSString * theKey = [theEvent charactersIgnoringModifiers];
+    
+    if ([theKey length] == 1) 
+    {
+        unichar keyChar = [theKey characterAtIndex:0];
+        
+        if (keyChar == ' ') 
+            [self doGrab:theEvent];
+    }
+}
+
 
 - (IBAction)brightnessChanged:(id)sender {
     [driver setBrightness:[brightnessSlider floatValue]];

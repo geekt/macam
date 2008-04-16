@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.h,v 1.10 2008/03/18 15:08:06 hxr Exp $
+ $Id: MyController.h,v 1.11 2008/04/16 19:10:47 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -27,7 +27,7 @@
 @class MyCameraInspector,MyMovieRecorder;
 
 
-@interface MyController : NSObject
+@interface MyController : NSResponder
 {
     IBOutlet NSWindow* window;
     IBOutlet NSSlider* brightnessSlider;
@@ -90,6 +90,10 @@
 //Disclaimer handling
 - (void) disclaimerOK:(id)sender;	
 - (void) disclaimerQuit:(id)sender;
+
+// Respond to space-bar
+- (BOOL) acceptsFirstResponder;
+- (void) keyDown:(NSEvent *) theEvent;
 
 //UI: Handlers for control value changes
 - (IBAction)brightnessChanged:(id)sender;

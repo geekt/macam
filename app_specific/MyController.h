@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.h,v 1.11 2008/04/16 19:10:47 hxr Exp $
+ $Id: MyController.h,v 1.12 2008/04/26 20:08:12 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -40,11 +40,11 @@
     IBOutlet NSSlider* gainSlider;
     IBOutlet NSSlider* shutterSlider;
     IBOutlet NSSlider* compressionSlider;
-    IBOutlet NSButton* horizontalFlipCheckbox;
+    IBOutlet NSPopUpButton* orientationPopup;
     IBOutlet NSImageView* previewView;
     IBOutlet NSTextField* statusText;
     IBOutlet NSPopUpButton* whiteBalancePopup;
-    IBOutlet NSPopUpButton* colorModePopup;
+//  IBOutlet NSPopUpButton* colorModePopup;
     IBOutlet NSPopUpButton* sizePopup;
     IBOutlet NSPopUpButton* fpsPopup;
     IBOutlet NSPopUpButton* flickerPopup;
@@ -109,7 +109,7 @@
 - (IBAction)flickerChanged:(id)sender;
 - (IBAction)compressionChanged:(id)sender;
 - (IBAction)whiteBalanceChanged:(id)sender;
-- (IBAction)horizontalFlipChanged:(id)sender;
+- (IBAction)orientationChanged:(id)sender;
 - (IBAction)blackwhiteCheckboxChanged:(id)sender;
 - (IBAction)ledCheckboxChanged:(id)sender;
 - (IBAction)cameraDisableChanged:(id)sender;

@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.m,v 1.34 2008/04/08 19:39:50 hxr Exp $
+ $Id: MyCameraDriver.m,v 1.35 2008/04/26 20:04:13 hxr Exp $
 */
 
 #import "MyCameraDriver.h"
@@ -369,6 +369,37 @@
 
 - (void) setAutoGain:(BOOL)v{
     autoGain=v;
+}
+
+// Orientation
+
+- (BOOL) canSetOrientationTo:(OrientationMode) m
+{
+    if ([self canSetHFlip]) 
+        if (m == FlipHorizontal) 
+            return YES;
+    
+    return (m == NormalOrientation) ? YES : NO;
+}
+
+- (OrientationMode) orientation
+{
+    if ([self hFlip]) 
+        return FlipHorizontal;
+    
+    return NormalOrientation;
+}
+
+- (void) setOrientation:(OrientationMode) m
+{
+    if ([self canSetHFlip]) 
+    {
+        if (m == NormalOrientation) 
+            [self setHFlip:NO];
+        
+        if (m == FlipHorizontal) 
+            [self setHFlip:YES];
+    }
 }
 
 - (BOOL) canSetHFlip {

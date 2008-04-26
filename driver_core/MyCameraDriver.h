@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.h,v 1.24 2008/04/08 19:38:29 hxr Exp $
+ $Id: MyCameraDriver.h,v 1.25 2008/04/26 20:03:20 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -232,6 +232,11 @@ Image buffers. There are two sets: lastIamgeBuffer and nextImageBuffer. The clie
 - (BOOL) canSetLed;
 - (BOOL) isLedOn;
 - (void) setLed:(BOOL)v;
+
+// Orientation
+- (BOOL) canSetOrientationTo:(OrientationMode) m;
+- (OrientationMode) orientation;
+- (void) setOrientation:(OrientationMode) m;
 
 // Horizontal flipping
 - (BOOL) canSetHFlip;		//Horizontal flipping

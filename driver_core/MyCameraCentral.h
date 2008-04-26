@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.h,v 1.9 2007/11/14 21:49:08 hxr Exp $
+ $Id: MyCameraCentral.h,v 1.10 2008/04/26 19:59:44 hxr Exp $
  */
 
 #import <Cocoa/Cocoa.h>
@@ -106,6 +106,7 @@
 //Camera defaults managements
 - (BOOL) setCameraToDefaults:(MyCameraDriver*) camera;
 - (BOOL) saveCameraSettingsAsDefaults:(MyCameraDriver*) camera;
+- (BOOL) deleteCameraSettings:(MyCameraDriver *) cam;
 
 - (BOOL) cameraDisabled:(Class)driver withVendorID:(UInt16)vid andProductID:(UInt16)pid;
 - (void) setDisableCamera:(MyCameraDriver *)camera yesNo:(BOOL)disable;

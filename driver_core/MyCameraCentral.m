@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.78 2008/04/08 19:54:13 hxr Exp $
+ $Id: MyCameraCentral.m,v 1.79 2008/04/26 20:02:00 hxr Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -689,6 +689,8 @@ MyCameraCentral* sharedCameraCentral=NULL;
             [cam setAutoGain:[[camDict objectForKey:@"autogain"] boolValue]];
         if ([camDict objectForKey:@"hflip"])
             [cam setHFlip:[[camDict objectForKey:@"hflip"] boolValue]];
+        if ([camDict objectForKey:@"orientation"])
+            [cam setOrientation:[[camDict objectForKey:@"orientation"] shortValue]];
         if ([camDict objectForKey:@"compression"])
             [cam setCompression:[[camDict objectForKey:@"compression"] shortValue]];
         if ([camDict objectForKey:@"resolution"]&&[camDict objectForKey:@"fps"])
@@ -699,6 +701,39 @@ MyCameraCentral* sharedCameraCentral=NULL;
             [cam setFlicker:(FlickerType)[[camDict objectForKey:@"flicker control"] shortValue]];
        	if ([camDict objectForKey:@"bandwidth reduction"])
             [cam setUSBReducedBandwidth:[[camDict objectForKey:@"bandwidth reduction"] boolValue]];
+    }
+    [pool release];
+    return ok;
+}
+
+- (BOOL) deleteCameraSettings:(MyCameraDriver *) cam
+{
+    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+    BOOL ok = YES;
+    short idx;
+    unsigned long cid;
+    
+    if (ok) 
+    {
+        if (!cam) 
+            ok = NO;
+    }
+    
+    if (ok) 
+    {
+        idx = [self indexOfCamera:cam];
+        if (idx < 0) 
+            ok = NO;		//This camera is not listed as connected
+    }
+    if (ok) 
+    {
+        cid = [self idOfCameraWithIndex:idx];
+        if (cid < 1) 
+            ok = NO;		//This camera has no cid (should not happen ever)
+    }
+    if (ok) 
+    {
+        [self setPrefs:NULL forKey:NSStringFromClass([[cameras objectAtIndex:idx] driverClass])];
     }
     [pool release];
     return ok;
@@ -746,6 +781,8 @@ MyCameraCentral* sharedCameraCentral=NULL;
             [camDict setObject:[NSNumber numberWithBool:[cam isAutoGain]] forKey:@"autogain"];
         if ([cam canSetHFlip])
             [camDict setObject:[NSNumber numberWithBool:[cam hFlip]] forKey:@"hflip"];
+        if (YES) // ([cam canSetOrientation])
+            [camDict setObject:[NSNumber numberWithShort:[cam orientation]] forKey:@"orientation"];
         if ([cam maxCompression]>0)
             [camDict setObject:[NSNumber numberWithShort:[cam compression]] forKey:@"compression"];
         if ([cam canSetWhiteBalanceMode])

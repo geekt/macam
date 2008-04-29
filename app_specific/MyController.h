@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.h,v 1.12 2008/04/26 20:08:12 hxr Exp $
+ $Id: MyController.h,v 1.13 2008/04/29 20:40:08 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -145,6 +145,8 @@
 - (void)grabFinished:(id)cam withError:(CameraError)err;
 - (void)cameraHasShutDown:(id)cam;
 - (void) cameraEventHappened:(id)sender event:(CameraEvent)evt;
+- (void) updateStatus:(NSString *)status fpsDisplay:(float)fpsDisplay fpsReceived:(float)fpsReceived;
+
 //menu item validation
 - (BOOL) validateMenuItem:(NSMenuItem *)item;
 //Toolbar stuff

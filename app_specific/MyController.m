@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.m,v 1.33 2008/04/26 20:08:12 hxr Exp $
+ $Id: MyController.m,v 1.34 2008/04/29 20:40:55 hxr Exp $
 */
 
 #import "MyController.h"
@@ -529,6 +529,25 @@ extern NSString* SnapshotQualityPrefsKey;
             [driver setImageBuffer:[imageRep bitmapData] bpp:3 rowBytes:[driver width]*3];
         }
     }
+}
+
+
+- (void) updateStatus:(NSString *)status fpsDisplay:(float)fpsDisplay fpsReceived:(float)fpsReceived
+{
+    NSString * append;
+    NSString * newStatus;
+    
+    if (fpsReceived == 0.0) 
+        append = [NSString stringWithFormat:LStr(@" (%3.1f fps)"), fpsDisplay];
+    else 
+        append = [NSString stringWithFormat:LStr(@" (%3.1f fps, receiving %3.1f fps)"), fpsDisplay, fpsReceived];
+    
+    if (status == NULL) 
+        newStatus = [[NSString stringWithString:LStr(@"Status: Playing")] stringByAppendingString:append];
+    else 
+        newStatus = [status stringByAppendingString:append];
+    
+    [statusText setStringValue:newStatus];
 }
 
 

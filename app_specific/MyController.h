@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.h,v 1.13 2008/04/29 20:40:08 hxr Exp $
+ $Id: MyController.h,v 1.14 2008/05/21 18:18:12 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -92,6 +92,7 @@
 - (void) disclaimerQuit:(id)sender;
 
 // Respond to space-bar
+- (BOOL) needsPanelToBecomeKey;
 - (BOOL) acceptsFirstResponder;
 - (void) keyDown:(NSEvent *) theEvent;
 

@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.m,v 1.34 2008/04/29 20:40:55 hxr Exp $
+ $Id: MyController.m,v 1.35 2008/05/21 18:18:52 hxr Exp $
 */
 
 #import "MyController.h"
@@ -178,6 +178,12 @@ extern NSString* SnapshotQualityPrefsKey;
     [previewView setImage:NULL];
     [image release];
     [super dealloc];
+}
+
+
+- (BOOL) needsPanelToBecomeKey
+{
+    return YES;
 }
 
 

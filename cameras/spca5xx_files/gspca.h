@@ -55,14 +55,14 @@ enum
 #endif
 
 #if DEBUG
-#define SPCA50X_ENABLE_DEBUG
+#define SPCA50X_ENABLE_DEBUG 1
 #define info(args...) { printf(args); printf("\n"); }
 extern int debug;
 #endif
 
 #endif // defined(MACAM)
 
-//static const char SPCA50X_H_CVS_VERSION[]="$Id: gspca.h,v 1.7 2008/03/18 19:16:32 hxr Exp $";
+//static const char SPCA50X_H_CVS_VERSION[]="$Id: gspca.h,v 1.8 2008/05/23 17:23:11 hxr Exp $";
 
 #if defined(__KERNEL__) || defined(MACAM)
 

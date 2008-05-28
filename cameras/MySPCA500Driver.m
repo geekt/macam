@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MySPCA500Driver.m,v 1.12 2008/04/10 05:40:58 hxr Exp $
+ $Id: MySPCA500Driver.m,v 1.13 2008/05/28 21:16:31 hxr Exp $
  */
 
 
@@ -96,12 +96,12 @@ extern UInt8 QTables[];
         [NSNumber numberWithUnsignedShort:PRODUCT_POCKET_PC_CS630],@"idProduct",
         [NSNumber numberWithUnsignedShort:VENDOR_INTEL],@"idVendor",
         @"Intel Pocket PC/PC Camera CS630 (experimental)",@"name",NULL];
-	
+	/*
 	NSDictionary* dict3=[NSDictionary dictionaryWithObjectsAndKeys:
         [NSNumber numberWithUnsignedShort:PRODUCT_EZ200],@"idProduct",
         [NSNumber numberWithUnsignedShort:VENDOR_KODAK],@"idVendor",
         @"Kodak EZ200 (experimental)",@"name",NULL];
-	
+	*/
 	NSDictionary* dict4=[NSDictionary dictionaryWithObjectsAndKeys:
         [NSNumber numberWithUnsignedShort:PRODUCT_PC_CAM_300],@"idProduct",
         [NSNumber numberWithUnsignedShort:VENDOR_CREATIVE_LABS],@"idVendor",
@@ -122,7 +122,7 @@ extern UInt8 QTables[];
         [NSNumber numberWithUnsignedShort:VENDOR_MINTON],@"idVendor",
         @"Minton S-Cam F5 or D-Link DSC-350F",@"name",NULL];
 	
-	return [NSArray arrayWithObjects:dict1,dict2,dict3,dict4,dict5,dict6,dict7,NULL];
+	return [NSArray arrayWithObjects:dict1,dict2,dict4,dict5,dict6,dict7,NULL];
 }
 
 - (CameraError) startupWithUsbLocationId:(UInt32)usbLocationId {

@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.81 2008/05/23 19:42:53 hxr Exp $
+ $Id: MyCameraCentral.m,v 1.82 2008/05/28 21:17:58 hxr Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -324,6 +324,7 @@ MyCameraCentral* sharedCameraCentral=NULL;
     [self registerCameraDriver:[SN9CxxxDriverPhilips1 class]];
     [self registerCameraDriver:[SN9CxxxDriverMicrosoft1 class]];
     [self registerCameraDriver:[SN9CxxxDriverGenius1 class]];
+    [self registerCameraDriver:[SN9CxxxDriverGenius2 class]];
     
     [self registerCameraDriver:[SN9C20xDriver class]];
     
@@ -333,14 +334,16 @@ MyCameraCentral* sharedCameraCentral=NULL;
     [self registerCameraDriver:[MR97310Driver class]];
     
     [self registerCameraDriver:[SPCA500Driver class]];
-    [self registerCameraDriver:[SPCA500ADriver class]];
-    [self registerCameraDriver:[SPCA500CDriver class]];
+    [self registerCameraDriver:[SPCA500DriverIntel1 class]];
+    [self registerCameraDriver:[SPCA500DriverLogitech1 class]];
+    [self registerCameraDriver:[SPCA500DriverClickSmart310 class]];
+    [self registerCameraDriver:[SPCA500DriverKodakEZ200 class]];
     
     [self registerCameraDriver:[SPCA501ADriver class]];
     [self registerCameraDriver:[SPCA501ADriverVariant1 class]];
     [self registerCameraDriver:[SPCA501ADriverVariant2 class]];
     [self registerCameraDriver:[SPCA501ADriverVariant3 class]];
-    [self registerCameraDriver:[SPCA501ADriverVariant4 class]];
+//  [self registerCameraDriver:[SPCA501ADriverVariant4 class]];
     
     [self registerCameraDriver:[SPCA504ADriver class]];
     [self registerCameraDriver:[SPCA504ADriverAiptekMiniCam class]];

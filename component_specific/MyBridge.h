@@ -15,13 +15,18 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyBridge.h,v 1.7 2007/10/17 22:43:03 hxr Exp $
+ $Id: MyBridge.h,v 1.8 2008/06/01 04:44:50 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
 #import <Carbon/Carbon.h>
 #import <QuickTime/QuickTime.h>
 #include "GlobalDefs.h"
+
+#if (MAC_OS_X_VERSION_MAX_ALLOWED <= MAC_OS_X_VERSION_10_3)
+#include <sys/time.h>
+#endif 
+
 
 #define NUM_BRIDGE_GRAB_BUFFERS 2
 

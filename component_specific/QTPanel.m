@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: QTPanel.m,v 1.8 2007/01/31 18:29:41 hxr Exp $
+ $Id: QTPanel.m,v 1.9 2008/06/12 00:07:19 hxr Exp $
 */
 
 #include "QTPanel.h"
@@ -159,7 +159,8 @@ pascal ComponentResult sgpnRegister(sgpnGlobals storage) {
             bridge=[[MyBridge alloc] initWithCentral:central cid:cid];
 //Note that we pass the bridge to the vdig in the Component refcon with a retain count of 1.
             if (bridge) {
-                if ([central getName:cname forID:cid]) {
+                if ([central getRegistrationName:cname forID:cid maxLength:255]) 
+                {
                     CStr2PStr(cname,pname);
                     PtrToHand ((Ptr)pname, &name, pname[0]+1);
                     comp=RegisterComponent(&cd,&vdigMainEntry,
@@ -256,8 +257,8 @@ pascal ComponentResult sgpnGetDITL(sgpnGlobals storage, Handle* ditl) {
 
 
 pascal ComponentResult sgpnInstall(sgpnGlobals storage, SGChannel channel, DialogRef dlg, short itemOffset) {
-    char cstr[200];
-    unsigned char pstr[200];
+    char cstr[256];
+    unsigned char pstr[256];
     ComponentResult err=0;
     VideoDigitizerComponent vdig;
     ComponentDescription cd;
@@ -275,7 +276,8 @@ pascal ComponentResult sgpnInstall(sgpnGlobals storage, SGChannel channel, Dialo
     bridge=(**storage).bridge=(**((vdigGlobals)(GetComponentInstanceStorage(vdig)))).bridge;
     if ((bridge)==NULL) return internalQuickTimeError;	//We NEED the bridge
     [bridge retain];				//Hold the bridge
-    if ([bridge getName:cstr]) {			//Try to get the camera name
+    if ([bridge getName:cstr maxLength:255]) 			//Try to get the camera name
+    {
         CStr2PStr(cstr,pstr);
         GetDialogItem(dlg,itemOffset+1,&dit,&di,&dib);		
         SetDialogItemText(di,pstr);

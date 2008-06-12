@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.83 2008/06/05 17:28:27 hxr Exp $
+ $Id: MyCameraCentral.m,v 1.84 2008/06/12 00:00:26 hxr Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -602,6 +602,7 @@ MyCameraCentral* sharedCameraCentral=NULL;
     }
     if (!err) {
         [cam setDelegate:delegate];
+        [cam setCameraInfo:dev];
         err=[cam startupWithUsbLocationId:[dev locationID]];
         if (err!=CameraErrorOK) {
             [cam release];
@@ -613,7 +614,7 @@ MyCameraCentral* sharedCameraCentral=NULL;
     }
     if (cam!=NULL) {
         [dev setDriver:cam];
-        [cam setCameraInfo:dev];
+//        [cam setCameraInfo:dev];
         [self setCameraToDefaults:cam];
         if (outCam) *outCam=cam;
     }
@@ -629,39 +630,76 @@ MyCameraCentral* sharedCameraCentral=NULL;
     return driver;
 }
 
-- (NSString*) nameForID:(unsigned long)cid {
-    long l=0;
-    while (l<[cameras count]) {
-        if ([[cameras objectAtIndex:l] cid]==cid) {
-            return [[cameras objectAtIndex:l] cameraName];
-        } else {
-            l++;
-        }
-    }
+- (NSString *) nameForID:(unsigned long) cid 
+{
+    long l;
+    
+    for (l = 0; l < [cameras count]; l++) 
+        if ([[cameras objectAtIndex:l] cid] == cid) 
+        {
+ 			NSString * name = [[cameras objectAtIndex:l] cameraName]; // get camera name
+ 			int  i, counter = 1;
+ 			NSString * modifiedName = nil;
+            
+ 			for (i = 0; i < [cameras count]; i++)  // look again over all cameras
+            {
+ 				NSString * findName = [[cameras objectAtIndex:i] cameraName];
+				if( [findName isEqualToString:name]) // Are there any cameras with the same name?
+ 				{
+ 					if (i == l) 
+                        modifiedName = [NSString stringWithFormat: @"%@ #%d", name, counter];  // We found our own camera again 
+                    
+ 					counter++;  // Number of cameras with the same name (plus one)
+ 				}
+ 			}
+            
+            return (counter > 2) ? modifiedName : name;  // Modify name if more then one camera
+        } 
+    
     return NULL;
 }
 
-- (NSString*) nameForDriver:(MyCameraDriver*)driver {
-    long l=0;
-    while (l<[cameras count]) {
-        if ([[cameras objectAtIndex:l] driver]==driver) {
+- (NSString *) nameForDriver:(MyCameraDriver*) driver 
+{
+    long l;
+    
+    for (l = 0; l < [cameras count]; l++) 
+        if ([[cameras objectAtIndex:l] driver] == driver) 
             return [[cameras objectAtIndex:l] cameraName];
-        } else l++;
-    }
+    
     return NULL;
 }
 
-- (BOOL) getName:(char*)name forID:(unsigned long)cid {
-    NSString* camName=[self nameForID:cid];
-    if (!camName) return NO;
-    [camName getCString:name];
+- (BOOL) getName:(char*)name forID:(unsigned long)cid maxLength:(unsigned)maxLength
+{
+    NSString * camName = [self nameForID:cid];
+    
+    if (!camName) 
+        return NO;
+    
+    [camName getCString:name maxLength:maxLength];
+    
     return YES;
 }
 
-- (BOOL) getName:(char*)name forDriver:(MyCameraDriver*)driver {
-    NSString* camName=[self nameForDriver:driver];
-    if (!camName) return NO;
-    [camName getCString:name];
+- (BOOL) getRegistrationName:(char*)name forID:(unsigned long)cid maxLength:(unsigned)maxLength
+{
+    long l;
+    NSString * camName = nil;
+    
+    for (l = 0; l < [cameras count]; l++) 
+        if ([[cameras objectAtIndex:l] cid] == cid) 
+        {
+ 			NSString * name = [[cameras objectAtIndex:l] cameraName];
+            camName = [NSString stringWithFormat: @"%@ #%d", name, cid]; 
+ 			// This is not so user friendly but name is not be changed after other cameras unplugging etc.
+        }
+    
+    if (!camName) 
+        return NO;
+    
+    [camName getCString:name maxLength:maxLength];
+    
     return YES;
 }
 

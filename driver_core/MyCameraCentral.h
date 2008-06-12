@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.h,v 1.10 2008/04/26 19:59:44 hxr Exp $
+ $Id: MyCameraCentral.h,v 1.11 2008/06/12 00:00:25 hxr Exp $
  */
 
 #import <Cocoa/Cocoa.h>
@@ -100,8 +100,8 @@
 - (MyCameraDriver*) useDummyForError:(CameraError)err;
 - (NSString*) nameForID:(unsigned long)cid;
 - (NSString*) nameForDriver:(MyCameraDriver*)driver;
-- (BOOL) getName:(char*)name forID:(unsigned long)cid;
-- (BOOL) getName:(char*)name forDriver:(MyCameraDriver*)driver;
+- (BOOL) getName:(char*)name forID:(unsigned long)cid maxLength:(unsigned)maxLength;
+- (BOOL) getRegistrationName:(char*)name forID:(unsigned long)cid maxLength:(unsigned)maxLength;
 
 //Camera defaults managements
 - (BOOL) setCameraToDefaults:(MyCameraDriver*) camera;

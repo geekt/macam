@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyBridge.h,v 1.8 2008/06/01 04:44:50 hxr Exp $
+ $Id: MyBridge.h,v 1.9 2008/06/12 04:35:36 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -106,7 +106,7 @@ typedef enum BridgeClientState {
 
 - (BOOL) isStarted;                 // Returns if the bridge is currently started (in use) 
 - (BOOL) isCameraValid;             // Returns if there currently is a real, valid camera that can deliver real video
-- (BOOL) getName:(char*)name;		// Try to get the camera name
+- (BOOL) getName:(char*)name maxLength:(unsigned)maxLength;		// Try to get the camera name
 - (short) getIndexOfCamera;         // Return the index of the camera
 
 //-----------------------
@@ -173,5 +173,8 @@ typedef enum BridgeClientState {
 - (void) cameraHasShutDown:(id)cam;
 - (void) grabFinished:(id)cam withError:(CameraError)err;
 
+- (NSImageView *) getHistogramView;
+- (NSTextField *) getDebugMessageField;
+- (void) updateStatus:(NSString *)status fpsDisplay:(float)fpsDisplay fpsReceived:(float)fpsReceived;
 
 @end

@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyBridge.m,v 1.6 2007/10/17 22:43:03 hxr Exp $
+ $Id: MyBridge.m,v 1.7 2008/06/12 04:35:36 hxr Exp $
 */
 
 
@@ -266,9 +266,12 @@
     return valid;
 }
 
-- (BOOL) getName:(char*)name {
-    if (!driverStarted) return NO;
-    return [central getName:name forID:cid];
+- (BOOL) getName:(char*)name maxLength:(unsigned)maxLength
+{
+    if (!driverStarted) 
+        return NO;
+    
+    return [central getName:name forID:cid maxLength:maxLength];
 }
 
 - (short) getIndexOfCamera 
@@ -649,5 +652,37 @@
     return driverGrabRunning;
 }
 
+
+- (NSImageView *) getHistogramView
+{
+    return NULL;
+}
+
+
+- (NSTextField *) getDebugMessageField
+{
+    return NULL;
+}
+
+
+- (void) updateStatus:(NSString *)status fpsDisplay:(float)fpsDisplay fpsReceived:(float)fpsReceived
+{
+/*
+    NSString * append;
+    NSString * newStatus;
+    
+    if (fpsReceived == 0.0) 
+        append = [NSString stringWithFormat:LStr(@" (%3.1f fps)"), fpsDisplay];
+    else 
+        append = [NSString stringWithFormat:LStr(@" (%3.1f fps, receiving %3.1f fps)"), fpsDisplay, fpsReceived];
+    
+    if (status == NULL) 
+        newStatus = [[NSString stringWithString:LStr(@"Status: Playing")] stringByAppendingString:append];
+    else 
+        newStatus = [status stringByAppendingString:append];
+    
+    [statusText setStringValue:newStatus];
+*/
+}
 
 @end

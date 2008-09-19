@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyPhilipsCameraDriver.m,v 1.10 2007/10/18 03:17:38 hxr Exp $
+ $Id: MyPhilipsCameraDriver.m,v 1.11 2008/09/19 13:33:06 hxr Exp $
 */
 
 #import "MyPhilipsCameraDriver.h"
@@ -211,7 +211,7 @@
     grabContext.bytesPerFrame=usbFrameBytes;
     grabContext.framesPerTransfer=50;
     grabContext.framesInRing=1000;
-    grabContext.concurrentTransfers=3;
+    grabContext.concurrentTransfers=2;
     grabContext.finishedTransfers=0;
 	if (videoDevice == NULL)
 		grabContext.bytesPerChunk = [self height] * [self width] * 6 / 4 + chunkHeader + chunkFooter;  // 4 yuv pixels fit into 4 bytes + header + footer

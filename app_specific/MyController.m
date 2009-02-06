@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyController.m,v 1.35 2008/05/21 18:18:52 hxr Exp $
+ $Id: MyController.m,v 1.36 2009/02/06 19:30:02 hxr Exp $
 */
 
 #import "MyController.h"
@@ -325,6 +325,7 @@ extern NSString* SnapshotQualityPrefsKey;
 - (IBAction)whiteBalanceChanged:(id)sender {
     WhiteBalanceMode wb=[whiteBalancePopup indexOfSelectedItem]+1;
     [driver setWhiteBalanceMode:wb];
+    [hueSlider setEnabled:[driver canSetHue]];
 }
 
 - (IBAction)blackwhiteCheckboxChanged:(id)sender {

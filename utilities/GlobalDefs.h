@@ -16,7 +16,7 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  
-    $Id: GlobalDefs.h,v 1.13 2009/05/01 02:54:43 hxr Exp $
+    $Id: GlobalDefs.h,v 1.14 2009/05/01 20:27:23 hxr Exp $
 */
 
 /*
@@ -56,7 +56,7 @@ typedef enum CameraResolution
 } CameraResolution;
 
 
-#define MaximumFPS  125
+#define MaximumFPS  180
 
 
 typedef enum CameraError 

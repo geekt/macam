@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MiscTools.h,v 1.2 2006/07/11 19:30:33 hxr Exp $
+ $Id: MiscTools.h,v 1.3 2009/05/01 02:55:41 hxr Exp $
  */
 
 #ifndef _MISC_TOOLS_
@@ -50,6 +50,9 @@ void ShowPipesInfo(IOUSBInterfaceInterface **intf);
 short WidthOfResolution(CameraResolution r);
 short HeightOfResolution(CameraResolution r);
 
+// FPS item menu lookup
+short MenuItem2FPS(int item);
+int FPS2MenuItem(short fps);
 
 // Replace deprecated calls
 void SetQDRect(Rect  * rect, short left, short top, short right, short bottom);

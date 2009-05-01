@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.m,v 1.35 2008/04/26 20:04:13 hxr Exp $
+ $Id: MyCameraDriver.m,v 1.36 2009/05/01 03:02:41 hxr Exp $
 */
 
 #import "MyCameraDriver.h"
@@ -548,44 +548,45 @@
     [stateLock unlock];
 }
 
-- (CameraResolution) findResolutionForWidth:(short)width height:(short) height {
-//Find the largest resolution that is supported and smaller than the given dimensions
-    CameraResolution res=ResolutionVGA;
-    BOOL found=NO;
-    while ((!found)&&(res>=(ResolutionSQSIF))) {
-        if (WidthOfResolution(res)<=width) {
-            if (HeightOfResolution(res)<=height) {
-                if ([self findFrameRateForResolution:res]>0) {
-                    found=YES;
-                }
-            }
-        }
-        if (!found) res=(CameraResolution)(((short)res)-1);
+//
+//  Find the largest resolution that is supported and smaller than the given dimensions
+//
+- (CameraResolution) findResolutionForWidth:(short)width height:(short)height 
+{
+    CameraResolution res;
+    
+    for (res = ResolutionMax; res >= ResolutionMin; res--) 
+    {
+        if ((WidthOfResolution(res) <= width) && (HeightOfResolution(res) <= height)) 
+            if ([self findFrameRateForResolution:res] >= 0) 
+                return res;
     }
-    //If there is no smaller resolution: Find the smallest availabe resolution
-    if (!found) {
-        res=ResolutionSQSIF;
-        while ((!found)&&(res<=(ResolutionVGA))) {
-            if ([self findFrameRateForResolution:res]>0) found=YES;
-            if (!found) res=(CameraResolution)(((short)res)+1);
-        }
+    
+    //  If there is no smaller resolution: Find the smallest availabe resolution
+    
+    for (res = ResolutionMin; res <= ResolutionMax; res++) 
+    {
+        if ([self findFrameRateForResolution:res] >= 0) 
+            return res;
     }
-    if (!found) {
+    
 #ifdef VERBOSE
-        NSLog(@"MyCameraDriver:findResolutionForWidth:height: Cannot find any resolution");
+    NSLog(@"MyCameraDriver:findResolutionForWidth:height: Cannot find any suitable resolution");
 #endif
-        return ResolutionQSIF;
-    }
-    return res;
+    return ResolutionQSIF;
 }
 
-- (short) findFrameRateForResolution:(CameraResolution)res {
-    short fpsRun=30;
-    while (fpsRun>=5) {
-        if ([self supportsResolution:res fps:fpsRun]) return fpsRun;
-        else fpsRun-=5;
+- (short) findFrameRateForResolution:(CameraResolution)res 
+{
+    short fpsRun;
+    
+    for (fpsRun = MaximumFPS; fpsRun >= 0; fpsRun -= 5) 
+    {
+        if ([self supportsResolution:res fps:fpsRun]) 
+            return fpsRun;
     }
-    return 0;
+    
+    return -1;
 }
 
 - (CameraResolution) defaultResolutionAndRate:(short*)dFps {	//Just some defaults. You should always override this.

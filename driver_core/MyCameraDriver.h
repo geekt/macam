@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraDriver.h,v 1.25 2008/04/26 20:03:20 hxr Exp $
+ $Id: MyCameraDriver.h,v 1.26 2009/05/01 03:02:41 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -275,14 +275,14 @@ Image buffers. There are two sets: lastIamgeBuffer and nextImageBuffer. The clie
 - (short) width;						//Current image width
 - (short) height;						//Current image height
 - (CameraResolution) resolution;		//Current image predefined format constant
-- (short) fps;							//Current frames per second
+- (short) fps;							//Current frames per second, 0 means fastest possible
 - (BOOL) supportsResolution:(CameraResolution)r fps:(short)fr;	//Does this combination work?
 - (void) setResolution:(CameraResolution)r fps:(short)fr;	//Set a resolution and frame rate
 
 //Resolution and fps negotiation - the default implementation will use [supportsResolution:fps:] to find something.
 //Override these if you want to.
 - (CameraResolution) findResolutionForWidth:(short)width height:(short) height;	//returns a (hopefully) good native resolution
-- (short) findFrameRateForResolution:(CameraResolution)res;	//returns fps or <=0 if resolution not supported
+- (short) findFrameRateForResolution:(CameraResolution)res;	//returns fps < 0 if resolution not supported
 - (CameraResolution) defaultResolutionAndRate:(short*)fps;	//Override this to set the startup resolution
 
 //Grabbing

@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MiscTools.c,v 1.5 2009/05/01 02:56:14 hxr Exp $
+ $Id: MiscTools.c,v 1.6 2009/05/01 20:28:22 hxr Exp $
  */
 
 #include "MiscTools.h"
@@ -178,8 +178,10 @@ short MenuItem2FPS(int item)
         case 9: return 50;
         case 10: return 60;
         case 11: return 75;
-        case 12: return 100;
-        case 13: return 125;
+        case 12: return 90;
+        case 13: return 100;
+        case 14: return 120;
+        case 15: return 180;
     }
     
     return -1; // error
@@ -201,8 +203,10 @@ int FPS2MenuItem(short fps)
         case 50: return 9;
         case 60: return 10;
         case 75: return 11;
-        case 100: return 12;
-        case 125: return 13;
+        case 90: return 12;
+        case 100: return 13;
+        case 120: return 14;
+        case 180: return 15;
     }
     
     return 0; // fastest

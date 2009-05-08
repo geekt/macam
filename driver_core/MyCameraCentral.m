@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.87 2009/05/06 20:05:53 hxr Exp $
+ $Id: MyCameraCentral.m,v 1.88 2009/05/08 19:17:37 hxr Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -86,6 +86,7 @@
 #import "CX11646Driver.h"
 #import "TP68xxDriver.h"
 #import "SQ905C.h"
+#import "UVCDriver.h"
 
 #include "unistd.h"
 
@@ -419,6 +420,8 @@ MyCameraCentral* sharedCameraCentral=NULL;
     [self registerCameraDriver:[PAC207DriverRotated class]];
     
     [self registerCameraDriver:[PicoDriver class]];
+    
+    [self registerCameraDriver:[UVCDriver class]];  // There should be another way to invoke this driver (i.e. matching driver classes)
     
     
     // Based on gspca (subclass SPCA5xxDriver)

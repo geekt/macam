@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyBridge.m,v 1.7 2008/06/12 04:35:36 hxr Exp $
+ $Id: MyBridge.m,v 1.8 2009/09/23 20:14:29 hxr Exp $
 */
 
 
@@ -321,6 +321,22 @@
 - (void)setSaturation:(unsigned short)c {
     if (driver) [driver setSaturation:((float)c)/65535.0f];
 }
+
+
+- (BOOL)canSetHue {
+    if (driver) return [driver canSetHue];
+    else return NO;
+}
+
+- (unsigned short)hue {
+    if (driver) return (unsigned short)([driver hue]*65535.0f);
+    else return 0;
+}
+
+- (void)setHue:(unsigned short)c {
+    if (driver) [driver setHue:((float)c)/65535.0f];
+}
+
 
 - (BOOL)canSetSharpness {
     if (driver) return [driver canSetSharpness];

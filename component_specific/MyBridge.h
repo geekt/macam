@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyBridge.h,v 1.9 2008/06/12 04:35:36 hxr Exp $
+ $Id: MyBridge.h,v 1.10 2009/09/23 20:12:02 hxr Exp $
 */
 
 #import <Cocoa/Cocoa.h>
@@ -122,6 +122,11 @@ typedef enum BridgeClientState {
 - (BOOL)canSetSaturation;		//Returns if the camera supports saturation adjustment
 - (unsigned short)saturation;		//Returns the saturation in the range [0..65535], if supported
 - (void)setSaturation:(unsigned short)c;//Sets the saturation in the range [0..65535], if supported
+
+- (BOOL)canSetHue;		//Returns if the camera supports saturation adjustment
+- (unsigned short)hue;		//Returns the saturation in the range [0..65535], if supported
+- (void)setHue:(unsigned short)c;//Sets the saturation in the range [0..65535], if supported
+
 - (BOOL)canSetSharpness;		//Returns if the camera supports sharpness adjustment
 - (unsigned short)sharpness;		//Returns the sharpness in the range [0..65535], if supported
 - (void)setSharpness:(unsigned short)c; //Sets the sharpness in the range [0..65535], if supported

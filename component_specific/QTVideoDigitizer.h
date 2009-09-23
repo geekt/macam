@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: QTVideoDigitizer.h,v 1.3 2006/10/12 14:21:22 hxr Exp $
+ $Id: QTVideoDigitizer.h,v 1.4 2009/09/23 20:36:11 hxr Exp $
 */
 
 #ifndef	_QT_VIDEO_DIGITIZER_
@@ -25,6 +25,7 @@
 #include <QuickTime/QuickTime.h>
 #include <QuickTime/QuickTimeComponents.h>
 #include <QuickTime/QuickTimeComponents.k.h>
+
 #include "GlobalDefs.h"
 #import "MyBridge.h"
 
@@ -105,6 +106,15 @@ pascal VideoDigitizerError vdigSetSaturation(vdigGlobals storage,unsigned short*
 pascal VideoDigitizerError vdigGetSharpness(vdigGlobals storage,unsigned short* val);
 pascal VideoDigitizerError vdigSetSharpness(vdigGlobals storage,unsigned short* val);
 pascal VideoDigitizerError vdigGetPreferredTimeScale(vdigGlobals storage,TimeScale* ts);
+
+// Theo added hue, gain, shutter
+
+pascal VideoDigitizerError vdigGetHue(vdigGlobals storage,unsigned short* val);
+pascal VideoDigitizerError vdigSetHue(vdigGlobals storage,unsigned short* val);
+pascal VideoDigitizerError vdigGetGain(vdigGlobals storage,unsigned short* val);
+pascal VideoDigitizerError vdigSetGain(vdigGlobals storage,unsigned short* val);
+pascal VideoDigitizerError vdigGetShutter(vdigGlobals storage,unsigned short* val);
+pascal VideoDigitizerError vdigSetShutter(vdigGlobals storage,unsigned short* val);
 
 pascal VideoDigitizerError vdigGetUniqueIDs(vdigGlobals storage, UInt64 * device, UInt64 * input);
 pascal VideoDigitizerError vdigSelectUniqueIDs(vdigGlobals storage, UInt64 * deviceID, UInt64 * inputID);

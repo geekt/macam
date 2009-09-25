@@ -15,7 +15,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: QTPanel.m,v 1.11 2009/09/23 17:29:11 hxr Exp $
+ $Id: QTPanel.m,v 1.12 2009/09/25 19:12:33 hxr Exp $
 */
 
 #include "QTPanel.h"
@@ -520,13 +520,13 @@ void UpdateFormatMenus(sgpnGlobals storage, DialogRef dlg, short itemOffset) {
         EnableControl(resCtrl);
         EnableControl(fpsCtrl);
         SetControlValue(resCtrl,(short)res);		//Update selection
-        SetControlValue(fpsCtrl,fps/5);
+        SetControlValue(fpsCtrl, FPS2MenuItem(fps));
         for (i=1;i<=numRes;i++) {			//Update available resolutons
             if ([bridge supportsResolution:(CameraResolution)i fps:fps]) EnableMenuItem(resMenu,i);
             else DisableMenuItem(resMenu,i);
         }
         for (i=1;i<=numFps;i++) {			//Update available frame rates
-            if ([bridge supportsResolution:res fps:i*5]) EnableMenuItem(fpsMenu,i);
+            if ([bridge supportsResolution:res fps:MenuItem2FPS(i)]) EnableMenuItem(fpsMenu,i);
             else DisableMenuItem(fpsMenu,i);
         }
     }

@@ -15,7 +15,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- $Id: MyCameraCentral.m,v 1.89 2010/05/23 04:34:51 hxr Exp $
+ $Id: MyCameraCentral.m,v 1.90 2010/10/29 19:58:44 hxr Exp $
  */
 
 #include <CoreFoundation/CoreFoundation.h>
@@ -403,8 +403,8 @@ MyCameraCentral* sharedCameraCentral=NULL;
     [self registerCameraDriver:[SQ905Cvariant1 class]];
     
     [self registerCameraDriver:[SQ930C class]];
-    [self registerCameraDriver:[SQ930B class]];
-    [self registerCameraDriver:[SQ930Bvariant1 class]];
+//    [self registerCameraDriver:[SQ930B class]];
+//    [self registerCameraDriver:[SQ930Bvariant1 class]];
     
 //  [self registerCameraDriver:[MyPixartDriver class]]; // Deprecated in favor of PixartDriver - has problems
 //  [self registerCameraDriver:[PixartDriver class]];   // Disabled because working on SPCA5XX-based version instead
